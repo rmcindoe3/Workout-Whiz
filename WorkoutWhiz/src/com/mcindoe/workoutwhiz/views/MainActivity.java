@@ -1,6 +1,7 @@
 package com.mcindoe.workoutwhiz.views;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -19,6 +20,8 @@ public class MainActivity extends Activity {
 	 */
 	public void onWorkoutButtonClicked(View view) {
 		//TODO: Open select exercise activity.
+		Intent intent = new Intent(this, SelectExerciseActivity.class);
+		startActivity(intent);
 	}
 
 	/**

@@ -1,4 +1,8 @@
-package com.mcindoe.workoutwhiz;
+package com.mcindoe.workoutwhiz.views;
+
+import com.mcindoe.workoutwhiz.R;
+import com.mcindoe.workoutwhiz.R.layout;
+import com.mcindoe.workoutwhiz.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;
