@@ -9,8 +9,49 @@
     tools:context=".MainActivity" >
 
     <TextView
+        android:id="@+id/title_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:text="@string/app_name"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_text_view"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+        
+        <Button
+	        android:id="@+id/workout_button"
+	        android:layout_width="110dp"
+	        android:layout_height="wrap_content"
+        	android:gravity="center"
+	        android:layout_marginTop="30dp"
+	        android:onClick="onWorkoutButtonClicked"
+	        android:text="@string/workout_button" />
+
+        <Button
+	        android:id="@+id/history_button"
+	        android:layout_width="110dp"
+	        android:layout_height="wrap_content"
+        	android:gravity="center"
+	        android:layout_marginTop="5dp"
+	        android:onClick="onHistoryButtonClicked"
+	        android:text="@string/history_button" />
+
+        <Button
+	        android:id="@+id/settings_button"
+	        android:layout_width="110dp"
+	        android:layout_height="wrap_content"
+        	android:gravity="center"
+	        android:layout_marginTop="5dp"
+	        android:onClick="onSettingsButtonClicked"
+	        android:text="@string/settings_button" />
+
+    </LinearLayout>
 
 </RelativeLayout>

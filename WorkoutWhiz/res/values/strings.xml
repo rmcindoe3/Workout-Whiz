@@ -3,6 +3,9 @@
 
     <string name="app_name">Workout Whiz</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+
+    <string name="workout_button">Workout!</string>
+    <string name="history_button">History</string>
+    <string name="settings_button">Settings</string>
 
 </resources>
