@@ -61,7 +61,7 @@ public class ExerciseActivity extends Activity {
 		mBackspaceButton = (Button)findViewById(R.id.exercise_backspace_button);
 
 		//Grabs our current exercise.
-		mExercise = new Exercise("Overhead Press", 40);
+		mExercise = ((WorkoutWhizApplication)getApplication()).getCurrentExercise();
 
 		//Setup our number pad controller.
 		mNPController = new NumberPadController();

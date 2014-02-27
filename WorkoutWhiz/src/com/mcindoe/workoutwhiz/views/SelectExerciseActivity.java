@@ -1,9 +1,7 @@
 package com.mcindoe.workoutwhiz.views;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -16,7 +14,7 @@ import com.mcindoe.workoutwhiz.models.Exercise;
 import com.mcindoe.workoutwhiz.models.Workout;
 
 public class SelectExerciseActivity extends Activity implements WeightDialogFragment.WeightDialogListener {
-	
+
 	private EditText mAddExerciseEditText;
 	private ListView mExerciseHistoryListView;
 	private TextView mWorkoutTitleTextView;
@@ -27,17 +25,19 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_select_exercise);
-		
-		//First we need to fill out our workout.
-		mWorkout = new Workout("New Workout");
-		
-		mAddExerciseEditText = (EditText)findViewById(R.id.add_exercise_edit_text);
 
+		//Grabs our GUI elements.
+		mAddExerciseEditText = (EditText)findViewById(R.id.add_exercise_edit_text);
 		mWorkoutTitleTextView = (TextView)findViewById(R.id.workout_title_text_view);
+		mExerciseHistoryListView = (ListView)findViewById(R.id.exercise_history_list_view);
+		
+		//First we need to grab our workout.
+		mWorkout = ((WorkoutWhizApplication)getApplication()).getCurrentWorkout();
+
+		//Sets the title of the activity.
 		mWorkoutTitleTextView.setText(mWorkout.getName());
 		
 		//Sets up our list view of exercises.
-		mExerciseHistoryListView = (ListView)findViewById(R.id.exercise_history_list_view);
 		mExerciseHistoryListView.setAdapter(new ExerciseArrayAdapter(this, mWorkout.getExercises(), new View.OnClickListener() {
 			
 			@Override
@@ -62,6 +62,13 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 			}
 		}));
 
+	}
+	
+	@Override
+	protected void onPause() {
+		//Any time this activity pauses we want to make sure our current workout is saved to the application.
+		((WorkoutWhizApplication)getApplication()).setCurrentWorkout(mWorkout);
+		super.onPause();
 	}
 
 	/**
@@ -90,6 +97,10 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 	@Override
 	public void onDialogPositiveClick(Exercise exer) {
 		//We want to start the given exercise.
+		((WorkoutWhizApplication)getApplication()).setCurrentExercise(exer);
+
+		Intent intent = new Intent(this, ExerciseActivity.class);
+		startActivity(intent);
 	}
 	
 	/**

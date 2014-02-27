@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.mcindoe.workoutwhiz.R;
+import com.mcindoe.workoutwhiz.models.Workout;
 
 public class MainActivity extends Activity {
 
@@ -19,7 +20,10 @@ public class MainActivity extends Activity {
 	 * Called when the Workout! button is clicked in the main activity.
 	 */
 	public void onWorkoutButtonClicked(View view) {
-		//TODO: Open select exercise activity.
+
+		//Creates a new workout object for this applications instance.
+		((WorkoutWhizApplication)getApplication()).setCurrentWorkout(new Workout("New Workout"));
+		
 		Intent intent = new Intent(this, SelectExerciseActivity.class);
 		startActivity(intent);
 	}
