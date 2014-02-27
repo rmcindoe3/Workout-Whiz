@@ -1,26 +1,38 @@
 package com.mcindoe.workoutwhiz.views;
 
-import com.mcindoe.workoutwhiz.R;
-import com.mcindoe.workoutwhiz.R.layout;
-import com.mcindoe.workoutwhiz.R.menu;
-
-import android.os.Bundle;
 import android.app.Activity;
-import android.view.Menu;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
 
-public class SelectExerciseActivity extends Activity {
+import com.mcindoe.workoutwhiz.R;
+
+public class SelectExerciseActivity extends Activity implements WeightDialogFragment.WeightDialogListener {
+	
+	private EditText mAddExerciseEditText;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_select_exercise);
+		
+		mAddExerciseEditText = (EditText)findViewById(R.id.add_exercise_edit_text);
 	}
 
+	/**
+	 * Called when the user pressed the create new exercise button.
+	 */
+	public void onAddExerciseButtonClicked(View view) {
+
+		WeightDialogFragment weightDialog = new WeightDialogFragment();
+		weightDialog.setInitialWeight(25);
+		weightDialog.show(getFragmentManager(), "weight dialog");
+	}
+
+	/**
+	 * Called after the user has successfully chosen a desired weight.
+	 */
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.select_exercise, menu);
-		return true;
+	public void onDialogPositiveClick(int weight) {
 	}
-
 }
