@@ -6,5 +6,7 @@
     <dimen name="list_item_exercise_name_text_size">20sp</dimen>
     <dimen name="list_item_exercise_intensity_text_size">15sp</dimen>
     <dimen name="list_item_exercise_height">40dp</dimen>
+    <dimen name="rep_count_text_size">40dp</dimen>
+    <dimen name="activity_title">30dp</dimen>
 
 </resources>

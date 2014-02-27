@@ -1,0 +1,228 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    tools:context=".ExerciseActivity" >
+    
+    <!-- Title of the Exercise -->
+    <TextView
+        android:id="@+id/exercise_title_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/exercise_title_text_view_default"
+        android:textSize="@dimen/activity_title" />
+    
+    <!-- Horizontal Linear Layout to contain previous/current rep information -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="1" >
+        
+        <!-- Vertical linear layout to contain previous rep information -->
+        <LinearLayout
+	        android:layout_width="0dp"
+	        android:layout_height="fill_parent"
+	        android:layout_weight="1"
+	        android:orientation="vertical"> 
+		
+		    <TextView
+		        android:layout_width="fill_parent"
+		        android:layout_height="0dp"
+		        android:layout_weight="1"
+		        android:gravity="center"
+		        android:text="@string/previous_rep_info_text_view"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+		    <TextView
+		        android:id="@+id/previous_rep_count_text_view"
+		        android:layout_width="fill_parent"
+		        android:layout_height="0dp"
+		        android:layout_weight="2"
+		        android:gravity="center"
+		        android:text="@string/default_previous_rep_count"
+		        android:textSize="@dimen/rep_count_text_size" />
+	        
+	    </LinearLayout>
+
+        <!-- Vertical linear layout to contain current rep information -->
+        <LinearLayout
+	        android:layout_width="0dp"
+	        android:layout_height="fill_parent"
+	        android:layout_weight="1"
+	        android:orientation="vertical"> 
+
+		    <TextView
+		        android:layout_width="fill_parent"
+		        android:layout_height="0dp"
+		        android:layout_weight="1"
+		        android:gravity="center"
+		        android:text="@string/current_rep_info_text_view"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+		    <TextView
+		        android:id="@+id/current_rep_count_text_view"
+		        android:layout_width="fill_parent"
+		        android:layout_height="0dp"
+		        android:layout_weight="2"
+		        android:gravity="center"
+		        android:text="@string/current_rep_count_text_view"
+		        android:textSize="@dimen/rep_count_text_size" />
+	        
+	    </LinearLayout>
+    </LinearLayout>
+    
+    <!-- Custom Number Pad starts here -->
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="4" >
+        
+        <!-- 7,8,9 Buttons -->
+        <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="0dp"
+	        android:orientation="horizontal"
+	        android:layout_weight="1" >
+		    
+	        <Button
+	            android:id="@+id/exercise_seven_button"
+	        	android:layout_width="0dp"
+	        	android:layout_height="fill_parent"
+	        	android:text="@string/seven"
+	        	android:layout_weight="1" />
+
+	        <Button
+	            android:id="@+id/exercise_eight_button"
+	        	android:layout_width="0dp"
+	        	android:layout_height="fill_parent"
+	        	android:text="@string/eight"
+	        	android:layout_weight="1" />
+                
+	        <Button
+	            android:id="@+id/exercise_nine_button"
+	        	android:layout_width="0dp"
+	        	android:layout_height="fill_parent"
+	        	android:text="@string/nine"
+	        	android:layout_weight="1" />
+
+		</LinearLayout>
+
+        <!-- 4,5,6 Buttons -->
+        <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="0dp"
+	        android:orientation="horizontal"
+	        android:layout_weight="1" >
+
+	        <Button
+	            android:id="@+id/exercise_four_button"
+	        	android:layout_width="0dp"
+	        	android:layout_height="fill_parent"
+	        	android:text="@string/four"
+	        	android:layout_weight="1" />
+
+	        <Button
+	            android:id="@+id/exercise_five_button"
+	        	android:layout_width="0dp"
+	        	android:layout_height="fill_parent"
+	        	android:text="@string/five"
+	        	android:layout_weight="1" />
+                
+	        <Button
+	            android:id="@+id/exercise_six_button"
+	        	android:layout_width="0dp"
+	        	android:layout_height="fill_parent"
+	        	android:text="@string/six"
+	        	android:layout_weight="1" />
+
+		</LinearLayout>
+
+        <!-- 1,2,3 Buttons -->
+        <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="0dp"
+	        android:orientation="horizontal"
+	        android:layout_weight="1" >
+
+	        <Button
+	            android:id="@+id/exercise_one_button"
+	        	android:layout_width="0dp"
+	        	android:layout_height="fill_parent"
+	        	android:text="@string/one"
+	        	android:layout_weight="1" />
+
+	        <Button
+	            android:id="@+id/exercise_two_button"
+	        	android:layout_width="0dp"
+	        	android:layout_height="fill_parent"
+	        	android:text="@string/two"
+	        	android:layout_weight="1" />
+                
+	        <Button
+	            android:id="@+id/exercise_three_button"
+	        	android:layout_width="0dp"
+	        	android:layout_height="fill_parent"
+	        	android:text="@string/three"
+	        	android:layout_weight="1" />
+
+		</LinearLayout>
+
+        <!-- 0 and Backspace Buttons -->
+        <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="0dp"
+	        android:orientation="horizontal"
+	        android:layout_weight="1" >
+
+	        <Button
+	            android:id="@+id/exercise_zero_button"
+	        	android:layout_width="0dp"
+	        	android:layout_height="fill_parent"
+	        	android:text="@string/zero"
+	        	android:layout_weight="1" />
+                
+	        <Button
+	            android:id="@+id/exercise_backspace_button"
+	        	android:layout_width="0dp"
+	        	android:layout_height="fill_parent"
+	        	android:text="@string/backspace"
+	        	android:layout_weight="1" />
+
+		</LinearLayout>
+        
+    </LinearLayout>
+
+    <!-- Next Set and Finish Exercise Buttons -->
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:layout_weight="1" >
+        
+        <Button
+            android:id="@+id/next_set_button"
+        	android:layout_width="0dp"
+        	android:layout_height="fill_parent"
+        	android:text="@string/next_set_button"
+        	android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/finish_exercise_button"
+        	android:layout_width="0dp"
+        	android:layout_height="fill_parent"
+        	android:text="@string/finish_exercise_button"
+        	android:layout_weight="1" />
+        
+    </LinearLayout>
+
+</LinearLayout>
