@@ -12,17 +12,17 @@ public class Exercise {
 	public Exercise(String name) {
 		this.setName(name);
 		this.setWeight(0);
-		reps = new ArrayList<Integer>();
-		lastReps = new ArrayList<Integer>();
+		setReps(new ArrayList<Integer>());
+		setLastReps(new ArrayList<Integer>());
 	}
 
 	public Exercise(String name, int weight) {
 		this.setName(name);
 		this.setWeight(weight);
-		reps = new ArrayList<Integer>();
-		lastReps = new ArrayList<Integer>();
+		setReps(new ArrayList<Integer>());
+		setLastReps(new ArrayList<Integer>());
 	}
-	
+
 	/**
 	 * Adds a set to our current exercise.
 	 * @param num - the number of reps performed for this exercise.
@@ -54,5 +54,21 @@ public class Exercise {
 
 	public void setWeight(int weight) {
 		this.weight = weight;
+	}
+	
+	public ArrayList<Integer> getReps() {
+		return reps;
+	}
+
+	public void setReps(ArrayList<Integer> reps) {
+		this.reps = reps;
+	}
+
+	public ArrayList<Integer> getLastReps() {
+		return lastReps;
+	}
+
+	public void setLastReps(ArrayList<Integer> lastReps) {
+		this.lastReps = lastReps;
 	}
 }

@@ -6,7 +6,7 @@ public class Workout {
 	
 	private String name;
 	private ArrayList<Exercise> exercises;
-	
+
 	public Workout(String name) {
 		this.setName(name);
 		exercises = new ArrayList<Exercise>();
@@ -18,6 +18,14 @@ public class Workout {
 	 */
 	public void addExercise(Exercise exer) {
 		exercises.add(exer);
+	}
+	
+	public ArrayList<Exercise> getExercises() {
+		return exercises;
+	}
+
+	public void setExercises(ArrayList<Exercise> exercises) {
+		this.exercises = exercises;
 	}
 
 	public String getName() {

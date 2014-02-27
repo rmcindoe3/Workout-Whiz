@@ -1,0 +1,23 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/list_item_exercise"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/list_item_exercise_height"
+    android:orientation="horizontal" >
+    
+    <TextView 
+        android:id="@+id/exercise_name_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|left"
+        android:text="@string/default_exercise_name"
+        android:textSize="@dimen/list_item_exercise_name_text_size" />
+    
+    <TextView 
+        android:id="@+id/exercise_intensity_text_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|right"
+        android:text="@string/default_exercise_intensity"
+        android:textSize="@dimen/list_item_exercise_intensity_text_size" />
+
+</LinearLayout>

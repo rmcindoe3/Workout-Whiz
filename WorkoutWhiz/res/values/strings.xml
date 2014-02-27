@@ -10,11 +10,13 @@
     <string name="workout_title_text_view_default">Workout</string>
     <string name="add_exercise_button">+</string>
     <string name="end_workout_button">End Workout</string>
-    <string name="select_exercise_text_view">Select An Exercise:</string>
-    <string name="create_exercise_text_view">Or Create An Exercise:</string>
-    <string name="create_exercise_edit_text_hint">New Exercise...</string>
+    <string name="select_exercise_text_view">Exercise History:</string>
+    <string name="create_exercise_text_view">Or Create A New Exercise:</string>
+    <string name="create_exercise_edit_text_hint">New Exercise&#8230;</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="select_weight_title">Select A Weight For This Exercise</string>
+    <string name="default_exercise_name">Untitled Exercise</string>
+    <string name="default_exercise_intensity">25/8,8,8</string>
 
 </resources>

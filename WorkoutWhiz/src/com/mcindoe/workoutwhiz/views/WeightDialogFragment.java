@@ -13,18 +13,19 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
 import com.mcindoe.workoutwhiz.R;
+import com.mcindoe.workoutwhiz.models.Exercise;
 
 public class WeightDialogFragment extends DialogFragment {
 	
 	private SeekBar mSeekBar;
 	private TextView mTextView;
-	private int initialWeight;
+	private Exercise mExercise;
 	
 	/**
 	 * Interface that allows us to pass events back to our select exercise activity.
 	 */
 	public interface WeightDialogListener {
-		public void onDialogPositiveClick(int weight);
+		public void onDialogPositiveClick(Exercise exer);
 	}
 	
 	private WeightDialogListener sourceActivity;
@@ -61,8 +62,8 @@ public class WeightDialogFragment extends DialogFragment {
 		mTextView = (TextView)weightDialogView.findViewById(R.id.weight_input_text_view);
 		
 		//Set them to the default weight for this exercise.
-		mTextView.setText("" + initialWeight);
-		mSeekBar.setProgress(initialWeight);
+		mTextView.setText("" + mExercise.getWeight());
+		mSeekBar.setProgress(mExercise.getWeight());
 
 		//Set up our seek bar listener.
 		mSeekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
@@ -71,6 +72,7 @@ public class WeightDialogFragment extends DialogFragment {
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 				//When the seek bar is moved, update the text view with it's new value
 				mTextView.setText("" + progress);
+				mExercise.setWeight(progress);
 			}
 
 			@Override
@@ -86,14 +88,16 @@ public class WeightDialogFragment extends DialogFragment {
 		
 		//Finishes creating our dialog builder.
 		builder.setView(weightDialogView);
-		builder.setTitle(R.string.select_weight_title);
+
+		builder.setTitle(mExercise.getName());
+
 		builder.setPositiveButton(R.string.ok,
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 
 						//When the ok button is pressed, let our source activity know
 						//	that the weight has been selected.
-						sourceActivity.onDialogPositiveClick(mSeekBar.getProgress());
+						sourceActivity.onDialogPositiveClick(mExercise);
 					}
 				});
 
@@ -108,11 +112,11 @@ public class WeightDialogFragment extends DialogFragment {
 		return builder.create();
 	}
 
-	public int getInitialWeight() {
-		return initialWeight;
+	public Exercise getExercise() {
+		return mExercise;
 	}
 
-	public void setInitialWeight(int initialWeight) {
-		this.initialWeight = initialWeight;
+	public void setExercise(Exercise mExercise) {
+		this.mExercise = mExercise;
 	}
 }

@@ -40,6 +40,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="0dp"
 	        android:layout_weight="14"
+	        android:fillViewport="true"
 	        android:gravity="center_horizontal"
 	        android:layout_marginTop="10dp" >
 	
@@ -48,7 +49,16 @@
 	            android:layout_height="match_parent"
 	            android:orientation="vertical" >
 	            
-	            <!-- This is where our list view should go -->
+	            <!-- ListView of exercise history -->
+	            <ListView
+	                android:id="@+id/exercise_history_list_view"
+	                android:layout_width="fill_parent"
+	                android:layout_height="wrap_content"
+	                android:gravity="center"
+	                android:divider="@android:color/holo_blue_light"
+	                android:dividerHeight="2dp"
+	                android:scrollbars="vertical"
+	                android:cacheColorHint="#00000000" />"
 	
 	        </LinearLayout>
 	    </ScrollView>
