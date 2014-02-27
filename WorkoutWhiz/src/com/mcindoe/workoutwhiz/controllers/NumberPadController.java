@@ -9,6 +9,11 @@ public class NumberPadController {
 		setNumber(0);
 	}
 	
+	public int clearNumber() {
+		setNumber(0);
+		return 0;
+	}
+	
 	public void capNumber() {
 		if(number > MAX_NUMBER) {
 			number = MAX_NUMBER;
