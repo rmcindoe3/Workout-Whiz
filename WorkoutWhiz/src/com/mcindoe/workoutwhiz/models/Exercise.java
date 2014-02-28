@@ -58,6 +58,26 @@ public class Exercise {
 		//TODO: Query database once it's finished and fill out the amount of
 		//	reps they have completed in this exercise in the past.
 	}
+	
+	/**
+	 * Capitalizes the first letter of a word and every first letter after spaces
+	 * @param inStr - the string you want to fix the capitalization of.
+	 * @return - properly capitalized string.
+	 */
+	public static String capitalizeLetters(String inStr) {
+		inStr = inStr.toLowerCase();
+		boolean capitalizeNext = true;
+		for(int i = 0; i < inStr.length(); i++) {
+			if(capitalizeNext && inStr.charAt(i) >= 'a' && inStr.charAt(i) <= 'z') {
+				inStr = inStr.substring(0, i) + (char)(inStr.charAt(i) - 'a' + 'A') + inStr.substring(i+1);
+				capitalizeNext = false;
+			}
+			if(inStr.charAt(i) == ' ') {
+				capitalizeNext = true;
+			}
+		}
+		return inStr;
+	}
 
 	public String getName() {
 		return name;

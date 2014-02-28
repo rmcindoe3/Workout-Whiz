@@ -76,7 +76,7 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 		}
 		//If the user did enter an exercise name, then set the name of the weightDialog's exercise.
 		else {
-			weightDialog.setExercise(new Exercise(mAddExerciseEditText.getText().toString(), 25));
+			weightDialog.setExercise(new Exercise(Exercise.capitalizeLetters(mAddExerciseEditText.getText().toString()), 25));
 		}
 
 		weightDialog.show(getFragmentManager(), "weight dialog");
