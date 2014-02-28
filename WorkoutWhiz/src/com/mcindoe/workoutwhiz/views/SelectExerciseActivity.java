@@ -14,10 +14,17 @@ import com.mcindoe.workoutwhiz.models.Exercise;
 import com.mcindoe.workoutwhiz.models.Workout;
 
 public class SelectExerciseActivity extends Activity implements WeightDialogFragment.WeightDialogListener {
+	
+	public static final int EXERCISE_RESULT = 0x01;
+	public static final int SUCCESSFUL_EXERCISE = 0x02;
 
 	private EditText mAddExerciseEditText;
-	private ListView mExerciseHistoryListView;
 	private TextView mWorkoutTitleTextView;
+
+	private ListView mIncompleteExercisesListView;
+	private ListView mCompleteExercisesListView;
+	private ExerciseArrayAdapter mIncompleteExercisesAdapter;
+	private ExerciseArrayAdapter mCompleteExercisesAdapter;
 	
 	private Workout mWorkout;
 
@@ -29,7 +36,8 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 		//Grabs our GUI elements.
 		mAddExerciseEditText = (EditText)findViewById(R.id.add_exercise_edit_text);
 		mWorkoutTitleTextView = (TextView)findViewById(R.id.workout_title_text_view);
-		mExerciseHistoryListView = (ListView)findViewById(R.id.exercise_history_list_view);
+		mIncompleteExercisesListView = (ListView)findViewById(R.id.incomplete_exercises_list_view);
+		mCompleteExercisesListView = (ListView)findViewById(R.id.complete_exercises_list_view);
 		
 		//First we need to grab our workout.
 		mWorkout = ((WorkoutWhizApplication)getApplication()).getCurrentWorkout();
@@ -37,30 +45,13 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 		//Sets the title of the activity.
 		mWorkoutTitleTextView.setText(mWorkout.getName());
 		
-		//Sets up our list view of exercises.
-		mExerciseHistoryListView.setAdapter(new ExerciseArrayAdapter(this, mWorkout.getIncompleteExercises(), new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				
-				//Just to make sure that the view object that was clicked is an exercise list item.
-				if(v.getId() == R.id.list_item_exercise) {
+		//Sets up our list view of incomplete exercises.
+		mIncompleteExercisesAdapter = new ExerciseArrayAdapter(this, false, mWorkout.getIncompleteExercises(), new OnExerciseClickListener());
+		mIncompleteExercisesListView.setAdapter(mIncompleteExercisesAdapter);
 
-					//Grab some of it's components.
-					TextView exerciseNameTextView = (TextView)v.findViewById(R.id.exercise_name_text_view);
-					TextView exerciseIntensityTextView = (TextView)v.findViewById(R.id.exercise_intensity_text_view);
-					
-					//Fill out a weight dialog and show it.
-					WeightDialogFragment weightDialog = new WeightDialogFragment();
-					
-					//Create a new exercise to pass to the dialog.
-					Exercise exer = new Exercise(exerciseNameTextView.getText().toString(), parseInitialWeight(exerciseIntensityTextView.getText().toString()));
-					weightDialog.setExercise(exer);
-
-					weightDialog.show(getFragmentManager(), "weight dialog");
-				}
-			}
-		}));
+		//Sets up our list view of complete exercises.
+		mCompleteExercisesAdapter = new ExerciseArrayAdapter(this, true, mWorkout.getCompleteExercises(), new OnExerciseClickListener());
+		mCompleteExercisesListView.setAdapter(mCompleteExercisesAdapter);
 
 	}
 	
@@ -100,9 +91,33 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 		((WorkoutWhizApplication)getApplication()).setCurrentExercise(exer);
 
 		Intent intent = new Intent(this, ExerciseActivity.class);
-		startActivity(intent);
+		startActivityForResult(intent, EXERCISE_RESULT);
 	}
 	
+	/**
+	 * Called when the exercise activity returns.
+	 */
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		if(resultCode == SUCCESSFUL_EXERCISE) {
+
+			mWorkout = ((WorkoutWhizApplication)getApplication()).getCurrentWorkout();
+			
+			//Sets up our list view of incomplete exercises.
+			mIncompleteExercisesAdapter = new ExerciseArrayAdapter(this, false, mWorkout.getIncompleteExercises(), new OnExerciseClickListener());
+			mIncompleteExercisesListView.setAdapter(mIncompleteExercisesAdapter);
+	
+			//Sets up our list view of complete exercises.
+			mCompleteExercisesAdapter = new ExerciseArrayAdapter(this, true, mWorkout.getCompleteExercises(), new OnExerciseClickListener());
+			mCompleteExercisesListView.setAdapter(mCompleteExercisesAdapter);
+			
+			mAddExerciseEditText.setText("");
+			
+		}
+	}
+
 	/**
 	 * Parses out the weight of the intensity strings located in the Exercise List Item
 	 * @param intensityString - the string from the text view
@@ -110,5 +125,31 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 	 */
 	public int parseInitialWeight(String intensityString) {
 		return Integer.parseInt(intensityString.substring(0, intensityString.indexOf('/')));
+	}
+	
+	/**
+	 * Custom click listener for our list views.
+	 */
+	private class OnExerciseClickListener implements View.OnClickListener {
+
+		@Override
+		public void onClick(View v) {
+			//Just to make sure that the view object that was clicked is an exercise list item.
+			if(v.getId() == R.id.list_item_exercise) {
+
+				//Grab some of it's components.
+				TextView exerciseNameTextView = (TextView)v.findViewById(R.id.exercise_name_text_view);
+				TextView exerciseIntensityTextView = (TextView)v.findViewById(R.id.exercise_intensity_text_view);
+				
+				//Fill out a weight dialog and show it.
+				WeightDialogFragment weightDialog = new WeightDialogFragment();
+				
+				//Create a new exercise to pass to the dialog.
+				Exercise exer = new Exercise(exerciseNameTextView.getText().toString(), parseInitialWeight(exerciseIntensityTextView.getText().toString()));
+				weightDialog.setExercise(exer);
+
+				weightDialog.show(getFragmentManager(), "weight dialog");
+			}
+		}
 	}
 }

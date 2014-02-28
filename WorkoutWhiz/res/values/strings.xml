@@ -37,6 +37,8 @@
     <string name="nine">9</string>
     <string name="zero">0</string>
     <string name="backspace">BS</string>
+    <string name="completed_exercises_text_view">Completed Exercises:</string>
+    <string name="incompleted_exercises_text_view">Not Completed Exercises:</string>
 
 
 </resources>

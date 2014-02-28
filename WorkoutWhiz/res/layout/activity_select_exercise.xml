@@ -30,7 +30,7 @@
 
     <!-- ScrollView that contains our list of available exercises. -->
     <ScrollView
-        android:id="@+id/workout_exercise_scroll_bar"
+        android:id="@+id/workout_exercise_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="14"
@@ -42,16 +42,41 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="@string/incompleted_exercises_text_view"
+                android:textSize="@dimen/list_view_dividers_text_size" />
             
-            <!-- ListView of exercise history -->
+            <!-- ListView of incomplete exercises -->
             <ListView
-                android:id="@+id/exercise_history_list_view"
+                android:id="@+id/incomplete_exercises_list_view"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:divider="@android:color/holo_blue_light"
                 android:dividerHeight="2dp"
-                android:scrollbars="vertical"
+                android:scrollbars="none"
+                android:cacheColorHint="#00000000" />"
+            
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="@string/completed_exercises_text_view"
+                android:textSize="@dimen/list_view_dividers_text_size" />
+
+            <!-- ListView of complete exercises -->
+            <ListView
+                android:id="@+id/complete_exercises_list_view"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:divider="@android:color/holo_blue_light"
+                android:dividerHeight="2dp"
+                android:scrollbars="none"
                 android:cacheColorHint="#00000000" />"
 
         </LinearLayout>

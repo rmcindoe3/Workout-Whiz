@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.mcindoe.workoutwhiz.R;
 import com.mcindoe.workoutwhiz.controllers.NumberPadController;
 import com.mcindoe.workoutwhiz.models.Exercise;
+import com.mcindoe.workoutwhiz.models.Workout;
 
 public class ExerciseActivity extends Activity {
 
@@ -79,148 +80,17 @@ public class ExerciseActivity extends Activity {
 		}
 
 		//Here are the button listeners for each button on the screen.
-		mButtonOne.setOnClickListener(new OnClickListener() {
-		    @Override
-		    public void onClick(View arg0) {
-		    	//Updates and formats the screen with the most recent number.
-		    	if(mExercise.getReps().size() != 0) {
-		    		mCurrentRepsTextView.setText(createRepsString(mExercise.getReps()) + ", " + mNPController.oneButtonClicked());
-		    	}
-		    	else {
-		    		mCurrentRepsTextView.setText("" + mNPController.oneButtonClicked());
-		    	}
-		    }
-		});
-
-		mButtonTwo.setOnClickListener(new OnClickListener() {
-		    @Override
-		    public void onClick(View arg0) {
-		    	//Updates and formats the screen with the most recent number.
-		        if(mExercise.getReps().size() != 0) {
-		            mCurrentRepsTextView.setText(createRepsString(mExercise.getReps()) + ", " + mNPController.twoButtonClicked());
-		        }
-		        else {
-		            mCurrentRepsTextView.setText("" + mNPController.twoButtonClicked());
-		        }
-		    }
-		});
-		
-		mButtonThree.setOnClickListener(new OnClickListener() {
-		    @Override
-		    public void onClick(View arg0) {
-		    	//Updates and formats the screen with the most recent number.
-		        if(mExercise.getReps().size() != 0) {
-		            mCurrentRepsTextView.setText(createRepsString(mExercise.getReps()) + ", " + mNPController.threeButtonClicked());
-		        }
-		        else {
-		            mCurrentRepsTextView.setText("" + mNPController.threeButtonClicked());
-		        }
-		    }
-		});
-		
-		mButtonFour.setOnClickListener(new OnClickListener() {
-		    @Override
-		    public void onClick(View arg0) {
-		    	//Updates and formats the screen with the most recent number.
-		        if(mExercise.getReps().size() != 0) {
-		            mCurrentRepsTextView.setText(createRepsString(mExercise.getReps()) + ", " + mNPController.fourButtonClicked());
-		        }
-		        else {
-		            mCurrentRepsTextView.setText("" + mNPController.fourButtonClicked());
-		        }
-		    }
-		});
-		
-		mButtonFive.setOnClickListener(new OnClickListener() {
-		    @Override
-		    public void onClick(View arg0) {
-		    	//Updates and formats the screen with the most recent number.
-		        if(mExercise.getReps().size() != 0) {
-		            mCurrentRepsTextView.setText(createRepsString(mExercise.getReps()) + ", " + mNPController.fiveButtonClicked());
-		        }
-		        else {
-		            mCurrentRepsTextView.setText("" + mNPController.fiveButtonClicked());
-		        }
-		    }
-		});
-		
-		mButtonSix.setOnClickListener(new OnClickListener() {
-		    @Override
-		    public void onClick(View arg0) {
-		    	//Updates and formats the screen with the most recent number.
-		        if(mExercise.getReps().size() != 0) {
-		            mCurrentRepsTextView.setText(createRepsString(mExercise.getReps()) + ", " + mNPController.sixButtonClicked());
-		        }
-		        else {
-		            mCurrentRepsTextView.setText("" + mNPController.sixButtonClicked());
-		        }
-		    }
-		});
-		
-		mButtonSeven.setOnClickListener(new OnClickListener() {
-		    @Override
-		    public void onClick(View arg0) {
-		    	//Updates and formats the screen with the most recent number.
-		        if(mExercise.getReps().size() != 0) {
-		            mCurrentRepsTextView.setText(createRepsString(mExercise.getReps()) + ", " + mNPController.sevenButtonClicked());
-		        }
-		        else {
-		            mCurrentRepsTextView.setText("" + mNPController.sevenButtonClicked());
-		        }
-		    }
-		});
-		
-		mButtonEight.setOnClickListener(new OnClickListener() {
-		    @Override
-		    public void onClick(View arg0) {
-		    	//Updates and formats the screen with the most recent number.
-		        if(mExercise.getReps().size() != 0) {
-		            mCurrentRepsTextView.setText(createRepsString(mExercise.getReps()) + ", " + mNPController.eightButtonClicked());
-		        }
-		        else {
-		            mCurrentRepsTextView.setText("" + mNPController.eightButtonClicked());
-		        }
-		    }
-		});
-		
-		mButtonNine.setOnClickListener(new OnClickListener() {
-		    @Override
-		    public void onClick(View arg0) {
-		    	//Updates and formats the screen with the most recent number.
-		        if(mExercise.getReps().size() != 0) {
-		            mCurrentRepsTextView.setText(createRepsString(mExercise.getReps()) + ", " + mNPController.nineButtonClicked());
-		        }
-		        else {
-		            mCurrentRepsTextView.setText("" + mNPController.nineButtonClicked());
-		        }
-		    }
-		});
-		
-		mButtonZero.setOnClickListener(new OnClickListener() {
-		    @Override
-		    public void onClick(View arg0) {
-		    	//Updates and formats the screen with the most recent number.
-		        if(mExercise.getReps().size() != 0) {
-		            mCurrentRepsTextView.setText(createRepsString(mExercise.getReps()) + ", " + mNPController.zeroButtonClicked());
-		        }
-		        else {
-		            mCurrentRepsTextView.setText("" + mNPController.zeroButtonClicked());
-		        }
-		    }
-		});
-		
-		mBackspaceButton.setOnClickListener(new OnClickListener() {
-		    @Override
-		    public void onClick(View arg0) {
-		    	//Updates and formats the screen with the most recent number.
-		    	if(mExercise.getReps().size() != 0) {
-		    		mCurrentRepsTextView.setText(createRepsString(mExercise.getReps()) + ", " + mNPController.backspaceButtonClicked());
-		    	}
-		    	else {
-		    		mCurrentRepsTextView.setText("" + mNPController.backspaceButtonClicked());
-		    	}
-		    }
-		});
+		mButtonOne.setOnClickListener(new OnNumberPadClickListener());
+		mButtonTwo.setOnClickListener(new OnNumberPadClickListener());
+		mButtonThree.setOnClickListener(new OnNumberPadClickListener());
+		mButtonFour.setOnClickListener(new OnNumberPadClickListener());
+		mButtonFive.setOnClickListener(new OnNumberPadClickListener());
+		mButtonSix.setOnClickListener(new OnNumberPadClickListener());
+		mButtonSeven.setOnClickListener(new OnNumberPadClickListener());
+		mButtonEight.setOnClickListener(new OnNumberPadClickListener());
+		mButtonNine.setOnClickListener(new OnNumberPadClickListener());
+		mButtonZero.setOnClickListener(new OnNumberPadClickListener());
+		mBackspaceButton.setOnClickListener(new OnNumberPadClickListener());
 		
 		mNextSetButton.setOnClickListener(new OnClickListener() {
 		    @Override
@@ -237,6 +107,23 @@ public class ExerciseActivity extends Activity {
 		    @Override
 		    public void onClick(View arg0) {
 		    	//Finish this exercise and go back to the previous screen.
+
+		    	//Adds the completed rep to our exercise object
+		    	if(mNPController.getNumber() != 0) {
+		    		mExercise.addRep(mNPController.getNumber());
+		    	}
+		    	
+		    	//Grab the current workout.
+		    	Workout workout = ((WorkoutWhizApplication)getApplication()).getCurrentWorkout();
+		    	
+		    	//Complete our exercise.
+		    	workout.completeExercise(mExercise);
+		    	
+		    	//Set our workout again.
+		    	((WorkoutWhizApplication)getApplication()).setCurrentWorkout(workout);
+		    	
+		    	setResult(SelectExerciseActivity.SUCCESSFUL_EXERCISE);
+		    	finish();
 		    }
 		});
 	}
@@ -257,5 +144,58 @@ public class ExerciseActivity extends Activity {
 		}
 		
 		return ret;
+	}
+	
+	private class OnNumberPadClickListener implements OnClickListener {
+
+		@Override
+		public void onClick(View v) {
+			
+			int newValue = -1;
+			
+			//Sets newValue according to which button is pressed.
+			if(v.getId() == R.id.exercise_one_button) {
+			    newValue = mNPController.oneButtonClicked();
+			}
+			else if(v.getId() == R.id.exercise_two_button) {
+			    newValue = mNPController.twoButtonClicked();
+			}
+			else if(v.getId() == R.id.exercise_three_button) {
+			    newValue = mNPController.threeButtonClicked();
+			}
+			else if(v.getId() == R.id.exercise_four_button) {
+			    newValue = mNPController.fourButtonClicked();
+			}
+			else if(v.getId() == R.id.exercise_five_button) {
+			    newValue = mNPController.fiveButtonClicked();
+			}
+			else if(v.getId() == R.id.exercise_six_button) {
+			    newValue = mNPController.sixButtonClicked();
+			}
+			else if(v.getId() == R.id.exercise_seven_button) {
+			    newValue = mNPController.sevenButtonClicked();
+			}
+			else if(v.getId() == R.id.exercise_eight_button) {
+			    newValue = mNPController.eightButtonClicked();
+			}
+			else if(v.getId() == R.id.exercise_nine_button) {
+			    newValue = mNPController.nineButtonClicked();
+			}
+			else if(v.getId() == R.id.exercise_zero_button) {
+			    newValue = mNPController.zeroButtonClicked();
+			}
+			else if(v.getId() == R.id.exercise_backspace_button) {
+				newValue = mNPController.backspaceButtonClicked();
+			}
+
+	    	//Updates and formats the screen with the most recent number.
+	    	if(mExercise.getReps().size() != 0) {
+	    		mCurrentRepsTextView.setText(createRepsString(mExercise.getReps()) + ", " + newValue);
+	    	}
+	    	else {
+	    		mCurrentRepsTextView.setText("" + newValue);
+	    	}
+		}
+		
 	}
 }
