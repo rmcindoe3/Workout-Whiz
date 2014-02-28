@@ -38,7 +38,7 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 		mWorkoutTitleTextView.setText(mWorkout.getName());
 		
 		//Sets up our list view of exercises.
-		mExerciseHistoryListView.setAdapter(new ExerciseArrayAdapter(this, mWorkout.getExercises(), new View.OnClickListener() {
+		mExerciseHistoryListView.setAdapter(new ExerciseArrayAdapter(this, mWorkout.getIncompleteExercises(), new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {

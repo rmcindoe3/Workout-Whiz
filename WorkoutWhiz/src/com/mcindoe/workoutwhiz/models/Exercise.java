@@ -22,6 +22,25 @@ public class Exercise {
 		setReps(new ArrayList<Integer>());
 		setLastReps(new ArrayList<Integer>());
 	}
+	
+	/**
+	 * Overridden equals method to compare the names of exercises.
+	 */
+	@Override
+	public boolean equals(Object other) {
+		if(other == null) {
+			return false;
+		}
+		else if(!(other instanceof Exercise)) {
+			return false;
+		}
+		else {
+			if(((Exercise)other).getName().equals(this.getName())) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	/**
 	 * Adds a set to our current exercise.

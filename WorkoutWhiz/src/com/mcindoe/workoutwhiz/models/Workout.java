@@ -5,27 +5,42 @@ import java.util.ArrayList;
 public class Workout {
 	
 	private String name;
-	private ArrayList<Exercise> exercises;
+	private ArrayList<Exercise> incompleteExercises;
+	private ArrayList<Exercise> completeExercises;
 
 	public Workout(String name) {
 		this.setName(name);
-		exercises = new ArrayList<Exercise>();
+		setCompleteExercises(new ArrayList<Exercise>());
+		setIncompleteExercises(new ArrayList<Exercise>());
 	}
 	
 	/**
-	 * Adds an exercise to our workout.
-	 * @param exer - the exercise you want to add.
+	 * Moves an exercise from the incomplete list to the complete list
+	 * @param exer - the exercise that has been completed.
 	 */
-	public void addExercise(Exercise exer) {
-		exercises.add(exer);
-	}
-	
-	public ArrayList<Exercise> getExercises() {
-		return exercises;
+	public void completeExercise(Exercise exer) {
+		//If our incomplete exercises list contains the exercise, remove it
+		if(incompleteExercises.contains(exer)) {
+			incompleteExercises.remove(exer);
+		}
+		//Now add it to our complete exercises list.
+		completeExercises.add(exer);
 	}
 
-	public void setExercises(ArrayList<Exercise> exercises) {
-		this.exercises = exercises;
+	public ArrayList<Exercise> getIncompleteExercises() {
+		return incompleteExercises;
+	}
+
+	public void setIncompleteExercises(ArrayList<Exercise> incompleteExercise) {
+		this.incompleteExercises = incompleteExercise;
+	}
+
+	public ArrayList<Exercise> getCompleteExercises() {
+		return completeExercises;
+	}
+
+	public void setCompleteExercises(ArrayList<Exercise> completeExercises) {
+		this.completeExercises = completeExercises;
 	}
 
 	public String getName() {
