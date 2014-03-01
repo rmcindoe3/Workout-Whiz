@@ -68,7 +68,7 @@ public class ExerciseActivity extends Activity {
 		mNPController = new NumberPadController();
 		
 		//Grabs the title to this activity and sets it.
-		mExerciseTitleTextView.setText(mExercise.getName() + " (" + mExercise.getWeight() + ")");
+		mExerciseTitleTextView.setText(mExercise.getName() + " (" + mExercise.getWeight() + " lbs.)");
 		
 		//If we have a previously recorded rep for this exercise and set, then set the previous reps text box.
 		if(mExercise.getLastReps().size() > 0) {
@@ -151,6 +151,7 @@ public class ExerciseActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			
+			int oldValue = mNPController.getNumber();
 			int newValue = -1;
 			
 			//Sets newValue according to which button is pressed.
@@ -186,6 +187,12 @@ public class ExerciseActivity extends Activity {
 			}
 			else if(v.getId() == R.id.exercise_backspace_button) {
 				newValue = mNPController.backspaceButtonClicked();
+			}
+
+			//If the old value was zero and we tried to backspace again, delete the last rep from our list.
+			if(oldValue == 0 && newValue == 0 && mExercise.getReps().size() != 0) {
+				newValue = mExercise.getReps().remove(mExercise.getReps().size()-1);
+				mNPController.setNumber(newValue);
 			}
 
 	    	//Updates and formats the screen with the most recent number.
