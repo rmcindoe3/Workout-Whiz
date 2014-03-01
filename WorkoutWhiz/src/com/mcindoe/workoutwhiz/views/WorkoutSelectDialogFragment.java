@@ -30,6 +30,8 @@ public class WorkoutSelectDialogFragment extends DialogFragment {
 	private EditText mCreateNewWorkoutEditText;
 	private ArrayList<Workout> mRecentWorkouts;
 	
+	private static final String INVALID_WORKOUT_NAME = "0v329jjc9222nk3lj235h35";
+	
 	private Context mContext;
 
 	/**
@@ -101,13 +103,21 @@ public class WorkoutSelectDialogFragment extends DialogFragment {
 						//	that the workout has been selected.
 						Workout workout = determineSelectedWorkout();
 						
-						//If they did select a workout then return to main activity.
+						//If they did select a workout...
 						if(workout != null) {
-							sourceActivity.onDialogPositiveClick(workout);
+
+							//If the workout name was invalid, let the user know.
+							if(workout.getName().equals(INVALID_WORKOUT_NAME)) {
+								Toast.makeText(mContext, "Please Enter A Valid Workout Name\nMinimum Length: 6 Letters", Toast.LENGTH_LONG).show();
+							}
+							//If the workout does have a valid name then return to the main activity.
+							else {
+								sourceActivity.onDialogPositiveClick(workout);
+							}
 						}
 						//If they didn't select a workout then let them know and do nothing.
 						else {
-							Toast.makeText(mContext, "Please Enter A Workout Name", Toast.LENGTH_SHORT).show();
+							Toast.makeText(mContext, "Please Select A Workout", Toast.LENGTH_LONG).show();
 						}
 					}
 				});
@@ -141,7 +151,15 @@ public class WorkoutSelectDialogFragment extends DialogFragment {
 
 		//If the create new workout radio button is checked, create a new workout to be returned.
 		if(mCreateNewWorkoutRadioButton.isChecked()) {
-			ret = new Workout(Exercise.capitalizeLetters(mCreateNewWorkoutEditText.getText().toString()));
+
+			//If the edit text has text, name the workout accordingly.
+			if(mCreateNewWorkoutEditText.length() >= 6) {
+				ret = new Workout(Exercise.capitalizeLetters(mCreateNewWorkoutEditText.getText().toString()));
+			}
+			//If the edit text was empty, set the return workout to the invalid workout name string.
+			else {
+				ret = new Workout(INVALID_WORKOUT_NAME);
+			}
 		}
 		//Otherwise it's one of the previously performed workouts.
 		else {
