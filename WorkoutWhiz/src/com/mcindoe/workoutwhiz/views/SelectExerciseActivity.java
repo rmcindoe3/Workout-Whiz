@@ -80,6 +80,11 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 			Toast.makeText(getApplicationContext(), "Please Enter An Exercise Name", Toast.LENGTH_SHORT).show();
 			return;
 		}
+		//If the exercise name is too long, let the user know.
+		else if(mAddExerciseEditText.getText().length() > 20) {
+			Toast.makeText(getApplicationContext(), "Exercise Name Too Long\nMaximum Letters: 20", Toast.LENGTH_SHORT).show();
+			return;
+		}
 		//If the user did enter an exercise name, then set the name of the weightDialog's exercise.
 		else {
 			weightDialog.setExercise(new Exercise(Exercise.capitalizeLetters(mAddExerciseEditText.getText().toString()), 25));

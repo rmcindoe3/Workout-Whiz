@@ -110,6 +110,10 @@ public class WorkoutSelectDialogFragment extends DialogFragment {
 							if(workout.getName().equals(INVALID_WORKOUT_NAME)) {
 								Toast.makeText(mContext, "Please Enter A Valid Workout Name\nMinimum Length: 6 Letters", Toast.LENGTH_LONG).show();
 							}
+							//If the workout name is too long, let the user know.
+							else if(workout.getName().length() > 20) {
+								Toast.makeText(mContext, "Please Enter A Valid Workout Name\nMaximum Length: 20 Letters", Toast.LENGTH_LONG).show();
+							}
 							//If the workout does have a valid name then return to the main activity.
 							else {
 								sourceActivity.onDialogPositiveClick(workout);
