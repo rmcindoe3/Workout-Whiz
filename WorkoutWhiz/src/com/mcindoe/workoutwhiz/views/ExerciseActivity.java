@@ -3,6 +3,8 @@ package com.mcindoe.workoutwhiz.views;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -224,6 +226,34 @@ public class ExerciseActivity extends Activity {
 	    		mCurrentRepsTextView.setText("" + newValue);
 	    	}
 		}
-		
 	}
+
+	/**
+	 * Override the default onBackPressed method to provide a confirmation message.
+	 */
+	@Override
+	public void onBackPressed() {
+		
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Are you sure?");
+		builder.setMessage("Continuing will cancel this exercise!");
+		builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+				//Set the result for this activity to indicate we cancelled the exercise and finish it.
+		    	setResult(SelectExerciseActivity.CANCELLED_EXERCISE);
+		    	finish();
+			}
+		});
+		builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+				//The dialog will be dismissed and nothing happens.
+			}
+		});
+		AlertDialog dialog = builder.create();
+		
+		dialog.show();
+	}
+
 }

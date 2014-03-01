@@ -13,7 +13,8 @@ import com.mcindoe.workoutwhiz.models.Workout;
 
 public class MainActivity extends Activity implements WorkoutSelectDialogFragment.WorkoutSelectDialogListener {
 	
-	public static final int SUCCESSFUL_WORKOUT = 0x03;
+	public static final int SUCCESSFUL_WORKOUT = 0x9271;
+	public static final int CANCELLED_WORKOUT = 0x843D;
 	
 	private ArrayList<Workout> mWorkouts;
 

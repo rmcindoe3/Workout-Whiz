@@ -3,6 +3,8 @@ package com.mcindoe.workoutwhiz.views;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,7 +21,8 @@ import com.mcindoe.workoutwhiz.models.Workout;
 
 public class SelectExerciseActivity extends Activity implements WeightDialogFragment.WeightDialogListener {
 	
-	public static final int SUCCESSFUL_EXERCISE = 0x02;
+	public static final int SUCCESSFUL_EXERCISE = 0x239F;
+	public static final int CANCELLED_EXERCISE = 0x38AB;
 
 	private EditText mAddExerciseEditText;
 	private TextView mWorkoutTitleTextView;
@@ -139,6 +142,9 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 			mAddExerciseEditText.setText("");
 			
 		}
+		else if(resultCode == CANCELLED_EXERCISE) {
+			//Nothing to do for now.
+		}
 	}
 
 	/**
@@ -171,5 +177,33 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 				weightDialog.show(getFragmentManager(), "weight dialog");
 			}
 		}
+	}
+
+	/**
+	 * Override the default onBackPressed method to provide a confirmation message.
+	 */
+	@Override
+	public void onBackPressed() {
+		
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Are you sure?");
+		builder.setMessage("Continuing will cancel this workout!");
+		builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+				//Set the result for this activity to indicate we cancelled the exercise and finish it.
+		    	setResult(MainActivity.CANCELLED_WORKOUT);
+		    	finish();
+			}
+		});
+		builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+				//The dialog will be dismissed and nothing happens.
+			}
+		});
+		AlertDialog dialog = builder.create();
+		
+		dialog.show();
 	}
 }
