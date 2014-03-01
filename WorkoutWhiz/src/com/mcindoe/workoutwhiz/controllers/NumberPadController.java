@@ -3,7 +3,7 @@ package com.mcindoe.workoutwhiz.controllers;
 public class NumberPadController {
 
 	private int number;
-	private final int MAX_NUMBER = 400;
+	private final int MAX_NUMBER = 99;
 	
 	public NumberPadController() {
 		setNumber(0);

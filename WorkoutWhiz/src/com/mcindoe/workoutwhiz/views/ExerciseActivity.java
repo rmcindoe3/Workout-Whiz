@@ -105,6 +105,11 @@ public class ExerciseActivity extends Activity {
 		    	if(mExercise.getReps().size() >= 2) {
 		    		mFinishExerciseButton.setEnabled(true);
 		    	}
+		    	
+		    	//If the current number of reps is higher than the maximum, disable input buttons
+		    	if(mExercise.getReps().size() >= 4) {
+		    		mNextSetButton.setEnabled(false);
+		    	}
 		    }
 		});
 		
@@ -206,6 +211,9 @@ public class ExerciseActivity extends Activity {
 				if(mExercise.getReps().size() < 2) {
 					mFinishExerciseButton.setEnabled(false);
 				}
+		    	
+				//Re-enable the input buttons if they were disabled.
+				mNextSetButton.setEnabled(true);
 			}
 
 	    	//Updates and formats the screen with the most recent number.
