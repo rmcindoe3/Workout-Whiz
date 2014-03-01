@@ -62,7 +62,7 @@ public class WeightDialogFragment extends DialogFragment {
 		mTextView = (TextView)weightDialogView.findViewById(R.id.weight_input_text_view);
 		
 		//Set them to the default weight for this exercise.
-		mTextView.setText("" + mExercise.getWeight());
+		mTextView.setText(mExercise.getWeight() + " lbs.");
 		mSeekBar.setProgress(mExercise.getWeight());
 
 		//Set up our seek bar listener.
@@ -71,7 +71,7 @@ public class WeightDialogFragment extends DialogFragment {
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 				//When the seek bar is moved, update the text view with it's new value
-				mTextView.setText("" + progress);
+				mTextView.setText(progress + " lbs.");
 				mExercise.setWeight(progress);
 			}
 
@@ -89,7 +89,7 @@ public class WeightDialogFragment extends DialogFragment {
 		//Finishes creating our dialog builder.
 		builder.setView(weightDialogView);
 
-		builder.setTitle(mExercise.getName());
+		builder.setTitle("Select Weight for " + mExercise.getName());
 
 		builder.setPositiveButton(R.string.ok,
 				new DialogInterface.OnClickListener() {
