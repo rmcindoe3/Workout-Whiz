@@ -93,14 +93,22 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 	 */
 	public void onEndWorkoutButtonClicked(View view) {
 		
-		//Store our workout in the database.
-		WorkoutDataSource wds = new WorkoutDataSource(this);
-		wds.open();
-		wds.insertWorkout(mWorkout);
-		wds.close();
-		
-		setResult(MainActivity.SUCCESSFUL_WORKOUT);
-		finish();
+		//If they have more than 3 exercises, let them finish the workout.
+		if(mWorkout.getCompleteExercises().size() >= 3) {
+
+			//Store our workout in the database.
+			WorkoutDataSource wds = new WorkoutDataSource(this);
+			wds.open();
+			wds.insertWorkout(mWorkout);
+			wds.close();
+
+			setResult(MainActivity.SUCCESSFUL_WORKOUT);
+			finish();
+		}
+		//If they haven't completed at least 3 exercises, don't let them finish the workout.
+		else {
+			Toast.makeText(getApplicationContext(), "You must complete at least 3 exercises to finish your workout!", Toast.LENGTH_LONG).show();
+		}
 	}
 
 	/**
