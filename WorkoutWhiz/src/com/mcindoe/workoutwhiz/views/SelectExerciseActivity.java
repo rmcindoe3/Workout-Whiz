@@ -1,5 +1,7 @@
 package com.mcindoe.workoutwhiz.views;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -103,9 +105,14 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 	 */
 	@Override
 	public void onDialogPositiveClick(Exercise exer) {
-		//We want to start the given exercise.
+
+		//first we need to set it's current reps to empty
+		exer.setReps(new ArrayList<Integer>());
+		
+		//Then set it to the applications current exercise.
 		((WorkoutWhizApplication)getApplication()).setCurrentExercise(exer);
 
+		//Now start the exercise activity for result
 		Intent intent = new Intent(this, ExerciseActivity.class);
 		startActivityForResult(intent, 0);
 	}
