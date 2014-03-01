@@ -96,19 +96,23 @@ public class WorkoutDataSource {
 		return workout;
 	}
 	
-	public Workout getMostRecentWorkout() {
+	public ArrayList<Workout> getMostRecentWorkouts() {
+		
+		//Initialize our return array.
+		ArrayList<Workout> ret = new ArrayList<Workout>();
 
 		//Initialize our workout to null, will return null if there is no workout in the database already
-		Workout ret = null;
+		Workout workout = null;
 		
 		//Make initial query to get the most recent workout.
 		Cursor workoutCursor = database.rawQuery("SELECT * FROM workout ORDER BY _id DESC", new String[] {});
 		
 		//If there is a workout stored, grab the most recent one
-		if(workoutCursor.moveToNext()) {
+		while(workoutCursor.moveToNext() && ret.size() < 5) {
 			
-			//Initialize our workout variable with the name.
-			ret = new Workout(workoutCursor.getString(workoutCursor.getColumnIndex(WorkoutDBSQLiteHelper.WORKOUT_NAME)));
+			//Initialize our workout variable with the name and date
+			workout = new Workout(workoutCursor.getString(workoutCursor.getColumnIndex(WorkoutDBSQLiteHelper.WORKOUT_NAME)));
+			workout.setDate(workoutCursor.getString(workoutCursor.getColumnIndex(WorkoutDBSQLiteHelper.WORKOUT_DATE)));
 			
 			//Create a list of exercises that we'll be adding to
 			ArrayList<Exercise> prevExercises = new ArrayList<Exercise>();
@@ -144,7 +148,8 @@ public class WorkoutDataSource {
 				prevExercises.add(exer);
 			}
 			
-			ret.setIncompleteExercises(prevExercises);
+			workout.setIncompleteExercises(prevExercises);
+			ret.add(workout);
 		}
 		
 		return ret;

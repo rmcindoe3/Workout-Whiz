@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Workout {
 	
 	private String name;
+	private String date;
 	private ArrayList<Exercise> incompleteExercises;
 	private ArrayList<Exercise> completeExercises;
 
@@ -49,6 +50,14 @@ public class Workout {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 }

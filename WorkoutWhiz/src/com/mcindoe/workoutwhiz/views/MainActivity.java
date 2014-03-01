@@ -1,6 +1,7 @@
 package com.mcindoe.workoutwhiz.views;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,6 +15,8 @@ import com.mcindoe.workoutwhiz.models.Workout;
 public class MainActivity extends Activity {
 	
 	public static final int SUCCESSFUL_WORKOUT = 0x03;
+	
+	private ArrayList<Workout> mWorkouts;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -21,19 +24,20 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+		updateWorkouts();
+	}
+
 	/**
 	 * Called when the Workout! button is clicked in the main activity.
 	 */
 	public void onWorkoutButtonClicked(View view) {
 
-		WorkoutDataSource wds = new WorkoutDataSource(this);
-		wds.open();
-		Workout workout = wds.getMostRecentWorkout();
-		wds.close();
-
 		//Creates a new workout object for this applications instance.
-		if(workout != null) {
-			((WorkoutWhizApplication)getApplication()).setCurrentWorkout(workout);
+		if(mWorkouts.size() != 0) {
+			((WorkoutWhizApplication)getApplication()).setCurrentWorkout(mWorkouts.get(0));
 		}
 		else {
 			((WorkoutWhizApplication)getApplication()).setCurrentWorkout(new Workout("New Workout"));
@@ -57,6 +61,17 @@ public class MainActivity extends Activity {
 			//Workout didn't end successfully.
 		}
 
+	}
+	
+	/**
+	 * Update our workouts variable to the most recent workouts in the database.
+	 */
+	public void updateWorkouts() {
+
+		WorkoutDataSource wds = new WorkoutDataSource(this);
+		wds.open();
+		mWorkouts = wds.getMostRecentWorkouts();
+		wds.close();
 	}
 
 	/**
