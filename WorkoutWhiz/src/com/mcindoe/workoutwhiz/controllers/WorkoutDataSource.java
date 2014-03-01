@@ -17,19 +17,6 @@ public class WorkoutDataSource {
 	
 	private SQLiteDatabase database;
 	private WorkoutDBSQLiteHelper dbHelper;
-
-	private String[] workoutColumns = { WorkoutDBSQLiteHelper.WORKOUT_ID, 
-										WorkoutDBSQLiteHelper.WORKOUT_NAME,
-										WorkoutDBSQLiteHelper.WORKOUT_DATE };
-
-	private String[] exerciseColumns = { WorkoutDBSQLiteHelper.EXERCISE_ID, 
-										 WorkoutDBSQLiteHelper.EXERCISE_WORKOUT_ID,
-										 WorkoutDBSQLiteHelper.EXERCISE_NAME,
-										 WorkoutDBSQLiteHelper.EXERCISE_INTENSITY };
-
-	private String[] repColumns = { WorkoutDBSQLiteHelper.REP_ID, 
-									WorkoutDBSQLiteHelper.REP_EXERCISE_ID,
-									WorkoutDBSQLiteHelper.REP_COUNT };
 	
 	public WorkoutDataSource(Context context) {
 		dbHelper = new WorkoutDBSQLiteHelper(context);
@@ -153,6 +140,18 @@ public class WorkoutDataSource {
 		}
 		
 		return ret;
+	}
+	
+	/**
+	 * Clears the database of all tuples.
+	 */
+	public void clearDatabase() {
+		database.execSQL("DROP TABLE IF EXISTS " + WorkoutDBSQLiteHelper.TABLE_WORKOUT);
+		database.execSQL("DROP TABLE IF EXISTS " + WorkoutDBSQLiteHelper.TABLE_EXERCISE);
+		database.execSQL("DROP TABLE IF EXISTS " + WorkoutDBSQLiteHelper.TABLE_REP);
+		database.execSQL(WorkoutDBSQLiteHelper.WORKOUT_TABLE_CREATE);
+		database.execSQL(WorkoutDBSQLiteHelper.EXERCISE_TABLE_CREATE);
+		database.execSQL(WorkoutDBSQLiteHelper.REP_TABLE_CREATE);
 	}
 	
 	public static String getCurrentDate() {

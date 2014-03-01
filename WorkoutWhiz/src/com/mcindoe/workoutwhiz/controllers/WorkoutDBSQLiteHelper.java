@@ -2,7 +2,6 @@ package com.mcindoe.workoutwhiz.controllers;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class WorkoutDBSQLiteHelper extends SQLiteOpenHelper {
@@ -26,13 +25,13 @@ public class WorkoutDBSQLiteHelper extends SQLiteOpenHelper {
 	public static final String REP_EXERCISE_ID = "exercise_id";
 	public static final String REP_COUNT = "count";
 	
-	private static final String WORKOUT_TABLE_CREATE = "create table "
+	public static final String WORKOUT_TABLE_CREATE = "create table "
 			+ TABLE_WORKOUT + "("
 			+ WORKOUT_ID + " integer primary key autoincrement, "
 			+ WORKOUT_NAME + " text not null, "
 			+ WORKOUT_DATE + " text not null);";
 
-	private static final String EXERCISE_TABLE_CREATE = "create table "
+	public static final String EXERCISE_TABLE_CREATE = "create table "
 			+ TABLE_EXERCISE + "("
 			+ EXERCISE_ID + " integer primary key autoincrement, "
 			+ EXERCISE_WORKOUT_ID + " integer not null, "
@@ -40,7 +39,7 @@ public class WorkoutDBSQLiteHelper extends SQLiteOpenHelper {
 			+ EXERCISE_INTENSITY + " integer not null, "
 			+ " FOREIGN KEY (" + EXERCISE_WORKOUT_ID + ") REFERENCES " + TABLE_WORKOUT + " (" + WORKOUT_ID + "));";
 
-	private static final String REP_TABLE_CREATE = "create table "
+	public static final String REP_TABLE_CREATE = "create table "
 			+ TABLE_REP + "("
 			+ REP_ID + " integer primary key autoincrement, "
 			+ REP_EXERCISE_ID + " integer not null, "

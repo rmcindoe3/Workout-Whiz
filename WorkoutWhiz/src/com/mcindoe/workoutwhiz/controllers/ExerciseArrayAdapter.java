@@ -1,4 +1,4 @@
-package com.mcindoe.workoutwhiz.views;
+package com.mcindoe.workoutwhiz.controllers;
 
 import java.util.List;
 
@@ -52,12 +52,6 @@ public class ExerciseArrayAdapter extends ArrayAdapter<Exercise> {
 		exerciseRow.setOnClickListener(mListener);
 
 		return exerciseRow;
-	}
-	
-	public void updateExerciseList(List<Exercise> exers) {
-		mExercises.clear();
-		mExercises.addAll(exers);
-		this.notifyDataSetChanged();
 	}
 	
 	/**

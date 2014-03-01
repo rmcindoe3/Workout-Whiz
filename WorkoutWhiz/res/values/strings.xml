@@ -39,6 +39,10 @@
     <string name="backspace">BS</string>
     <string name="completed_exercises_text_view">Completed Exercises:</string>
     <string name="incompleted_exercises_text_view">Not Completed Exercises:</string>
+    <string name="create_new_workout_hint">Create New Workout&#8230;</string>
+    <string name="select_workout_dialog_title">Select A Workout:</string>
+    <string name="default_workout_name">Untitled Workout</string>
+    <string name="default_workout_date">Date Unknown</string>
 
 
 </resources>

@@ -1,6 +1,5 @@
 package com.mcindoe.workoutwhiz.views;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -12,7 +11,7 @@ import com.mcindoe.workoutwhiz.R;
 import com.mcindoe.workoutwhiz.controllers.WorkoutDataSource;
 import com.mcindoe.workoutwhiz.models.Workout;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements WorkoutSelectDialogFragment.WorkoutSelectDialogListener {
 	
 	public static final int SUCCESSFUL_WORKOUT = 0x03;
 	
@@ -35,13 +34,17 @@ public class MainActivity extends Activity {
 	 */
 	public void onWorkoutButtonClicked(View view) {
 
-		//Creates a new workout object for this applications instance.
-		if(mWorkouts.size() != 0) {
-			((WorkoutWhizApplication)getApplication()).setCurrentWorkout(mWorkouts.get(0));
-		}
-		else {
-			((WorkoutWhizApplication)getApplication()).setCurrentWorkout(new Workout("New Workout"));
-		}
+		//Create our workout select dialog fragment and then show it.
+		WorkoutSelectDialogFragment workoutSelectDialog = new WorkoutSelectDialogFragment();
+		workoutSelectDialog.setRecentWorkouts(mWorkouts);
+		workoutSelectDialog.show(getFragmentManager(), "workout select dialog");
+	}
+
+	@Override
+	public void onDialogPositiveClick(Workout workout) {
+
+		//Sets the application's workout to what the user has selected.
+		((WorkoutWhizApplication)getApplication()).setCurrentWorkout(workout);
 		
 		Intent intent = new Intent(this, SelectExerciseActivity.class);
 		startActivityForResult(intent, 0);
@@ -86,5 +89,9 @@ public class MainActivity extends Activity {
 	 */
 	public void onSettingsButtonClicked(View view) {
 		//TODO: Open settings activity.
+		WorkoutDataSource wds = new WorkoutDataSource(this);
+		wds.open();
+		wds.clearDatabase();
+		wds.close();
 	}
 }

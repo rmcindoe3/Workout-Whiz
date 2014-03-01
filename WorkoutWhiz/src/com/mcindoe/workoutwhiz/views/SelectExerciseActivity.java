@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mcindoe.workoutwhiz.R;
+import com.mcindoe.workoutwhiz.controllers.ExerciseArrayAdapter;
 import com.mcindoe.workoutwhiz.controllers.WorkoutDataSource;
 import com.mcindoe.workoutwhiz.models.Exercise;
 import com.mcindoe.workoutwhiz.models.Workout;

@@ -1,6 +1,7 @@
 package com.mcindoe.workoutwhiz.models;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Exercise {
 
@@ -65,7 +66,7 @@ public class Exercise {
 	 * @return - properly capitalized string.
 	 */
 	public static String capitalizeLetters(String inStr) {
-		inStr = inStr.toLowerCase();
+		inStr = inStr.toLowerCase(Locale.US);
 		boolean capitalizeNext = true;
 		for(int i = 0; i < inStr.length(); i++) {
 			if(capitalizeNext && inStr.charAt(i) >= 'a' && inStr.charAt(i) <= 'z') {
