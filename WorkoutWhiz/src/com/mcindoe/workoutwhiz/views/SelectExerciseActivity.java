@@ -10,12 +10,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mcindoe.workoutwhiz.R;
+import com.mcindoe.workoutwhiz.controllers.WorkoutDataSource;
 import com.mcindoe.workoutwhiz.models.Exercise;
 import com.mcindoe.workoutwhiz.models.Workout;
 
 public class SelectExerciseActivity extends Activity implements WeightDialogFragment.WeightDialogListener {
 	
-	public static final int EXERCISE_RESULT = 0x01;
 	public static final int SUCCESSFUL_EXERCISE = 0x02;
 
 	private EditText mAddExerciseEditText;
@@ -83,6 +83,21 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 	}
 
 	/**
+	 * Called when the user presses the end workout button.
+	 */
+	public void onEndWorkoutButtonClicked(View view) {
+		
+		//Store our workout in the database.
+		WorkoutDataSource wds = new WorkoutDataSource(this);
+		wds.open();
+		wds.insertWorkout(mWorkout);
+		wds.close();
+		
+		setResult(MainActivity.SUCCESSFUL_WORKOUT);
+		finish();
+	}
+
+	/**
 	 * Called after the user has successfully chosen a desired weight.
 	 */
 	@Override
@@ -91,7 +106,7 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 		((WorkoutWhizApplication)getApplication()).setCurrentExercise(exer);
 
 		Intent intent = new Intent(this, ExerciseActivity.class);
-		startActivityForResult(intent, EXERCISE_RESULT);
+		startActivityForResult(intent, 0);
 	}
 	
 	/**
