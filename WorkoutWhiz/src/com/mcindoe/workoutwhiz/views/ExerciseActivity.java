@@ -100,9 +100,15 @@ public class ExerciseActivity extends Activity {
 		    	
 		    	//Clears the text view and number pad controller
 		    	mCurrentRepsTextView.setText(createRepsString(mExercise.getReps()) + ", " + mNPController.clearNumber());
+		    	
+		    	//If the current number of reps is higher than the minimum, enable the finish exercise button.
+		    	if(mExercise.getReps().size() >= 2) {
+		    		mFinishExerciseButton.setEnabled(true);
+		    	}
 		    }
 		});
 		
+		mFinishExerciseButton.setEnabled(false);
 		mFinishExerciseButton.setOnClickListener(new OnClickListener() {
 		    @Override
 		    public void onClick(View arg0) {
@@ -191,8 +197,15 @@ public class ExerciseActivity extends Activity {
 
 			//If the old value was zero and we tried to backspace again, delete the last rep from our list.
 			if(oldValue == 0 && newValue == 0 && mExercise.getReps().size() != 0) {
+				
+				//Removes and updates the numbers.
 				newValue = mExercise.getReps().remove(mExercise.getReps().size()-1);
 				mNPController.setNumber(newValue);
+
+				//If the number of reps is now below the minimum to finish, disable finish button
+				if(mExercise.getReps().size() < 2) {
+					mFinishExerciseButton.setEnabled(false);
+				}
 			}
 
 	    	//Updates and formats the screen with the most recent number.
