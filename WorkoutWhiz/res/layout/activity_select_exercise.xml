@@ -19,15 +19,6 @@
         android:text="@string/workout_title_text_view_default"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:id="@+id/select_exercise_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="left"
-        android:text="@string/select_exercise_text_view"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
     <!-- ScrollView that contains our list of available exercises. -->
     <ScrollView
         android:id="@+id/workout_exercise_scroll_view"
@@ -57,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:scrollbars="none"
-                android:cacheColorHint="#00000000" />"
+                android:background="#85D6FF" />
             
             <TextView
                 android:layout_width="fill_parent"
@@ -73,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:scrollbars="none"
-                android:cacheColorHint="#00000000" />"
+                android:background="#85D6FF" />
 
         </LinearLayout>
     </ScrollView>

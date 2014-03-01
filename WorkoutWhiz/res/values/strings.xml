@@ -10,7 +10,6 @@
     <string name="workout_title_text_view_default">Workout</string>
     <string name="add_exercise_button">+</string>
     <string name="end_workout_button">End Workout</string>
-    <string name="select_exercise_text_view">Exercise History:</string>
     <string name="create_exercise_text_view">Or Create A New Exercise:</string>
     <string name="create_exercise_edit_text_hint">New Exercise&#8230;</string>
     <string name="ok">OK</string>
@@ -39,8 +38,8 @@
     <string name="nine">9</string>
     <string name="zero">0</string>
     <string name="backspace">BS</string>
-    <string name="completed_exercises_text_view">Completed Exercises:</string>
-    <string name="incompleted_exercises_text_view">Not Completed Exercises:</string>
+    <string name="completed_exercises_text_view">Complete Exercises:</string>
+    <string name="incompleted_exercises_text_view">Incomplete Exercises:</string>
     <string name="create_new_workout_hint">Create New Workout&#8230;</string>
     <string name="select_workout_dialog_title">Select A Workout:</string>
     <string name="default_workout_name">Untitled Workout</string>
