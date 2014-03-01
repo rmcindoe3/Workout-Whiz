@@ -43,6 +43,8 @@
     <string name="select_workout_dialog_title">Select A Workout:</string>
     <string name="default_workout_name">Untitled Workout</string>
     <string name="default_workout_date">Date Unknown</string>
+    <string name="weight_input_info_text">Tip: Move slider to max to increase weight beyond current limit.</string>
+    
 
 
 </resources>

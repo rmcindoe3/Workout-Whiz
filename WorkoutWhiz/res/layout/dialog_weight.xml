@@ -6,15 +6,25 @@
     <TextView
         android:id="@+id/weight_input_text_view"
         android:gravity="center"
-        android:textSize="30sp"
+        android:textSize="@dimen/weight_input_text_view_text_size"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="2" />
 
     <SeekBar
         android:id="@+id/weight_input_seek_bar"
         android:progress="20"
         android:max="200"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2" />
+
+    <TextView
+        android:gravity="center"
+        android:textSize="@dimen/weight_input_info_text_size"
+        android:text="@string/weight_input_info_text"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />

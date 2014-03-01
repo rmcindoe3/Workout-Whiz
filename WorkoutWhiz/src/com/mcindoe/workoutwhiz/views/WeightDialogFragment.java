@@ -20,6 +20,7 @@ public class WeightDialogFragment extends DialogFragment {
 	private SeekBar mSeekBar;
 	private TextView mTextView;
 	private Exercise mExercise;
+	private int mExerciseOriginalWeight;
 	
 	/**
 	 * Interface that allows us to pass events back to our select exercise activity.
@@ -61,15 +62,31 @@ public class WeightDialogFragment extends DialogFragment {
 		mSeekBar = (SeekBar)weightDialogView.findViewById(R.id.weight_input_seek_bar);
 		mTextView = (TextView)weightDialogView.findViewById(R.id.weight_input_text_view);
 		
+		//Store the initial weight in case the user cancels this dialog.
+		mExerciseOriginalWeight = mExercise.getWeight();
+		
 		//Set them to the default weight for this exercise.
 		mTextView.setText(mExercise.getWeight() + " lbs.");
+		mSeekBar.setMax(mExercise.getWeight()*2);
 		mSeekBar.setProgress(mExercise.getWeight());
 
 		//Set up our seek bar listener.
 		mSeekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+			
+			private int maxChangedCounter = 0;
 
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+				
+				//If the seekbar is moved to maximum range and the maximum has not changed recently
+				// then increase the maximum by a factor of 1.5
+				if(progress == mSeekBar.getMax() && maxChangedCounter == 0) {
+					mSeekBar.setMax(mSeekBar.getMax()*3/2);
+					maxChangedCounter = 10;
+				}
+				else if(progress != mSeekBar.getMax() && maxChangedCounter != 0) {
+					maxChangedCounter--;
+				}
 				//When the seek bar is moved, update the text view with it's new value
 				mTextView.setText(progress + " lbs.");
 				mExercise.setWeight(progress);
@@ -104,7 +121,9 @@ public class WeightDialogFragment extends DialogFragment {
 		builder.setNegativeButton(R.string.cancel,
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
-						//Do nothing.
+						
+						//Revert the exercise back to it's original weight.
+						mExercise.setWeight(mExerciseOriginalWeight);
 					}
 				});
 
