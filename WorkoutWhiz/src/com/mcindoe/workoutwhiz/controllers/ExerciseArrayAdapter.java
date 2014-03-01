@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.mcindoe.workoutwhiz.R;
 import com.mcindoe.workoutwhiz.models.Exercise;
+import com.mcindoe.workoutwhiz.views.ExerciseListItemLinearLayout;
 
 public class ExerciseArrayAdapter extends ArrayAdapter<Exercise> {
 	
@@ -34,6 +35,10 @@ public class ExerciseArrayAdapter extends ArrayAdapter<Exercise> {
 
 		LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View exerciseRow = inflater.inflate(R.layout.list_item_exercise, parent, false);
+		
+		//Sets our exercise for this list item.
+		ExerciseListItemLinearLayout layout = (ExerciseListItemLinearLayout)exerciseRow.findViewById(R.id.list_item_exercise);
+		layout.setExercise(mExercises.get(position));
 
 		//Fills in the name of the exercise.
 		TextView exerciseNameTextView = (TextView)exerciseRow.findViewById(R.id.exercise_name_text_view);

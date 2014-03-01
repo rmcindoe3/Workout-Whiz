@@ -152,17 +152,14 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 		public void onClick(View v) {
 			//Just to make sure that the view object that was clicked is an exercise list item.
 			if(v.getId() == R.id.list_item_exercise) {
-
-				//Grab some of it's components.
-				TextView exerciseNameTextView = (TextView)v.findViewById(R.id.exercise_name_text_view);
-				TextView exerciseIntensityTextView = (TextView)v.findViewById(R.id.exercise_intensity_text_view);
+				
+				//Grabs the exercise from this list item
+				ExerciseListItemLinearLayout layout = (ExerciseListItemLinearLayout)v;
 				
 				//Fill out a weight dialog and show it.
 				WeightDialogFragment weightDialog = new WeightDialogFragment();
 				
-				//Create a new exercise to pass to the dialog.
-				Exercise exer = new Exercise(exerciseNameTextView.getText().toString(), parseInitialWeight(exerciseIntensityTextView.getText().toString()));
-				weightDialog.setExercise(exer);
+				weightDialog.setExercise(layout.getExercise());
 
 				weightDialog.show(getFragmentManager(), "weight dialog");
 			}
