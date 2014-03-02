@@ -15,6 +15,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+	    android:paddingLeft="5dp"
+	    android:paddingRight="5dp"
         android:orientation="vertical" >
 	    
 	    <!-- Horizontal Linear Layout to contain previous/current rep information -->
@@ -22,6 +24,7 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="0dp"
 	        android:orientation="horizontal"
+	        android:paddingBottom="5dp"
 	        android:layout_weight="1" >
 	        
 	        <!-- Vertical linear layout to contain previous rep information -->
@@ -32,21 +35,20 @@
 		        android:orientation="vertical"> 
 			
 			    <TextView
+			        style="@style/AppTheme.View.TextView.Subtitle"
 			        android:layout_width="fill_parent"
 			        android:layout_height="0dp"
 			        android:layout_weight="1"
-			        android:gravity="center"
-			        android:text="@string/previous_rep_info_text_view"
-			        android:textAppearance="?android:attr/textAppearanceSmall" />
+			        android:text="@string/previous_rep_info_text_view" />
 	
 			    <TextView
 			        android:id="@+id/previous_rep_count_text_view"
+			        style="@style/AppTheme.View.TextView.RepCount"
 			        android:layout_width="fill_parent"
 			        android:layout_height="0dp"
 			        android:layout_weight="2"
 			        android:gravity="center"
-			        android:text="@string/default_previous_rep_count"
-			        android:textSize="@dimen/rep_count_text_size" />
+			        android:text="@string/default_previous_rep_count" />
 		        
 		    </LinearLayout>
 	
@@ -58,21 +60,20 @@
 		        android:orientation="vertical"> 
 	
 			    <TextView
+			        style="@style/AppTheme.View.TextView.Subtitle"
 			        android:layout_width="fill_parent"
 			        android:layout_height="0dp"
 			        android:layout_weight="1"
-			        android:gravity="center"
-			        android:text="@string/current_rep_info_text_view"
-			        android:textAppearance="?android:attr/textAppearanceSmall" />
+			        android:text="@string/current_rep_info_text_view" />
 	
 			    <TextView
 			        android:id="@+id/current_rep_count_text_view"
+			        style="@style/AppTheme.View.TextView.RepCount"
 			        android:layout_width="fill_parent"
 			        android:layout_height="0dp"
 			        android:layout_weight="2"
 			        android:gravity="center"
-			        android:text="@string/current_rep_count_text_view"
-			        android:textSize="@dimen/rep_count_text_size" />
+			        android:text="@string/current_rep_count_text_view" />
 		        
 		    </LinearLayout>
 	    </LinearLayout>
@@ -215,12 +216,12 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="0dp"
 	        android:orientation="horizontal"
-	        android:paddingTop="10dp"
+	        android:padding="10dp"
 	        android:layout_weight="1" >
 	        
 	        <Button
 	            android:id="@+id/next_set_button"
-		        style="@style/AppTheme.View.TextView.Button"
+		        style="@style/AppTheme.View.TextView.Button.Navigation"
 	        	android:layout_width="0dp"
 	        	android:layout_height="fill_parent"
 	        	android:text="@string/next_set_button"
@@ -228,7 +229,7 @@
 	
 	        <Button
 	            android:id="@+id/finish_exercise_button"
-		        style="@style/AppTheme.View.TextView.Button"
+		        style="@style/AppTheme.View.TextView.Button.Navigation"
 	        	android:layout_width="0dp"
 	        	android:layout_height="fill_parent"
 	        	android:text="@string/finish_exercise_button"

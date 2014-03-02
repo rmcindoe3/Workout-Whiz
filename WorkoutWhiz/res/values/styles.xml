@@ -30,6 +30,11 @@
     <style name="AppTheme.View.TextView.EditText">
         <item name="android:background">@drawable/edit_text</item>
     </style>
+
+    <style name="AppTheme.View.TextView.RepCount">
+        <item name="android:background">@drawable/rep_text_view</item>
+        <item name="android:textSize">@dimen/rep_count_text_size</item>
+    </style>
     
     <style name="AppTheme.View.TextView.Title">
         <item name="android:gravity">center_vertical|left</item>
@@ -51,8 +56,13 @@
         <item name="android:background">@drawable/button_number_pad</item>
         <item name="android:textSize">@dimen/number_pad_text_size</item>
         <item name="android:typeface">sans</item>
+    </style>
+
+    <style name="AppTheme.View.TextView.Button.Navigation">
+        <item name="android:background">@drawable/button_navigation</item>
         <item name="android:textStyle">bold</item>
     </style>
+
 
    <!--  
     <style name="Buttons" parent="AppTheme">

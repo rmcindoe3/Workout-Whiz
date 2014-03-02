@@ -112,7 +112,7 @@
 		    android:layout_weight="2">
 			<Button
 			    android:id="@+id/end_workout_button"
-		        style="@style/AppTheme.View.TextView.Button"
+		        style="@style/AppTheme.View.TextView.Button.Navigation"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:textStyle="bold"
