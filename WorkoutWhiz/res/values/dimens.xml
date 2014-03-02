@@ -7,12 +7,15 @@
     <dimen name="list_item_exercise_intensity_text_size">15sp</dimen>
     <dimen name="list_item_exercise_height">40dp</dimen>
     <dimen name="rep_count_text_size">30dp</dimen>
-    <dimen name="activity_title">30dp</dimen>
+    <dimen name="activity_title_text_size">25sp</dimen>
+    <dimen name="activity_subtitle_text_size">15sp</dimen>
     <dimen name="list_view_dividers_text_size">20sp</dimen>
     <dimen name="list_item_workout_height">40dp</dimen>
     <dimen name="list_item_workout_name_text_size">20sp</dimen>
     <dimen name="list_item_workout_date_text_size">15sp</dimen>
     <dimen name="weight_input_text_view_text_size">30sp</dimen>
     <dimen name="weight_input_info_text_size">13sp</dimen>
+    <dimen name="number_pad_text_size">35sp</dimen>
+    <dimen name="activity_title_bar_height">60dp</dimen>
 
 </resources>

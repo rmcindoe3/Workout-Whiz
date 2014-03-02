@@ -10,7 +10,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/workout_whiz_activity_title_icon"
         android:name="com.mcindoe.workoutwhiz.views.WorkoutWhizApplication"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >

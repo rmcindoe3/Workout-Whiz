@@ -1,20 +1,73 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!--
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    -->
-    <style name="AppBaseTheme" parent="android:Theme.Light.NoTitleBar">
-        <!--
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        -->
+    <style name="AppBaseTheme" parent="android:Theme.NoTitleBar">
     </style>
-
+    
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
+    
+    <style name="AppTheme.Layout">
+        <item name="android:background">#4059A8</item>
+    </style>
+
+    <style name="AppTheme.View">
+    </style>
+
+    <style name="AppTheme.View.TextView">
+        <item name="android:ellipsize">end</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="AppTheme.View.TextView.Subtitle">
+        <item name="android:gravity">bottom|left</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:textSize">@dimen/activity_subtitle_text_size</item>
+    </style>
+
+    <style name="AppTheme.View.TextView.EditText">
+        <item name="android:background">@drawable/edit_text</item>
+    </style>
+    
+    <style name="AppTheme.View.TextView.Title">
+        <item name="android:gravity">center_vertical|left</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/activity_title_bar_height</item>
+        <item name="android:background">@drawable/activity_title_bar</item>
+        <item name="android:drawableLeft">@drawable/workout_whiz_activity_title_icon</item>
+        <item name="android:drawablePadding">10dp</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/activity_title_text_size</item>
+    </style>
+
+    <style name="AppTheme.View.TextView.Button">
+        <item name="android:background">@drawable/button</item>
+    </style>
+
+    <style name="AppTheme.View.TextView.Button.NumberPad">
+        <item name="android:background">@drawable/button_number_pad</item>
+        <item name="android:textSize">@dimen/number_pad_text_size</item>
+        <item name="android:typeface">sans</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+   <!--  
+    <style name="Buttons" parent="AppTheme">
+        <item name="android:divider"
+        <item name="android:dividerPadding"
+        <item name="android:clickColor"
+        <item name="android:drawableLeft"
+        <item name="android:ellipsize"
+        <item name="android:fontFamily"
+        <item name="android:foreground"
+        <item name="android:resOutColor"
+        <item name="android:shadowColor"
+        <item name="android:textStyle"
+        <item name="android:typeface"
+    </style>
+    -->
 
 </resources>
