@@ -17,54 +17,16 @@
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
-	    <!-- ScrollView that contains our list of available exercises. -->
-	    <ScrollView
-	        android:id="@+id/workout_exercise_scroll_view"
-	        android:layout_width="match_parent"
-	        android:layout_height="0dp"
+        <!-- ListView of exercises -->
+        <ListView
+            android:id="@+id/incomplete_exercises_list_view"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
 	        android:layout_weight="14"
-	        android:fillViewport="true"
-	        android:gravity="center_horizontal"
-	        android:layout_marginTop="10dp" >
+            android:scrollbars="none"
+	        android:layout_marginTop="10dp" />
 	
-	        <LinearLayout
-	            android:layout_width="match_parent"
-	            android:layout_height="match_parent"
-	            android:orientation="vertical" >
-	
-	            <TextView
-	                android:layout_width="fill_parent"
-	                android:layout_height="wrap_content"
-	                android:gravity="left"
-	                android:text="@string/incompleted_exercises_text_view"
-	                android:textSize="@dimen/list_view_dividers_text_size" />
-	            
-	            <!-- ListView of incomplete exercises -->
-	            <ListView
-	                android:id="@+id/incomplete_exercises_list_view"
-	                android:layout_width="fill_parent"
-	                android:layout_height="wrap_content"
-	                android:gravity="center"
-	                android:scrollbars="none" />
-	            
-	            <TextView
-	                android:layout_width="fill_parent"
-	                android:layout_height="wrap_content"
-	                android:gravity="left"
-	                android:text="@string/completed_exercises_text_view"
-	                android:textSize="@dimen/list_view_dividers_text_size" />
-	
-	            <!-- ListView of complete exercises -->
-	            <ListView
-	                android:id="@+id/complete_exercises_list_view"
-	                android:layout_width="fill_parent"
-	                android:layout_height="wrap_content"
-	                android:gravity="center"
-	                android:scrollbars="none" />
-	
-	        </LinearLayout>
-	    </ScrollView>
-	
+        <!-- Subtitle to indicate we can create a new exercise -->
 	    <TextView
 	        android:id="@+id/create_exercise_text_view"
 	        style="@style/AppTheme.View.TextView.Subtitle"

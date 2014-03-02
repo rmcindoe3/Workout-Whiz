@@ -24,14 +24,15 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 	
 	public static final int SUCCESSFUL_EXERCISE = 0x239F;
 	public static final int CANCELLED_EXERCISE = 0x38AB;
+	
+	public static final Exercise INCOMPLETE_EXERCISE_TITLE = new Exercise("18fj9x0jd02k3j9");
+	public static final Exercise COMPLETE_EXERCISE_TITLE = new Exercise("0219j381s0dk3nx0");
 
 	private EditText mAddExerciseEditText;
 	private TextView mWorkoutTitleTextView;
 
-	private ListView mIncompleteExercisesListView;
-	private ListView mCompleteExercisesListView;
-	private ExerciseArrayAdapter mIncompleteExercisesAdapter;
-	private ExerciseArrayAdapter mCompleteExercisesAdapter;
+	private ListView mExercisesListView;
+	private ExerciseArrayAdapter mExercisesArrayAdapter;
 	
 	private Workout mWorkout;
 
@@ -44,8 +45,7 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 		//Grabs our GUI elements.
 		mAddExerciseEditText = (EditText)findViewById(R.id.add_exercise_edit_text);
 		mWorkoutTitleTextView = (TextView)findViewById(R.id.workout_title_text_view);
-		mIncompleteExercisesListView = (ListView)findViewById(R.id.incomplete_exercises_list_view);
-		mCompleteExercisesListView = (ListView)findViewById(R.id.complete_exercises_list_view);
+		mExercisesListView = (ListView)findViewById(R.id.incomplete_exercises_list_view);
 		
 		//First we need to grab our workout.
 		mWorkout = ((WorkoutWhizApplication)getApplication()).getCurrentWorkout();
@@ -53,14 +53,16 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 		//Sets the title of the activity.
 		mWorkoutTitleTextView.setText(mWorkout.getName());
 		
-		//Sets up our list view of incomplete exercises.
-		mIncompleteExercisesAdapter = new ExerciseArrayAdapter(this, false, mWorkout.getIncompleteExercises(), new OnExerciseClickListener());
-		mIncompleteExercisesListView.setAdapter(mIncompleteExercisesAdapter);
+		//Formats our list of exercises the way the array adapter will understand it.
+		ArrayList<Exercise> listOfExercises = new ArrayList<Exercise>();
+		listOfExercises.add(INCOMPLETE_EXERCISE_TITLE);
+		listOfExercises.addAll(mWorkout.getIncompleteExercises());
+		listOfExercises.add(COMPLETE_EXERCISE_TITLE);
+		listOfExercises.addAll(mWorkout.getCompleteExercises());
 
-		//Sets up our list view of complete exercises.
-		mCompleteExercisesAdapter = new ExerciseArrayAdapter(this, true, mWorkout.getCompleteExercises(), new OnExerciseClickListener());
-		mCompleteExercisesListView.setAdapter(mCompleteExercisesAdapter);
-
+		//Sets up our list view 
+		mExercisesArrayAdapter = new ExerciseArrayAdapter(this, listOfExercises, new OnExerciseClickListener());
+		mExercisesListView.setAdapter(mExercisesArrayAdapter);
 	}
 	
 	@Override
@@ -145,14 +147,17 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 		if(resultCode == SUCCESSFUL_EXERCISE) {
 
 			mWorkout = ((WorkoutWhizApplication)getApplication()).getCurrentWorkout();
-			
-			//Sets up our list view of incomplete exercises.
-			mIncompleteExercisesAdapter = new ExerciseArrayAdapter(this, false, mWorkout.getIncompleteExercises(), new OnExerciseClickListener());
-			mIncompleteExercisesListView.setAdapter(mIncompleteExercisesAdapter);
-	
-			//Sets up our list view of complete exercises.
-			mCompleteExercisesAdapter = new ExerciseArrayAdapter(this, true, mWorkout.getCompleteExercises(), new OnExerciseClickListener());
-			mCompleteExercisesListView.setAdapter(mCompleteExercisesAdapter);
+
+			//Formats our list of exercises the way the array adapter will understand it.
+			ArrayList<Exercise> listOfExercises = new ArrayList<Exercise>();
+			listOfExercises.add(INCOMPLETE_EXERCISE_TITLE);
+			listOfExercises.addAll(mWorkout.getIncompleteExercises());
+			listOfExercises.add(COMPLETE_EXERCISE_TITLE);
+			listOfExercises.addAll(mWorkout.getCompleteExercises());
+
+			//Sets up our list view 
+			mExercisesArrayAdapter = new ExerciseArrayAdapter(this, listOfExercises, new OnExerciseClickListener());
+			mExercisesListView.setAdapter(mExercisesArrayAdapter);
 			
 			mAddExerciseEditText.setText("");
 			

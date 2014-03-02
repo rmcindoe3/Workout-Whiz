@@ -36,11 +36,22 @@ public class Exercise {
 			return false;
 		}
 		else {
-			if(((Exercise)other).getName().equals(this.getName())) {
-				return true;
+			Exercise exer = (Exercise)other;
+			if(!this.getName().equals(exer.getName()) || this.getWeight() != exer.getWeight()) {
+				return false;
+			}
+			if(this.getLastReps().size() != exer.getLastReps().size()) {
+				return false;
+			}
+			else {
+				for(int i = 0; i < this.getLastReps().size(); i++) {
+					if(this.getLastReps().get(i) != exer.getLastReps().get(i)) {
+						return false;
+					}
+				}
 			}
 		}
-		return false;
+		return true;
 	}
 
 	/**
