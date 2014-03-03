@@ -2,12 +2,12 @@
     android:id="@+id/list_item_workout"
     android:layout_width="match_parent"
     android:layout_height="@dimen/list_item_workout_height"
+    android:gravity="center"
     android:orientation="horizontal" >
 
     <RadioButton 
         android:id="@+id/workout_select_radio_button"
-        android:layout_width="0dp"
-        android:layout_weight="1"
+        android:layout_width="wrap_content"
         android:gravity="center"
         android:layout_height="wrap_content" />
 
