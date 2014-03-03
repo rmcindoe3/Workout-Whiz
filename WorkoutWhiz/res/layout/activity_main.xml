@@ -4,51 +4,47 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    style="@style/AppTheme.Layout"
+    android:background="@color/white"
     tools:context=".MainActivity" >
 
-    <TextView
-        android:id="@+id/title_text_view"
-        android:drawableLeft="@drawable/workout_whiz_activity_title_icon"
+    <ImageView
+        android:id="@+id/title_image_view"
+        android:background="@drawable/activity_title_bar"
+        android:gravity="center"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="80dp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:textSize="35sp"
-        android:textColor="#FFFFFF"
-        android:text="@string/main_activity_title" />
+        android:layout_height="150dp"
+        android:src="@drawable/main_activity_logo" />
 
-    <Button
-        android:id="@+id/workout_button"
-        style="@style/AppTheme.View.TextView.Button.MainMenu"
-        android:layout_marginTop="50dp"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:gravity="center"
-        android:onClick="onWorkoutButtonClicked"
-        android:text="@string/workout_button" />
-
-    <Button
-        android:id="@+id/history_button"
-        style="@style/AppTheme.View.TextView.Button.MainMenu"
-        android:gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:enabled="false"
-        android:onClick="onHistoryButtonClicked"
-        android:text="@string/history_button" />
-
-    <Button
-        android:id="@+id/settings_button"
-        style="@style/AppTheme.View.TextView.Button.MainMenu"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:gravity="center"
-        android:enabled="false"
-        android:layout_marginTop="10dp"
-        android:onClick="onSettingsButtonClicked"
-        android:text="@string/settings_button" />
+    <LinearLayout
+        android:background="@color/bg_dark_blue"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center_horizontal"
+        android:paddingTop="40dp"
+        android:orientation="vertical" >
+        
+	    <Button
+	        android:id="@+id/workout_button"
+	        style="@style/AppTheme.View.TextView.Button.MainMenu"
+	        android:onClick="onWorkoutButtonClicked"
+	        android:text="@string/workout_button" />
+	
+	    <Button
+	        android:id="@+id/history_button"
+	        style="@style/AppTheme.View.TextView.Button.MainMenu"
+	        android:layout_marginTop="10dp"
+	        android:enabled="false"
+	        android:onClick="onHistoryButtonClicked"
+	        android:text="@string/history_button" />
+	
+	    <Button
+	        android:id="@+id/settings_button"
+	        style="@style/AppTheme.View.TextView.Button.MainMenu"
+	        android:enabled="false"
+	        android:layout_marginTop="10dp"
+	        android:onClick="onSettingsButtonClicked"
+	        android:text="@string/settings_button" />
+        
+    </LinearLayout>
 
 </LinearLayout>
