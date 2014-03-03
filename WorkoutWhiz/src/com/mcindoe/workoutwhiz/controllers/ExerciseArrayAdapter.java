@@ -20,7 +20,6 @@ public class ExerciseArrayAdapter extends ArrayAdapter<Exercise> {
 	private Context mContext;
 	private List<Exercise> mExercises;
 	private View.OnClickListener mListener;
-	private boolean completed;
 
 	public ExerciseArrayAdapter(Context context, List<Exercise> exercises, View.OnClickListener listener) {
 	
@@ -29,7 +28,6 @@ public class ExerciseArrayAdapter extends ArrayAdapter<Exercise> {
 		this.mContext = context;
 		this.mExercises = exercises;
 		this.mListener = listener;
-		this.completed = false;
 	}
 	
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -56,9 +54,6 @@ public class ExerciseArrayAdapter extends ArrayAdapter<Exercise> {
 		//If the exercise we're on is actually the complete exercise header title, then add the title
 		else if(exer.equals(SelectExerciseActivity.COMPLETE_EXERCISE_TITLE)) {
 			
-			//Indicates to this adapter that we're now adding completed exercises.
-			completed = true;
-			
 			//Inflate our row with the right object
 			exerciseRow = inflater.inflate(R.layout.list_item_exercise_header, parent, false);
 			
@@ -68,6 +63,9 @@ public class ExerciseArrayAdapter extends ArrayAdapter<Exercise> {
 		}
 		//Otherwise, we know we have a real exercise to be filled in
 		else {
+			
+			//If the exercise has completed reps, this is a completed exercise.
+			boolean completed = (exer.getReps().size() > 0);
 			
 			//Inflate the proper layout
 			exerciseRow = inflater.inflate(R.layout.list_item_exercise, parent, false);
