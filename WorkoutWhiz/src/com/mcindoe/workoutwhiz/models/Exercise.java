@@ -55,6 +55,30 @@ public class Exercise {
 	}
 
 	/**
+	 * Parses out a readable string that describes this exercise object.
+	 */
+	@Override
+	public String toString() {
+		String ret = getName();
+		ret += ": Weight (" + getWeight() + "), Last Reps (";
+		for(int i = 0; i < getLastReps().size(); i++) {
+			ret += "" + getLastReps().get(i);
+			if(i != getLastReps().size()-1) {
+				ret += ", ";
+			}
+		}
+		ret += "), Curr Reps (";
+		for(int i = 0; i < getReps().size(); i++) {
+			ret += "" + getReps().get(i);
+			if(i != getReps().size()-1) {
+				ret += ", ";
+			}
+		}
+		ret += ")";
+		return ret;
+	}
+
+	/**
 	 * Adds a set to our current exercise.
 	 * @param num - the number of reps performed for this exercise.
 	 */

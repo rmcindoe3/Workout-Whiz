@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
@@ -127,10 +128,7 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 	@Override
 	public void onDialogPositiveClick(Exercise exer) {
 
-		//first we need to set it's current reps to empty
-		exer.setReps(new ArrayList<Integer>());
-		
-		//Then set it to the applications current exercise.
+		//set the exercise to the applications current exercise.
 		((WorkoutWhizApplication)getApplication()).setCurrentExercise(exer);
 
 		//Now start the exercise activity for result
@@ -187,13 +185,19 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 			//Just to make sure that the view object that was clicked is an exercise list item.
 			if(v.getId() == R.id.list_item_exercise) {
 				
-				//Grabs the exercise from this list item
+				//Grabs the exercise list item layout from the view so we can then get our exercise.
 				ExerciseListItemLinearLayout layout = (ExerciseListItemLinearLayout)v;
+				
+				//We create a new exercise and fill it with this exercises information because
+				// otherwise it will overwrite the previous exercises information in the case
+				// where we are repeating the same exercise in the same workout.
+				Exercise exer = new Exercise(layout.getExercise().getName(),layout.getExercise().getWeight());
+				exer.setLastReps(layout.getExercise().getLastReps());
 				
 				//Fill out a weight dialog and show it.
 				WeightDialogFragment weightDialog = new WeightDialogFragment();
 				
-				weightDialog.setExercise(layout.getExercise());
+				weightDialog.setExercise(exer);
 
 				weightDialog.show(getFragmentManager(), "weight dialog");
 			}
