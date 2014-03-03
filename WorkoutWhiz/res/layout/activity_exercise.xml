@@ -5,236 +5,236 @@
     style="@style/AppTheme.Layout"
     android:orientation="vertical"
     tools:context=".ExerciseActivity" >
-    
+
     <!-- Title of the Exercise -->
     <TextView
         android:id="@+id/exercise_title_text_view"
         style="@style/AppTheme.View.TextView.Title"
         android:text="@string/exercise_title_text_view_default" />
-    
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-	    android:paddingLeft="5dp"
-	    android:paddingRight="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:orientation="vertical" >
-	    
-	    <!-- Horizontal Linear Layout to contain previous/current rep information -->
-	    <LinearLayout
-	        android:layout_width="match_parent"
-	        android:layout_height="0dp"
-	        android:orientation="horizontal"
-	        android:paddingBottom="5dp"
-	        android:layout_weight="1" >
-	        
-	        <!-- Vertical linear layout to contain previous rep information -->
-	        <LinearLayout
-		        android:layout_width="0dp"
-		        android:layout_height="fill_parent"
-		        android:layout_weight="1"
-		        android:orientation="vertical"> 
-			
-			    <TextView
-			        style="@style/AppTheme.View.TextView.Subtitle"
-			        android:layout_width="fill_parent"
-			        android:layout_height="0dp"
-			        android:layout_weight="1"
-			        android:text="@string/previous_rep_info_text_view" />
-	
-			    <TextView
-			        android:id="@+id/previous_rep_count_text_view"
-			        style="@style/AppTheme.View.TextView.RepCount"
-			        android:layout_width="fill_parent"
-			        android:layout_height="0dp"
-			        android:layout_weight="2"
-			        android:gravity="center"
-			        android:text="@string/default_previous_rep_count" />
-		        
-		    </LinearLayout>
-	
-	        <!-- Vertical linear layout to contain current rep information -->
-	        <LinearLayout
-		        android:layout_width="0dp"
-		        android:layout_height="fill_parent"
-		        android:layout_weight="1"
-		        android:orientation="vertical"> 
-	
-			    <TextView
-			        style="@style/AppTheme.View.TextView.Subtitle"
-			        android:layout_width="fill_parent"
-			        android:layout_height="0dp"
-			        android:layout_weight="1"
-			        android:text="@string/current_rep_info_text_view" />
-	
-			    <TextView
-			        android:id="@+id/current_rep_count_text_view"
-			        style="@style/AppTheme.View.TextView.RepCount"
-			        android:layout_width="fill_parent"
-			        android:layout_height="0dp"
-			        android:layout_weight="2"
-			        android:gravity="center"
-			        android:text="@string/current_rep_count_text_view" />
-		        
-		    </LinearLayout>
-	    </LinearLayout>
-	    
-	    <!-- Custom Number Pad starts here -->
-	    <LinearLayout 
-	        android:layout_width="match_parent"
-	        android:layout_height="0dp"
-	        android:orientation="vertical"
-	        android:layout_weight="4" >
-	        
-	        <!-- 7,8,9 Buttons -->
-	        <LinearLayout
-		        android:layout_width="match_parent"
-		        android:layout_height="0dp"
-		        android:orientation="horizontal"
-		        android:layout_weight="1" >
-			    
-		        <Button
-		            android:id="@+id/exercise_seven_button"
-			        style="@style/AppTheme.View.TextView.Button.NumberPad"
-		        	android:layout_width="0dp"
-		        	android:layout_height="fill_parent"
-		        	android:text="@string/seven"
-		        	android:layout_weight="1" />
-	
-		        <Button
-		            android:id="@+id/exercise_eight_button"
-			        style="@style/AppTheme.View.TextView.Button.NumberPad"
-		        	android:layout_width="0dp"
-		        	android:layout_height="fill_parent"
-		        	android:text="@string/eight"
-		        	android:layout_weight="1" />
-	                
-		        <Button
-		            android:id="@+id/exercise_nine_button"
-			        style="@style/AppTheme.View.TextView.Button.NumberPad"
-		        	android:layout_width="0dp"
-		        	android:layout_height="fill_parent"
-		        	android:text="@string/nine"
-		        	android:layout_weight="1" />
-	
-			</LinearLayout>
-	
-	        <!-- 4,5,6 Buttons -->
-	        <LinearLayout
-		        android:layout_width="match_parent"
-		        android:layout_height="0dp"
-		        android:orientation="horizontal"
-		        android:layout_weight="1" >
-	
-		        <Button
-		            android:id="@+id/exercise_four_button"
-			        style="@style/AppTheme.View.TextView.Button.NumberPad"
-		        	android:layout_width="0dp"
-		        	android:layout_height="fill_parent"
-		        	android:text="@string/four"
-		        	android:layout_weight="1" />
-	
-		        <Button
-		            android:id="@+id/exercise_five_button"
-			        style="@style/AppTheme.View.TextView.Button.NumberPad"
-		        	android:layout_width="0dp"
-		        	android:layout_height="fill_parent"
-		        	android:text="@string/five"
-		        	android:layout_weight="1" />
-	                
-		        <Button
-		            android:id="@+id/exercise_six_button"
-			        style="@style/AppTheme.View.TextView.Button.NumberPad"
-		        	android:layout_width="0dp"
-		        	android:layout_height="fill_parent"
-		        	android:text="@string/six"
-		        	android:layout_weight="1" />
-	
-			</LinearLayout>
-	
-	        <!-- 1,2,3 Buttons -->
-	        <LinearLayout
-		        android:layout_width="match_parent"
-		        android:layout_height="0dp"
-		        android:orientation="horizontal"
-		        android:layout_weight="1" >
-	
-		        <Button
-		            android:id="@+id/exercise_one_button"
-			        style="@style/AppTheme.View.TextView.Button.NumberPad"
-		        	android:layout_width="0dp"
-		        	android:layout_height="fill_parent"
-		        	android:text="@string/one"
-		        	android:layout_weight="1" />
-	
-		        <Button
-		            android:id="@+id/exercise_two_button"
-			        style="@style/AppTheme.View.TextView.Button.NumberPad"
-		        	android:layout_width="0dp"
-		        	android:layout_height="fill_parent"
-		        	android:text="@string/two"
-		        	android:layout_weight="1" />
-	                
-		        <Button
-		            android:id="@+id/exercise_three_button"
-			        style="@style/AppTheme.View.TextView.Button.NumberPad"
-		        	android:layout_width="0dp"
-		        	android:layout_height="fill_parent"
-		        	android:text="@string/three"
-		        	android:layout_weight="1" />
-	
-			</LinearLayout>
-	
-	        <!-- 0 and Backspace Buttons -->
-	        <LinearLayout
-		        android:layout_width="match_parent"
-		        android:layout_height="0dp"
-		        android:orientation="horizontal"
-		        android:layout_weight="1" >
-	
-		        <Button
-		            android:id="@+id/exercise_zero_button"
-			        style="@style/AppTheme.View.TextView.Button.NumberPad"
-		        	android:layout_width="0dp"
-		        	android:layout_height="fill_parent"
-		        	android:text="@string/zero"
-		        	android:layout_weight="1" />
-	                
-		        <Button
-		            android:id="@+id/exercise_backspace_button"
-			        style="@style/AppTheme.View.TextView.Button.NumberPad"
-		        	android:layout_width="0dp"
-		        	android:layout_height="fill_parent"
-		        	android:text="@string/backspace"
-		        	android:layout_weight="1" />
-	
-			</LinearLayout>
-	        
-	    </LinearLayout>
-	
-	    <!-- Next Set and Finish Exercise Buttons -->
-	    <LinearLayout 
-	        android:layout_width="match_parent"
-	        android:layout_height="0dp"
-	        android:orientation="horizontal"
-	        android:padding="10dp"
-	        android:layout_weight="1" >
-	        
-	        <Button
-	            android:id="@+id/next_set_button"
-		        style="@style/AppTheme.View.TextView.Button.Navigation"
-	        	android:layout_width="0dp"
-	        	android:layout_height="fill_parent"
-	        	android:text="@string/next_set_button"
-	        	android:layout_weight="1" />
-	
-	        <Button
-	            android:id="@+id/finish_exercise_button"
-		        style="@style/AppTheme.View.TextView.Button.Navigation"
-	        	android:layout_width="0dp"
-	        	android:layout_height="fill_parent"
-	        	android:text="@string/finish_exercise_button"
-	        	android:layout_weight="1" />
-	        
-	    </LinearLayout>
+
+        <!-- Horizontal Linear Layout to contain previous/current rep information -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp"
+            android:layout_weight="1" >
+
+            <!-- Vertical linear layout to contain previous rep information -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"> 
+
+                <TextView
+                    style="@style/AppTheme.View.TextView.Subtitle"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/previous_rep_info_text_view" />
+
+                <TextView
+                    android:id="@+id/previous_rep_count_text_view"
+                    style="@style/AppTheme.View.TextView.RepCount"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="@string/default_previous_rep_count" />
+
+            </LinearLayout>
+
+            <!-- Vertical linear layout to contain current rep information -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"> 
+
+                <TextView
+                    style="@style/AppTheme.View.TextView.Subtitle"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/current_rep_info_text_view" />
+
+                <TextView
+                    android:id="@+id/current_rep_count_text_view"
+                    style="@style/AppTheme.View.TextView.RepCount"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="@string/current_rep_count_text_view" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Custom Number Pad starts here -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:layout_weight="4" >
+
+            <!-- 7,8,9 Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                android:layout_weight="1" >
+
+                <Button
+                    android:id="@+id/exercise_seven_button"
+                    style="@style/AppTheme.View.TextView.Button.NumberPad"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:text="@string/seven"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/exercise_eight_button"
+                    style="@style/AppTheme.View.TextView.Button.NumberPad"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:text="@string/eight"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/exercise_nine_button"
+                    style="@style/AppTheme.View.TextView.Button.NumberPad"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:text="@string/nine"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+            <!-- 4,5,6 Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                android:layout_weight="1" >
+
+                <Button
+                    android:id="@+id/exercise_four_button"
+                    style="@style/AppTheme.View.TextView.Button.NumberPad"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:text="@string/four"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/exercise_five_button"
+                    style="@style/AppTheme.View.TextView.Button.NumberPad"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:text="@string/five"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/exercise_six_button"
+                    style="@style/AppTheme.View.TextView.Button.NumberPad"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:text="@string/six"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+            <!-- 1,2,3 Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                android:layout_weight="1" >
+
+                <Button
+                    android:id="@+id/exercise_one_button"
+                    style="@style/AppTheme.View.TextView.Button.NumberPad"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:text="@string/one"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/exercise_two_button"
+                    style="@style/AppTheme.View.TextView.Button.NumberPad"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:text="@string/two"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/exercise_three_button"
+                    style="@style/AppTheme.View.TextView.Button.NumberPad"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:text="@string/three"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+            <!-- 0 and Backspace Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                android:layout_weight="1" >
+
+                <Button
+                    android:id="@+id/exercise_zero_button"
+                    style="@style/AppTheme.View.TextView.Button.NumberPad"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:text="@string/zero"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/exercise_backspace_button"
+                    style="@style/AppTheme.View.TextView.Button.NumberPad"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:text="@string/backspace"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Next Set and Finish Exercise Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/next_set_button"
+                style="@style/AppTheme.View.TextView.Button.Navigation"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:text="@string/next_set_button"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/finish_exercise_button"
+                style="@style/AppTheme.View.TextView.Button.Navigation"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:text="@string/finish_exercise_button"
+                android:layout_weight="1" />
+
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
