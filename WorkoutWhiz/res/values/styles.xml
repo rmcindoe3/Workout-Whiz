@@ -8,15 +8,22 @@
     </style>
     
     <style name="AppTheme.Layout">
-        <item name="android:background">#4059A8</item>
+        <item name="android:background">@color/bg_dark_blue</item>
     </style>
 
     <style name="AppTheme.View">
     </style>
 
     <style name="AppTheme.View.ListView">
-		<item name="android:background">@drawable/list_item_exercise</item>
+    </style>
+
+    <style name="AppTheme.View.ListView.ListItem">
+    </style>
+
+    <style name="AppTheme.View.ListView.ListItem.Exercise">
+		<item name="android:background">@drawable/wide_list_item_exercise</item>
         <item name="android:divider">@drawable/list_view_exercise_divider</item>
+        <item name="android:gravity">center_vertical</item>
     </style>
 
     <style name="AppTheme.View.TextView">
@@ -26,7 +33,7 @@
 
     <style name="AppTheme.View.TextView.Subtitle">
         <item name="android:gravity">bottom|left</item>
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:textStyle">bold</item>
         <item name="android:paddingLeft">10dp</item>
         <item name="android:textSize">@dimen/activity_subtitle_text_size</item>

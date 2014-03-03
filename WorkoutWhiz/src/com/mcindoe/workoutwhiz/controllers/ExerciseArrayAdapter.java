@@ -105,7 +105,7 @@ public class ExerciseArrayAdapter extends ArrayAdapter<Exercise> {
 		String ret = "";
 		Exercise exer = mExercises.get(position);
 		
-		ret += exer.getWeight() + "/";
+		ret += exer.getWeight() + " lbs. - ";
 
 		if(!comp) {
 			for(int i = 0; i < exer.getLastReps().size(); i++) {
@@ -113,7 +113,7 @@ public class ExerciseArrayAdapter extends ArrayAdapter<Exercise> {
 				ret += exer.getLastReps().get(i) + "";
 	
 				if(i != (exer.getLastReps().size()-1)) {
-					ret += ",";
+					ret += ", ";
 				}
 			}
 		}
@@ -123,7 +123,7 @@ public class ExerciseArrayAdapter extends ArrayAdapter<Exercise> {
 				ret += exer.getReps().get(i) + "";
 	
 				if(i != (exer.getReps().size()-1)) {
-					ret += ",";
+					ret += ", ";
 				}
 			}
 		}
