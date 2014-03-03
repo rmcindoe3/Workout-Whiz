@@ -23,67 +23,73 @@
             android:layout_width="fill_parent"
             android:layout_height="0dp"
 	        android:layout_weight="14"
-            android:scrollbars="none"
-	        android:layout_marginTop="10dp" />
-	
-        <!-- Subtitle to indicate we can create a new exercise -->
-	    <TextView
-	        android:id="@+id/create_exercise_text_view"
-	        style="@style/AppTheme.View.TextView.Subtitle"
-	        android:layout_width="match_parent"
-	        android:layout_height="0dp"
-	        android:layout_weight="1"
-	        android:text="@string/create_exercise_text_view" />
-	
-	    <!-- Horizontal Linear Layout that allows us to add new exercises -->
-	    <LinearLayout
-	        android:layout_width="match_parent"
-	        android:layout_height="0dp"
-	        android:layout_weight="2"
-	        android:gravity="center"
-	        android:orientation="horizontal" >
-	
-	        <EditText
-	            android:id="@+id/add_exercise_edit_text"
-	            style="@style/AppTheme.View.TextView.EditText"
-	            android:inputType="text"
-	            android:hint="@string/create_exercise_edit_text_hint"
-	            android:gravity="left"
-	            android:layout_width="0dp"
-	            android:layout_weight="4"
-	            android:layout_height="wrap_content"
-	            android:ems="10" />
-	
-	        <Button
-	            android:id="@+id/add_exercise_button"
-	        	style="@style/AppTheme.View.TextView.Button.NumberPad"
-	        	android:textSize="20sp"
-	            android:layout_width="0dp"
-	            android:layout_weight="1"
-	            android:layout_height="wrap_content"
-	            android:onClick="onAddExerciseButtonClicked"
-	            android:text="@string/add_exercise_button" />
-	
-	    </LinearLayout>
-	    
-	    <!-- Button used to end the workout. -->
-	    <LinearLayout
-	        android:layout_width="fill_parent"
-		    android:layout_height="0dp"
-		    android:gravity="center"
-		    android:layout_weight="2">
-			<Button
-			    android:id="@+id/end_workout_button"
-		        style="@style/AppTheme.View.TextView.Button.Navigation"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:textStyle="bold"
-		        android:paddingLeft="50dp"
-		        android:paddingRight="50dp"
-			    android:onClick="onEndWorkoutButtonClicked"
-			    android:text="@string/end_workout_button" />
-	    </LinearLayout>
+            android:scrollbars="none" />
+        
+        <LinearLayout 
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:background="#6187ff"
+            android:orientation="vertical"
+            android:layout_width="match_parent">
 
+	        <!-- Subtitle to indicate we can create a new exercise -->
+		    <TextView
+		        android:id="@+id/create_exercise_text_view"
+		        style="@style/AppTheme.View.TextView.Subtitle"
+		        android:background="@drawable/create_new_exercise_bg"
+		        android:layout_width="match_parent"
+		        android:layout_height="0dp"
+		        android:layout_weight="1"
+		        android:text="@string/create_exercise_text_view" />
+		
+		    <!-- Horizontal Linear Layout that allows us to add new exercises -->
+		    <LinearLayout
+		        android:layout_width="match_parent"
+		        android:layout_height="0dp"
+		        android:layout_weight="2"
+		        android:gravity="center"
+		        android:orientation="horizontal" >
+		
+		        <EditText
+		            android:id="@+id/add_exercise_edit_text"
+		            style="@style/AppTheme.View.TextView.EditText"
+		            android:inputType="text"
+		            android:hint="@string/create_exercise_edit_text_hint"
+		            android:gravity="left"
+		            android:layout_width="0dp"
+		            android:layout_weight="4"
+		            android:layout_height="wrap_content"
+		            android:ems="10" />
+		
+		        <Button
+		            android:id="@+id/add_exercise_button"
+		        	style="@style/AppTheme.View.TextView.Button.Navigation"
+		        	android:textSize="20sp"
+		            android:layout_width="0dp"
+		            android:layout_weight="1"
+		            android:layout_height="wrap_content"
+		            android:onClick="onAddExerciseButtonClicked"
+		            android:text="@string/add_exercise_button" />
+		
+		    </LinearLayout>
+		    
+		    <!-- Button used to end the workout. -->
+		    <LinearLayout
+		        android:layout_width="fill_parent"
+			    android:layout_height="0dp"
+			    android:gravity="center"
+			    android:layout_weight="2">
+				<Button
+				    android:id="@+id/end_workout_button"
+			        style="@style/AppTheme.View.TextView.Button.Navigation"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:textStyle="bold"
+			        android:paddingLeft="50dp"
+			        android:paddingRight="50dp"
+				    android:onClick="onEndWorkoutButtonClicked"
+				    android:text="@string/end_workout_button" />
+		    </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
-	    
 </LinearLayout>

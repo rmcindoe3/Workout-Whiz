@@ -14,6 +14,11 @@
     <style name="AppTheme.View">
     </style>
 
+    <style name="AppTheme.View.ListView">
+		<item name="android:background">@drawable/list_item_exercise</item>
+        <item name="android:divider">@drawable/list_view_exercise_divider</item>
+    </style>
+
     <style name="AppTheme.View.TextView">
         <item name="android:ellipsize">end</item>
         <item name="android:gravity">center</item>
@@ -52,6 +57,10 @@
         <item name="android:background">@drawable/button</item>
     </style>
 
+    <style name="AppTheme.View.TextView.Button.MainMenu">
+        <item name="android:textSize">@dimen/activity_title_text_size</item>
+    </style>
+
     <style name="AppTheme.View.TextView.Button.NumberPad">
         <item name="android:background">@drawable/button_number_pad</item>
         <item name="android:textSize">@dimen/number_pad_text_size</item>
@@ -62,22 +71,5 @@
         <item name="android:background">@drawable/button_navigation</item>
         <item name="android:textStyle">bold</item>
     </style>
-
-
-   <!--  
-    <style name="Buttons" parent="AppTheme">
-        <item name="android:divider"
-        <item name="android:dividerPadding"
-        <item name="android:clickColor"
-        <item name="android:drawableLeft"
-        <item name="android:ellipsize"
-        <item name="android:fontFamily"
-        <item name="android:foreground"
-        <item name="android:resOutColor"
-        <item name="android:shadowColor"
-        <item name="android:textStyle"
-        <item name="android:typeface"
-    </style>
-    -->
 
 </resources>

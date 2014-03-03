@@ -1,61 +1,52 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
     style="@style/AppTheme.Layout"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
     <TextView
         android:id="@+id/title_text_view"
+        android:drawableLeft="@drawable/workout_whiz_activity_title_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp"
-        android:text="@string/app_name"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/title_text_view"
-        android:gravity="center_horizontal"
-        android:orientation="vertical" >
+        android:paddingTop="80dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textSize="35sp"
+        android:textColor="#FFFFFF"
+        android:text="@string/main_activity_title" />
         
-        <Button
-	        android:id="@+id/workout_button"
-	        style="@style/AppTheme.View.TextView.Button"
-	        android:layout_width="110dp"
-	        android:layout_height="wrap_content"
-        	android:gravity="center"
-	        android:layout_marginTop="30dp"
-	        android:onClick="onWorkoutButtonClicked"
-	        android:text="@string/workout_button" />
+	<Button
+		android:id="@+id/workout_button"
+		style="@style/AppTheme.View.TextView.Button.MainMenu"
+		android:layout_marginTop="50dp"
+		android:layout_width="150dp"
+		android:layout_height="60dp"
+		android:gravity="center"
+		android:onClick="onWorkoutButtonClicked"
+		android:text="@string/workout_button" />
+	
+	<Button
+		android:id="@+id/history_button"
+		style="@style/AppTheme.View.TextView.Button.MainMenu"
+		android:gravity="center"
+		android:layout_marginTop="10dp"
+		android:layout_width="150dp"
+		android:layout_height="60dp"
+		android:onClick="onHistoryButtonClicked"
+		android:text="@string/history_button" />
+	
+	<Button
+		android:id="@+id/settings_button"
+		style="@style/AppTheme.View.TextView.Button.MainMenu"
+		android:layout_width="150dp"
+		android:layout_height="60dp"
+		android:gravity="center"
+		android:layout_marginTop="10dp"
+		android:onClick="onSettingsButtonClicked"
+		android:text="@string/settings_button" />
 
-        <Button
-	        android:id="@+id/history_button"
-	        style="@style/AppTheme.View.TextView.Button"
-	        android:layout_width="110dp"
-	        android:layout_height="wrap_content"
-        	android:gravity="center"
-	        android:layout_marginTop="5dp"
-	        android:onClick="onHistoryButtonClicked"
-	        android:text="@string/history_button" />
-
-        <Button
-	        android:id="@+id/settings_button"
-	        style="@style/AppTheme.View.TextView.Button"
-	        android:layout_width="110dp"
-	        android:layout_height="wrap_content"
-        	android:gravity="center"
-	        android:layout_marginTop="5dp"
-	        android:onClick="onSettingsButtonClicked"
-	        android:text="@string/settings_button" />
-
-    </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>

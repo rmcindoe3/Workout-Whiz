@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Workout Whiz</string>
+    <string name="main_activity_title">orkout Whiz</string>
     <string name="action_settings">Settings</string>
     <string name="workout_button">Workout!</string>
     <string name="history_button">History</string>
