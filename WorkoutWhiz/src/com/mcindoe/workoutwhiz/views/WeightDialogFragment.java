@@ -67,7 +67,17 @@ public class WeightDialogFragment extends DialogFragment {
 		
 		//Set them to the default weight for this exercise.
 		mTextView.setText(mExercise.getWeight() + " lbs.");
-		mSeekBar.setMax(mExercise.getWeight()*2);
+		
+		//If the weight isn't zero, then set seek bar max to twice the weight
+		if(mExercise.getWeight() != 0) {
+			mSeekBar.setMax(mExercise.getWeight()*2);
+		}
+		//If the weight is zero, then just set it to 20
+		else {
+			mSeekBar.setMax(20);
+		}
+		
+		//Set the progress of the seekbar to the previously selected weight.
 		mSeekBar.setProgress(mExercise.getWeight());
 
 		//Set up our seek bar listener.
