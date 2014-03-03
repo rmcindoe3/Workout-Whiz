@@ -112,6 +112,7 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 			wds.close();
 
 			setResult(MainActivity.SUCCESSFUL_WORKOUT);
+			Toast.makeText(getApplicationContext(), "Workout saved!", Toast.LENGTH_LONG).show();
 			finish();
 		}
 		//If they haven't completed at least 3 exercises, don't let them finish the workout.
