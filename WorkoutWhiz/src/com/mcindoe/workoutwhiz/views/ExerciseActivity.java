@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.mcindoe.workoutwhiz.R;
@@ -36,7 +37,7 @@ public class ExerciseActivity extends Activity {
 	private Button mButtonEight;
 	private Button mButtonNine;
 	private Button mButtonZero;
-	private Button mBackspaceButton;
+	private ImageButton mBackspaceButton;
 	
 	private Button mNextSetButton;
 	private Button mFinishExerciseButton;
@@ -63,7 +64,7 @@ public class ExerciseActivity extends Activity {
 		mButtonEight = (Button)findViewById(R.id.exercise_eight_button);
 		mButtonNine = (Button)findViewById(R.id.exercise_nine_button);
 		mButtonZero = (Button)findViewById(R.id.exercise_zero_button);
-		mBackspaceButton = (Button)findViewById(R.id.exercise_backspace_button);
+		mBackspaceButton = (ImageButton)findViewById(R.id.exercise_backspace_button);
 
 		//Grabs our current exercise.
 		mExercise = ((WorkoutWhizApplication)getApplication()).getCurrentExercise();
