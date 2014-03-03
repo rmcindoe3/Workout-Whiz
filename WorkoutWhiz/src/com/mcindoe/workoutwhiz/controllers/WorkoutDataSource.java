@@ -156,6 +156,6 @@ public class WorkoutDataSource {
 	
 	public static String getCurrentDate() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		return sdf.format(new Date(0));
+		return sdf.format(new Date(System.currentTimeMillis()));
 	}
 }
