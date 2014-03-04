@@ -211,8 +211,8 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 	public void onBackPressed() {
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Are you sure?");
-		builder.setMessage("Continuing will cancel this workout!");
+		builder.setTitle("Cancel this workout?");
+		builder.setMessage("You'll lose current progress!");
 		builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface arg0, int arg1) {

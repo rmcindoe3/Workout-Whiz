@@ -256,8 +256,8 @@ public class ExerciseActivity extends Activity {
 	public void onBackPressed() {
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle("Are you sure?");
-		builder.setMessage("Continuing will cancel this exercise!");
+		builder.setTitle("Cancel this exercise?");
+		builder.setMessage("You'll lose current progress!");
 		builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface arg0, int arg1) {
