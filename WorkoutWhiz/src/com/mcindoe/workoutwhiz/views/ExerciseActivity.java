@@ -84,7 +84,7 @@ public class ExerciseActivity extends Activity {
 		}
 		//Otherwise, just throw in a 0 for reps completed last time.
 		else {
-			mLastRepsTextView.setText("0");
+			mLastRepsTextView.setText("N/A");
 		}
 
 		//Here are the button listeners for each button on the screen.
