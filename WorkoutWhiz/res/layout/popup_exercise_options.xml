@@ -17,8 +17,8 @@
 	        style="@style/AppTheme.View.TextView.ExerciseOptions" />
 	
 	    <Button
-	        android:id="@+id/exercise_options_edit_button"
-	        android:text="@string/exercise_options_edit"
+	        android:id="@+id/exercise_options_mark_as_incomplete_button"
+	        android:text="@string/exercise_options_mark_as_incomplete"
 	        android:textSize="20sp"
 	        style="@style/AppTheme.View.TextView.ExerciseOptions" />
 	

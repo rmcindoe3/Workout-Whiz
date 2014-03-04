@@ -26,7 +26,7 @@ public class WeightDialogFragment extends DialogFragment {
 	 * Interface that allows us to pass events back to our select exercise activity.
 	 */
 	public interface WeightDialogListener {
-		public void onDialogPositiveClick(Exercise exer);
+		public void startExercise(Exercise exer);
 	}
 	
 	private WeightDialogListener sourceActivity;
@@ -124,7 +124,7 @@ public class WeightDialogFragment extends DialogFragment {
 
 						//When the ok button is pressed, let our source activity know
 						//	that the weight has been selected.
-						sourceActivity.onDialogPositiveClick(mExercise);
+						sourceActivity.startExercise(mExercise);
 					}
 				});
 

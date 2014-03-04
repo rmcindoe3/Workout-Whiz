@@ -25,6 +25,39 @@ public class Exercise {
 	}
 	
 	/**
+	 * Performs a more thorough equals comparison for when you want to
+	 * see if the current reps are the same as well
+	 * @param other - the other exercise
+	 * @return - if the two exercises are the same
+	 */
+	public boolean completeEquals(Exercise other) {
+		if(!equals(other)) {
+			return false;
+		}
+		else {
+			if(this.getReps().size() != other.getReps().size()) {
+				return false;
+			}
+			else {
+				for(int i = 0; i < this.getReps().size(); i++) {
+					if(this.getReps().get(i) != other.getReps().get(i)) {
+						return false;
+					}
+				}
+			}
+		}
+		return true;
+	}
+	
+	/**
+	 * Returns whether or not this activity has been completed
+	 * @return - whether or not the activity has been completed
+	 */
+	public boolean isCompleted() {
+		return (getReps().size() > 0);
+	}
+	
+	/**
 	 * Overridden equals method to compare the names of exercises.
 	 */
 	@Override
@@ -85,16 +118,7 @@ public class Exercise {
 	public void addRep(int num) {
 		reps.add(num);
 	}
-	
-	/**
-	 * Grabs information about the last time the user has performed this 
-	 * exercise and stores it in our lastReps ArrayList.
-	 */
-	public void updateLastReps() {
-		//TODO: Query database once it's finished and fill out the amount of
-		//	reps they have completed in this exercise in the past.
-	}
-	
+
 	/**
 	 * Capitalizes the first letter of a word and every first letter after spaces
 	 * @param inStr - the string you want to fix the capitalization of.

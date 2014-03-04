@@ -16,6 +16,48 @@ public class Workout {
 	}
 	
 	/**
+	 * Removes the given exercise from the incomplete exercises list.
+	 * @param exer - the exercise to remove.
+	 */
+	public void removeIncompleteExercise(Exercise exer) {
+		for(int i = 0; i < incompleteExercises.size(); i++) {
+			if(exer.completeEquals(incompleteExercises.get(i))) {
+				incompleteExercises.remove(i);
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * Removes the given exercise from the complete exercises list.
+	 * @param exer - the exercise to remove.
+	 */
+	public void removeCompleteExercise(Exercise exer) {
+		for(int i = 0; i < completeExercises.size(); i++) {
+			if(exer.completeEquals(completeExercises.get(i))) {
+				completeExercises.remove(i);
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * Moves the given exercise from the complete exercise list to
+	 * the incomplete exercise list
+	 * @param exer - the exercise to move.
+	 */
+	public void markAsIncomplete(Exercise exer) {
+		for(int i = 0; i < completeExercises.size(); i++) {
+			if(exer.completeEquals(completeExercises.get(i))) {
+				completeExercises.get(i).setReps(new ArrayList<Integer>());
+				incompleteExercises.add(completeExercises.get(i));
+				completeExercises.remove(i);
+				break;
+			}
+		}
+	}
+	
+	/**
 	 * Moves an exercise from the incomplete list to the complete list
 	 * @param exer - the exercise that has been completed.
 	 */

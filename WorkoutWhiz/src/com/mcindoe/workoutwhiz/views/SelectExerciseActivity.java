@@ -4,14 +4,19 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,12 +52,18 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 		mAddExerciseEditText = (EditText)findViewById(R.id.add_exercise_edit_text);
 		mWorkoutTitleTextView = (TextView)findViewById(R.id.workout_title_text_view);
 		mExercisesListView = (ListView)findViewById(R.id.incomplete_exercises_list_view);
-		
-		//First we need to grab our workout.
-		mWorkout = ((WorkoutWhizApplication)getApplication()).getCurrentWorkout();
+
+		//Sets up and displays our list view.
+		updateExerciseListView();
 
 		//Sets the title of the activity.
 		mWorkoutTitleTextView.setText(mWorkout.getName());
+	}
+	
+	public void updateExerciseListView() {
+		
+		//First we need to grab our workout.
+		mWorkout = ((WorkoutWhizApplication)getApplication()).getCurrentWorkout();
 		
 		//Formats our list of exercises the way the array adapter will understand it.
 		ArrayList<Exercise> listOfExercises = new ArrayList<Exercise>();
@@ -126,7 +137,7 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 	 * Called after the user has successfully chosen a desired weight.
 	 */
 	@Override
-	public void onDialogPositiveClick(Exercise exer) {
+	public void startExercise(Exercise exer) {
 
 		//set the exercise to the applications current exercise.
 		((WorkoutWhizApplication)getApplication()).setCurrentExercise(exer);
@@ -145,34 +156,14 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 		
 		if(resultCode == SUCCESSFUL_EXERCISE) {
 
-			mWorkout = ((WorkoutWhizApplication)getApplication()).getCurrentWorkout();
-
-			//Formats our list of exercises the way the array adapter will understand it.
-			ArrayList<Exercise> listOfExercises = new ArrayList<Exercise>();
-			listOfExercises.add(INCOMPLETE_EXERCISE_TITLE);
-			listOfExercises.addAll(mWorkout.getIncompleteExercises());
-			listOfExercises.add(COMPLETE_EXERCISE_TITLE);
-			listOfExercises.addAll(mWorkout.getCompleteExercises());
-
-			//Sets up our list view 
-			mExercisesArrayAdapter = new ExerciseArrayAdapter(this, listOfExercises, new OnExerciseClickListener());
-			mExercisesListView.setAdapter(mExercisesArrayAdapter);
+			//Update the list view with our new exercises
+			updateExerciseListView();
 			
 			mAddExerciseEditText.setText("");
-			
 		}
 		else if(resultCode == CANCELLED_EXERCISE) {
 			//Nothing to do for now.
 		}
-	}
-
-	/**
-	 * Parses out the weight of the intensity strings located in the Exercise List Item
-	 * @param intensityString - the string from the text view
-	 * @return the weight value from the input string.
-	 */
-	public int parseInitialWeight(String intensityString) {
-		return Integer.parseInt(intensityString.substring(0, intensityString.indexOf('/')));
 	}
 	
 	/**
@@ -182,26 +173,126 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 
 		@Override
 		public void onClick(View v) {
-			//Just to make sure that the view object that was clicked is an exercise list item.
+			
+			//If the view that called this is our list item
 			if(v.getId() == R.id.list_item_exercise) {
 				
-				//Grabs the exercise list item layout from the view so we can then get our exercise.
-				ExerciseListItemLinearLayout layout = (ExerciseListItemLinearLayout)v;
-				
-				//We create a new exercise and fill it with this exercises information because
-				// otherwise it will overwrite the previous exercises information in the case
-				// where we are repeating the same exercise in the same workout.
-				Exercise exer = new Exercise(layout.getExercise().getName(),layout.getExercise().getWeight());
-				exer.setLastReps(layout.getExercise().getLastReps());
-				
-				//Fill out a weight dialog and show it.
-				WeightDialogFragment weightDialog = new WeightDialogFragment();
-				
-				weightDialog.setExercise(exer);
+				//Show the weight dialog for the exercise that is contained in this layout
+				showWeightDialog(extractExercise((ExerciseListItemLinearLayout)v));
+			}
+			//If the view that called this is our options button...
+			else if(v.getId() == R.id.list_item_exercise_options_button) {
 
-				weightDialog.show(getFragmentManager(), "weight dialog");
+				//Shows an exercise options popup menu
+				showExerciseOptions(v);
 			}
 		}
+	}
+	
+	/**
+	 * Builds and displays our select weight dialog
+	 * @param exer - the exercise we want to select a weight for
+	 */
+	public void showWeightDialog(Exercise exer) {
+
+		//Fill out a weight dialog and show it.
+		WeightDialogFragment weightDialog = new WeightDialogFragment();
+
+		//Extract the exercise from our view and set it in our dialog fragment.
+		weightDialog.setExercise(exer);
+
+		weightDialog.show(getFragmentManager(), "weight dialog");
+	}
+	
+	/**
+	 * Extracts the exercise component of an ExerciseListItemLinearLayout and returns a copy of it
+	 * @param layout - the layout that contains the exercise
+	 * @return - the exercise itself
+	 */
+	public Exercise extractExercise(ExerciseListItemLinearLayout layout) {
+
+		//We create a new exercise and fill it with this exercises information because
+		// otherwise it will overwrite the previous exercises information in the case
+		// where we are repeating the same exercise in the same workout.
+		Exercise exer = new Exercise(layout.getExercise().getName(),layout.getExercise().getWeight());
+		exer.setLastReps(layout.getExercise().getLastReps());
+		
+		return exer;
+	}
+	
+	/**
+	 * Shows the exercise options popup menu.
+	 * @param anchorView - the view that called this popup
+	 */
+	public void showExerciseOptions(View anchorView) {
+
+		//Grabs the parent layout of the settings button - the exercise list item linear layout
+		final ExerciseListItemLinearLayout srcLayout = ((ExerciseListItemLinearLayout)anchorView.getParent());
+
+		//Inflate our layout
+		View exerciseOptions = ((LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.popup_exercise_options, null);
+		
+		//Create our popup
+		final PopupWindow exercisePopup = new PopupWindow(exerciseOptions, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		
+		//We want the popup window to be focusable
+		exercisePopup.setFocusable(true);
+		
+		//We also want the popup to be dismissed when a touch is made outside of it.
+		exercisePopup.setBackgroundDrawable(new ColorDrawable());
+		
+		//Adds a listener to our perform exercise button.
+		Button performButton = (Button)exerciseOptions.findViewById(R.id.exercise_options_perform_button);
+		performButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				
+				//Extract our exercise from the source layout and pass it to our weight dialog.
+				showWeightDialog(extractExercise(srcLayout));
+				exercisePopup.dismiss();
+			}
+		});
+
+		//Initializes our mark as incomplete button
+		Button markAsIncompleteButton = (Button)exerciseOptions.findViewById(R.id.exercise_options_mark_as_incomplete_button);
+		
+		//If the exercise isn't completed, then don't show this option.
+		if(!srcLayout.getExercise().isCompleted()) {
+			markAsIncompleteButton.setVisibility(View.GONE);
+		}
+		
+		//Sets up the button listener for the mark as incomplete button.
+		markAsIncompleteButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+				//Marks this exercise as incomplete in our workout.
+				mWorkout.markAsIncomplete(srcLayout.getExercise());
+				updateExerciseListView();
+				exercisePopup.dismiss();
+			}
+		});
+
+		//Adds a listener to our remove exercise button.
+		Button removeButton = (Button)exerciseOptions.findViewById(R.id.exercise_options_remove_button);
+		removeButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+				//Remove this exercise from the list.
+				if(srcLayout.getExercise().isCompleted()) {
+					mWorkout.removeCompleteExercise(srcLayout.getExercise());
+				}
+				else {
+					mWorkout.removeIncompleteExercise(srcLayout.getExercise());
+				}
+				updateExerciseListView();
+				exercisePopup.dismiss();
+			}
+		});
+
+		//Show the popup as a drop down from our anchor view
+		exercisePopup.showAsDropDown(anchorView);
 	}
 
 	/**
