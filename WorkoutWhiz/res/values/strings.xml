@@ -47,6 +47,9 @@
     <string name="default_workout_name">Untitled Workout</string>
     <string name="default_workout_date">Date Unknown</string>
     <string name="weight_input_info_text">Tip: Move slider to max to increase weight beyond current limit.</string>
+    <string name="exercise_options_perform">Perform</string>
+    <string name="exercise_options_edit">Edit</string>
+    <string name="exercise_options_remove">Remove</string>
     
 
 

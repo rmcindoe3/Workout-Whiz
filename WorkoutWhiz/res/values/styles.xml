@@ -31,6 +31,14 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="AppTheme.View.TextView.ExerciseOptions">
+		<item name="android:background">@drawable/popup_exercise_options_item</item>
+        <item name="android:layout_height">@dimen/exercise_options_height</item>
+        <item name="android:layout_width">@dimen/exercise_options_width</item>
+        <item name="android:gravity">center_vertical|right</item>
+        <item name="android:paddingRight">5dp</item>
+    </style>
+
     <style name="AppTheme.View.TextView.Subtitle">
         <item name="android:gravity">bottom|left</item>
         <item name="android:textColor">@color/white</item>

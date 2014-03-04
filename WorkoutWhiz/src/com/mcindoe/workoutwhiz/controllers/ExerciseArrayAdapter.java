@@ -4,10 +4,15 @@ import java.util.List;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.mcindoe.workoutwhiz.R;
@@ -81,6 +86,16 @@ public class ExerciseArrayAdapter extends ArrayAdapter<Exercise> {
 			//Fills in the intensity of the exercise.
 			TextView exerciseIntensityTextView = (TextView)exerciseRow.findViewById(R.id.exercise_intensity_text_view);
 			exerciseIntensityTextView.setText(getExerciseIntensityString(position, completed));
+			
+			//Adds a click listener to our options button.
+			ImageButton optionsButton = (ImageButton)exerciseRow.findViewById(R.id.list_item_exercise_options_button);
+			optionsButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					//Shows an exercise options popup menu
+					showExerciseOptions(v, (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE));
+				}
+			});
 
 			//If this is a completed exercise, color the text green.
 			if(completed) {
@@ -93,6 +108,47 @@ public class ExerciseArrayAdapter extends ArrayAdapter<Exercise> {
 		exerciseRow.setOnClickListener(mListener);
 
 		return exerciseRow;
+	}
+	
+	public void showExerciseOptions(View anchorView, LayoutInflater inflater) {
+
+		//Inflate our layout
+		View exerciseOptions = inflater.inflate(R.layout.popup_exercise_options, null);
+		
+		//Create our popup
+		PopupWindow exercisePopup = new PopupWindow(exerciseOptions, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		
+		//Set it up the way we want
+		exercisePopup.setFocusable(true);
+		exercisePopup.setBackgroundDrawable(new ColorDrawable());
+		
+		//Adds a listener to our perform exercise button.
+		Button performButton = (Button)exerciseOptions.findViewById(R.id.exercise_options_perform_button);
+		performButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+			}
+		});
+
+		//Adds a listener to our edit exercise button.
+		Button editButton = (Button)exerciseOptions.findViewById(R.id.exercise_options_edit_button);
+		editButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+			}
+		});
+
+		//Adds a listener to our remove exercise button.
+		Button removeButton = (Button)exerciseOptions.findViewById(R.id.exercise_options_remove_button);
+		removeButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+			}
+		});
+
+
+		//Show the popup as a drop down from our anchor view
+		exercisePopup.showAsDropDown(anchorView);
 	}
 	
 	/**

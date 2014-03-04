@@ -18,5 +18,7 @@
     <dimen name="number_pad_text_size">35sp</dimen>
     <dimen name="activity_title_bar_height">60dp</dimen>
     <dimen name="exercise_list_view_header_height">30dp</dimen>
+    <dimen name="exercise_options_height">35dp</dimen>
+    <dimen name="exercise_options_width">100dp</dimen>
 
 </resources>
