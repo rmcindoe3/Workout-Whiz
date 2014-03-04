@@ -19,6 +19,9 @@ import com.mcindoe.workoutwhiz.models.Exercise;
 import com.mcindoe.workoutwhiz.models.Workout;
 
 public class ExerciseActivity extends Activity {
+	
+	public static final int MAX_NUM_SETS = 5;
+	public static final int MIN_NUM_SETS = 1;
 
 	private Exercise mExercise;
 	private NumberPadController mNPController;
@@ -97,6 +100,10 @@ public class ExerciseActivity extends Activity {
 		mButtonZero.setOnClickListener(new OnNumberPadClickListener());
 		mBackspaceButton.setOnClickListener(new OnNumberPadClickListener());
 		
+		//If the exercise has zero reps already completed, don't let the user hit mNextSetButton
+		if(mExercise.getReps().size() == 0) {
+			mNextSetButton.setEnabled(false);
+		}
 		mNextSetButton.setOnClickListener(new OnClickListener() {
 		    @Override
 		    public void onClick(View arg0) {
@@ -107,14 +114,12 @@ public class ExerciseActivity extends Activity {
 		    	mCurrentRepsTextView.setText(createRepsString(mExercise.getReps()) + ", " + mNPController.clearNumber());
 		    	
 		    	//If the current number of reps is higher than the minimum, enable the finish exercise button.
-		    	if(mExercise.getReps().size() >= 2) {
+		    	if(mExercise.getReps().size() >= MIN_NUM_SETS) {
 		    		mFinishExerciseButton.setEnabled(true);
 		    	}
 		    	
-		    	//If the current number of reps is higher than the maximum, disable input buttons
-		    	if(mExercise.getReps().size() >= 4) {
-		    		mNextSetButton.setEnabled(false);
-		    	}
+		    	//Disable this button until the user presses the next rep buttons.
+		    	mNextSetButton.setEnabled(false);
 		    }
 		});
 		
@@ -213,12 +218,25 @@ public class ExerciseActivity extends Activity {
 				mNPController.setNumber(newValue);
 
 				//If the number of reps is now below the minimum to finish, disable finish button
-				if(mExercise.getReps().size() < 2) {
+				if(mExercise.getReps().size() < MIN_NUM_SETS) {
 					mFinishExerciseButton.setEnabled(false);
 				}
-		    	
-				//Re-enable the input buttons if they were disabled.
+			}
+			
+			//Only allow the user to move on to the next set if the value isn't zero.
+			if(newValue == 0 && mNextSetButton.isEnabled()) {
+				mNextSetButton.setEnabled(false);
+			}
+			else if(newValue != 0 && !mNextSetButton.isEnabled() && mExercise.getReps().size() < MAX_NUM_SETS) {
 				mNextSetButton.setEnabled(true);
+			}
+			
+			//Only allow the user to finish the exercise if they have entered at least the minimum values.
+			if(newValue == 0 && mFinishExerciseButton.isEnabled() && mExercise.getReps().size() < MIN_NUM_SETS) {
+				mFinishExerciseButton.setEnabled(false);
+			}
+			else if(newValue != 0 && !mFinishExerciseButton.isEnabled() && mExercise.getReps().size() >= MIN_NUM_SETS - 1) {
+				mFinishExerciseButton.setEnabled(true);
 			}
 
 	    	//Updates and formats the screen with the most recent number.
