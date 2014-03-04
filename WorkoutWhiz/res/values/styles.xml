@@ -21,7 +21,7 @@
     </style>
 
     <style name="AppTheme.View.ListView.ListItem.Exercise">
-		<item name="android:background">@drawable/wide_list_item_exercise</item>
+		<item name="android:background">@drawable/wide_list_item_exercise_selector</item>
         <item name="android:divider">@drawable/list_view_exercise_divider</item>
         <item name="android:gravity">center_vertical</item>
     </style>
@@ -62,7 +62,6 @@
     </style>
 
     <style name="AppTheme.View.TextView.Button">
-        <item name="android:background">@drawable/button</item>
     </style>
 
     <style name="AppTheme.View.TextView.Button.MainMenu">
@@ -72,14 +71,14 @@
     </style>
 
     <style name="AppTheme.View.TextView.Button.NumberPad">
-        <item name="android:background">@drawable/button_number_pad</item>
+        <item name="android:background">@drawable/button_number_pad_selector</item>
         <item name="android:textSize">@dimen/number_pad_text_size</item>
         <item name="android:typeface">sans</item>
         <item name="android:layout_margin">1px</item>
     </style>
 
     <style name="AppTheme.View.TextView.Button.Navigation">
-        <item name="android:background">@drawable/button_navigation</item>
+        <item name="android:background">@drawable/button_navigation_selector</item>
         <item name="android:textStyle">bold</item>
     </style>
 
