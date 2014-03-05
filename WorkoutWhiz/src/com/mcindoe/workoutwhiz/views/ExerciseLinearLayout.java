@@ -6,19 +6,19 @@ import android.widget.LinearLayout;
 
 import com.mcindoe.workoutwhiz.models.Exercise;
 
-public class ExerciseListItemLinearLayout extends LinearLayout {
+public class ExerciseLinearLayout extends LinearLayout {
 	
 	private Exercise mExercise;
 
-	public ExerciseListItemLinearLayout(Context context) {
+	public ExerciseLinearLayout(Context context) {
 		super(context);
 	}
 	
-	public ExerciseListItemLinearLayout(Context context, AttributeSet attrs) {
+	public ExerciseLinearLayout(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
 
-	public ExerciseListItemLinearLayout(Context context, AttributeSet attrs, int defStyles) {
+	public ExerciseLinearLayout(Context context, AttributeSet attrs, int defStyles) {
 		super(context, attrs, defStyles);
 	}
 

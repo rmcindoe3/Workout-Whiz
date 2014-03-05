@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.mcindoe.workoutwhiz.R;
 import com.mcindoe.workoutwhiz.models.Workout;
-import com.mcindoe.workoutwhiz.views.WorkoutListItemLinearLayout;
+import com.mcindoe.workoutwhiz.views.WorkoutLinearLayout;
 
 public class WorkoutSelectArrayAdapter extends ArrayAdapter<Workout> {
 	
@@ -38,7 +38,7 @@ public class WorkoutSelectArrayAdapter extends ArrayAdapter<Workout> {
 		View workoutRow = inflater.inflate(R.layout.list_item_workout, parent, false);
 		
 		//Stores our workout in this view.
-		WorkoutListItemLinearLayout layout = (WorkoutListItemLinearLayout)workoutRow.findViewById(R.id.list_item_workout);
+		WorkoutLinearLayout layout = (WorkoutLinearLayout)workoutRow.findViewById(R.id.list_item_workout);
 		layout.setWorkout(mWorkouts.get(position));
 		
 		//Sets up the radio button listener. We want clickable to false because we're overriding the default 

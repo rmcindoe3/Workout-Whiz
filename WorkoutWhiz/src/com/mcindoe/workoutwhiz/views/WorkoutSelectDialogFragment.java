@@ -170,7 +170,7 @@ public class WorkoutSelectDialogFragment extends DialogFragment {
 			
 			//Find which one it is and get it's workout to be returnd.
 			for(int i = 0; i < mRecentWorkoutsListView.getChildCount(); i++) {
-				WorkoutListItemLinearLayout recentWorkoutsListItem = (WorkoutListItemLinearLayout)mRecentWorkoutsListView.getChildAt(i);
+				WorkoutLinearLayout recentWorkoutsListItem = (WorkoutLinearLayout)mRecentWorkoutsListView.getChildAt(i);
 				RadioButton rb = (RadioButton)recentWorkoutsListItem.findViewById(R.id.workout_select_radio_button);
 				
 				//If the radio button is checked, we have found the checked radio button

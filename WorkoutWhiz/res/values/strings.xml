@@ -50,7 +50,7 @@
     <string name="exercise_options_perform">Perform</string>
     <string name="exercise_options_mark_as_incomplete">Mark As Incomplete</string>
     <string name="exercise_options_remove">Remove</string>
-    
-
+    <string name="title_activity_history">History Activity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

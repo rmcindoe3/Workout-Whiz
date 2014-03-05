@@ -178,7 +178,7 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 			if(v.getId() == R.id.list_item_exercise) {
 				
 				//Show the weight dialog for the exercise that is contained in this layout
-				showWeightDialog(extractExercise((ExerciseListItemLinearLayout)v));
+				showWeightDialog(extractExercise((ExerciseLinearLayout)v));
 			}
 			//If the view that called this is our options button...
 			else if(v.getId() == R.id.list_item_exercise_options_button) {
@@ -209,7 +209,7 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 	 * @param layout - the layout that contains the exercise
 	 * @return - the exercise itself
 	 */
-	public Exercise extractExercise(ExerciseListItemLinearLayout layout) {
+	public Exercise extractExercise(ExerciseLinearLayout layout) {
 
 		//We create a new exercise and fill it with this exercises information because
 		// otherwise it will overwrite the previous exercises information in the case
@@ -227,7 +227,7 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 	public void showExerciseOptions(View anchorView) {
 
 		//Grabs the parent layout of the settings button - the exercise list item linear layout
-		final ExerciseListItemLinearLayout srcLayout = ((ExerciseListItemLinearLayout)anchorView.getParent());
+		final ExerciseLinearLayout srcLayout = ((ExerciseLinearLayout)anchorView.getParent());
 
 		//Inflate our layout
 		View exerciseOptions = ((LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.popup_exercise_options, null);

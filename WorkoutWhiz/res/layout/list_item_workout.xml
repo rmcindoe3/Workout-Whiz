@@ -1,4 +1,4 @@
-<com.mcindoe.workoutwhiz.views.WorkoutListItemLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.mcindoe.workoutwhiz.views.WorkoutLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/list_item_workout"
     android:layout_width="match_parent"
     android:layout_height="@dimen/list_item_workout_height"
@@ -29,4 +29,4 @@
         android:text="@string/default_workout_date"
         android:textSize="@dimen/list_item_workout_date_text_size" />
 
-</com.mcindoe.workoutwhiz.views.WorkoutListItemLinearLayout>
+</com.mcindoe.workoutwhiz.views.WorkoutLinearLayout>

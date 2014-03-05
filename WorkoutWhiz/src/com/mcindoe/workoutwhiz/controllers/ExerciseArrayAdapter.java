@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.mcindoe.workoutwhiz.R;
 import com.mcindoe.workoutwhiz.models.Exercise;
-import com.mcindoe.workoutwhiz.views.ExerciseListItemLinearLayout;
+import com.mcindoe.workoutwhiz.views.ExerciseLinearLayout;
 import com.mcindoe.workoutwhiz.views.SelectExerciseActivity;
 
 public class ExerciseArrayAdapter extends ArrayAdapter<Exercise> {
@@ -72,7 +72,7 @@ public class ExerciseArrayAdapter extends ArrayAdapter<Exercise> {
 			exerciseRow = inflater.inflate(R.layout.list_item_exercise, parent, false);
 			
 			//Sets our exercise for this list item.
-			ExerciseListItemLinearLayout layout = (ExerciseListItemLinearLayout)exerciseRow.findViewById(R.id.list_item_exercise);
+			ExerciseLinearLayout layout = (ExerciseLinearLayout)exerciseRow.findViewById(R.id.list_item_exercise);
 			layout.setExercise(exer);
 
 			//Fills in the name of the exercise.
