@@ -99,4 +99,14 @@ public class MainActivity extends Activity implements WorkoutSelectDialogFragmen
 	public void onSettingsButtonClicked(View view) {
 		//TODO: Open settings activity.
 	}
+
+	/**
+	 * Override the default onBackPressed method to do nothing.  We don't
+	 * want the back button to exit the app accidentally.  User can still press
+	 * the HOME button to go to the home screen.
+	 */
+	@Override
+	public void onBackPressed() {
+		//Do nothing.
+	}
 }
