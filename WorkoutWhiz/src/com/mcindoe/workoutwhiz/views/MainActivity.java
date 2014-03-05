@@ -98,9 +98,5 @@ public class MainActivity extends Activity implements WorkoutSelectDialogFragmen
 	 */
 	public void onSettingsButtonClicked(View view) {
 		//TODO: Open settings activity.
-		WorkoutDataSource wds = new WorkoutDataSource(this);
-		wds.open();
-		wds.clearDatabase();
-		wds.close();
 	}
 }

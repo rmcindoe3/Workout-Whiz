@@ -3,6 +3,8 @@ package com.mcindoe.workoutwhiz.views;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -37,7 +39,31 @@ public class HistoryActivity extends Activity {
 	 */
 	public void onClearWorkoutsButtonClicked(View view) {
 		
-		//TODO: clear workout history here.
+		final HistoryActivity srcActivity = this;
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Delete workout history?");
+		builder.setMessage("You'll lose all workout data!");
+		builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+				//Clear the database if they click yes
+				WorkoutDataSource wds = new WorkoutDataSource(srcActivity);
+				wds.open();
+				wds.clearDatabase();
+				wds.close();
+				updateWorkoutListView();
+			}
+		});
+		builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+				//The dialog will be dismissed and nothing happens.
+			}
+		});
+		AlertDialog dialog = builder.create();
+		
+		dialog.show();
 	}
 	
 	/**
