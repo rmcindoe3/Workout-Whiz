@@ -83,7 +83,12 @@ public class WorkoutDataSource {
 		return workout;
 	}
 	
-	public ArrayList<Workout> getMostRecentWorkouts() {
+	/**
+	 * Gets the most recent workouts, up to the given amount.
+	 * @param numWorkouts - the number of workouts you want to grab
+	 * @return - a list containing the "numWorkouts"th most recent workouts stored in the db.
+	 */
+	public ArrayList<Workout> getMostRecentWorkouts(int numWorkouts) {
 		
 		//Initialize our return array.
 		ArrayList<Workout> ret = new ArrayList<Workout>();
@@ -95,7 +100,7 @@ public class WorkoutDataSource {
 		Cursor workoutCursor = database.rawQuery("SELECT * FROM workout ORDER BY _id DESC", new String[] {});
 		
 		//If there is a workout stored, grab the most recent one
-		while(workoutCursor.moveToNext() && ret.size() < 5) {
+		while(workoutCursor.moveToNext() && ret.size() < numWorkouts) {
 			
 			//Initialize our workout variable with the name and date
 			workout = new Workout(workoutCursor.getString(workoutCursor.getColumnIndex(WorkoutDBSQLiteHelper.WORKOUT_NAME)));

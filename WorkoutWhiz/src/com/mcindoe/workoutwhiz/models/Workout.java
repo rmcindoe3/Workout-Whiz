@@ -1,6 +1,9 @@
 package com.mcindoe.workoutwhiz.models;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Workout {
 	
@@ -13,6 +16,28 @@ public class Workout {
 		this.setName(name);
 		setCompleteExercises(new ArrayList<Exercise>());
 		setIncompleteExercises(new ArrayList<Exercise>());
+	}
+
+	/**
+	 * Changes the given date into the format we want for our date text view
+	 * @param date - the original formatting of the date
+	 * @return - the corrected format of the date
+	 */
+	public static String formatDate(String date) {
+		
+		//Grab a date object out of the given string.
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		Date dateObj = new Date();
+		try {
+			dateObj = sdf.parse(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return "Date Format Error";
+		}
+		
+		//Change the pattern to what we want and then return the new foramt.
+		sdf.applyPattern("yyyy-MM-dd");
+		return sdf.format(dateObj);
 	}
 	
 	/**

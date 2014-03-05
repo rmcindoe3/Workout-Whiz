@@ -20,7 +20,7 @@
        
         <!-- ListView of previous workouts -->
         <ListView
-            android:id="@+id/incomplete_exercises_list_view"
+            android:id="@+id/workout_history_list_view"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="21"
@@ -41,6 +41,7 @@
                 style="@style/AppTheme.View.TextView.Button.Navigation"
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:onClick="onClearWorkoutsButtonClicked"
                 android:layout_height="fill_parent"
                 android:text="@string/clear_workouts_button" />
 
@@ -48,6 +49,7 @@
                 android:id="@+id/export_workouts_button"
                 style="@style/AppTheme.View.TextView.Button.Navigation"
                 android:layout_width="0dp"
+                android:onClick="onExportWorkoutsButtonClicked"
                 android:layout_weight="1"
                 android:layout_height="fill_parent"
                 android:text="@string/export_workouts_button" />

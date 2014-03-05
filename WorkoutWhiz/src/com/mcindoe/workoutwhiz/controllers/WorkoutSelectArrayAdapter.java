@@ -52,33 +52,11 @@ public class WorkoutSelectArrayAdapter extends ArrayAdapter<Workout> {
 		
 		//Fills in the date of the workout.
 		TextView workoutDateTextView = (TextView)workoutRow.findViewById(R.id.workout_date_text_view);
-		workoutDateTextView.setText(formatDate(mWorkouts.get(position).getDate()));
+		workoutDateTextView.setText(Workout.formatDate(mWorkouts.get(position).getDate()));
 		
 		//Sets the on click listener for this exercise.
 		workoutRow.setOnClickListener(mListener);
 
 		return workoutRow;
-	}
-
-	/**
-	 * Changes the given date into the format we want for our date text view
-	 * @param date - the original formatting of the date
-	 * @return - the corrected format of the date
-	 */
-	public String formatDate(String date) {
-		
-		//Grab a date object out of the given string.
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		Date dateObj = new Date();
-		try {
-			dateObj = sdf.parse(date);
-		} catch (ParseException e) {
-			e.printStackTrace();
-			return "Date Format Error";
-		}
-		
-		//Change the pattern to what we want and then return the new foramt.
-		sdf.applyPattern("yyyy-MM-dd");
-		return sdf.format(dateObj);
 	}
 }

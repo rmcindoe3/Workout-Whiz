@@ -76,7 +76,10 @@ public class MainActivity extends Activity implements WorkoutSelectDialogFragmen
 
 		WorkoutDataSource wds = new WorkoutDataSource(this);
 		wds.open();
-		mWorkouts = wds.getMostRecentWorkouts();
+		
+		//Grabs the 5 most recent workouts to be shown
+		mWorkouts = wds.getMostRecentWorkouts(5);
+
 		wds.close();
 	}
 
