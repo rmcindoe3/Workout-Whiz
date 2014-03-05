@@ -116,7 +116,7 @@ public class WeightDialogFragment extends DialogFragment {
 		//Finishes creating our dialog builder.
 		builder.setView(weightDialogView);
 
-		builder.setTitle("Select Weight for " + mExercise.getName());
+		builder.setTitle("Select weight for " + mExercise.getName());
 
 		builder.setPositiveButton(R.string.ok,
 				new DialogInterface.OnClickListener() {

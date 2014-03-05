@@ -36,9 +36,9 @@
         android:id="@+id/list_item_exercise_options_button"
         android:gravity="right|center_vertical"
         android:src="@drawable/list_item_options_button"
-        android:background="@color/list_item_color"
+        android:background="@color/choice_button_color"
         android:layout_weight="1"
         android:layout_width="0dp"
-        android:layout_height="fill_parent" />
+        android:layout_height="wrap_content" />
 
 </com.mcindoe.workoutwhiz.views.ExerciseListItemLinearLayout>

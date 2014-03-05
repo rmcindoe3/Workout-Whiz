@@ -6,7 +6,7 @@
     
     <LinearLayout
         android:orientation="vertical"
-    	android:background="@drawable/popup_exercise_options_bg"
+        android:background="@drawable/floating_layout_bg"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content" >
     

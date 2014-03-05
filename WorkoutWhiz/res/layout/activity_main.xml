@@ -4,19 +4,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:background="@color/bg_darkest_blue"
+    android:background="@color/bg_color"
     tools:context=".MainActivity" >
 
     <ImageView
         android:id="@+id/title_image_view"
-        android:background="@drawable/activity_title_bar"
+        android:background="@drawable/activity_top_bar"
         android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
         android:src="@drawable/main_activity_logo" />
 
     <LinearLayout
-        android:background="@color/bg_dark_blue"
+        android:background="@color/bg_color"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:gravity="center_horizontal"

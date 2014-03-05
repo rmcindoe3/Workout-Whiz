@@ -28,7 +28,7 @@
         <LinearLayout 
             android:layout_height="0dp"
             android:layout_weight="5"
-            android:background="@color/bg_darkest_blue"
+            android:background="@color/bar_color"
             android:orientation="vertical"
             android:layout_width="match_parent">
 
@@ -36,7 +36,7 @@
             <TextView
                 android:id="@+id/create_exercise_text_view"
                 style="@style/AppTheme.View.TextView.Subtitle"
-                android:background="@drawable/create_new_exercise_bg"
+                android:background="@drawable/activity_bottom_bar"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
