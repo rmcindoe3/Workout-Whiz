@@ -34,9 +34,10 @@
     <style name="AppTheme.View.TextView.ExerciseOptions">
 		<item name="android:background">@drawable/popup_exercise_options_item</item>
         <item name="android:layout_height">@dimen/exercise_options_height</item>
-        <item name="android:layout_width">@dimen/exercise_options_width</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:gravity">center_vertical|right</item>
         <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingLeft">20dp</item>
     </style>
 
     <style name="AppTheme.View.TextView.Subtitle">
