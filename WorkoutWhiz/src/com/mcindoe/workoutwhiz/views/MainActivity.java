@@ -84,7 +84,10 @@ public class MainActivity extends Activity implements WorkoutSelectDialogFragmen
 	 * Called when the History button is clicked in the main activity.
 	 */
 	public void onHistoryButtonClicked(View view) {
-		//TODO: Open history activity.
+		
+		//Open history activity.
+		Intent intent = new Intent(this, HistoryActivity.class);
+		startActivityForResult(intent, 0);
 	}
 
 	/**

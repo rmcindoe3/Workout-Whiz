@@ -37,7 +37,6 @@
 	        android:layout_marginTop="10dp"
 	        android:layout_width="150dp"
 	        android:layout_height="60dp"
-	        android:enabled="false"
 	        android:onClick="onHistoryButtonClicked"
 	        android:text="@string/history_button" />
 	

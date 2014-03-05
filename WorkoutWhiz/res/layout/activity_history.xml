@@ -2,15 +2,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    style="@style/AppTheme.Layout"
     tools:context=".HistoryActivity" >
 
+    <!-- Title of the Workout -->
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:id="@+id/workout_history_title_text_view"
+        style="@style/AppTheme.View.TextView.Title"
+        android:text="@string/workout_history_title_text_view" />
+
+    <!-- This layout contains the entire screen, besides the title -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+       
+        <!-- ListView of previous workouts -->
+        <ListView
+            android:id="@+id/incomplete_exercises_list_view"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="21"
+            android:scrollbars="none" />
+        
+        <!-- Contains the bottom part of the screen that contains buttons -->
+        <LinearLayout 
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:background="@drawable/activity_bottom_bar"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="10dp"
+            android:layout_width="match_parent">
+
+            <Button
+                android:id="@+id/clear_workouts_button"
+                style="@style/AppTheme.View.TextView.Button.Navigation"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="fill_parent"
+                android:text="@string/clear_workouts_button" />
+
+            <Button
+                android:id="@+id/export_workouts_button"
+                style="@style/AppTheme.View.TextView.Button.Navigation"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="fill_parent"
+                android:text="@string/export_workouts_button" />
+            
+        </LinearLayout>
+        
+	</LinearLayout>
 
 </LinearLayout>
