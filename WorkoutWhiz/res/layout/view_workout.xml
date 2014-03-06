@@ -1,0 +1,21 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/AppTheme.Layout"
+    android:orientation="vertical" >
+
+    <!-- Title of the Workout -->
+    <TextView
+        android:id="@+id/workout_view_title_text_view"
+        style="@style/AppTheme.View.TextView.Title"
+        android:text="@string/default_workout_name" />
+
+	<!-- ListView of previous workouts -->
+	<ListView
+	    android:id="@+id/workout_view_list_view"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:scrollbars="none" />
+    
+
+</LinearLayout>
