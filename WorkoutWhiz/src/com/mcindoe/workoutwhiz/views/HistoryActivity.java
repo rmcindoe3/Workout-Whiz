@@ -261,7 +261,14 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 
 	@Override
 	public void performWorkout(Workout workout) {
-		//TODO: perform the given workout
-		Log.d("Debug", "Perform");
+		
+		//Set the application's current workout to the selected workout.
+		((WorkoutWhizApplication)getApplication()).setCurrentWorkout(workout);
+		
+		if(workoutViewExtended) {
+			hideWorkoutFragment();
+		}
+		setResult(MainActivity.PERFORM_WORKOUT);
+		finish();
 	}
 }

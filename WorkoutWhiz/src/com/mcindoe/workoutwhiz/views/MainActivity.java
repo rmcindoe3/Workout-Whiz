@@ -17,6 +17,7 @@ public class MainActivity extends Activity implements WorkoutSelectDialogFragmen
 	
 	public static final int SUCCESSFUL_WORKOUT = 0x9271;
 	public static final int CANCELLED_WORKOUT = 0x843D;
+	public static final int PERFORM_WORKOUT = 0x28B1;
 	
 	private ArrayList<Workout> mWorkouts;
 
@@ -64,8 +65,16 @@ public class MainActivity extends Activity implements WorkoutSelectDialogFragmen
 		if(resultCode == SUCCESSFUL_WORKOUT) {
 			//Workout went well.
 		}
-		else {
+		else if(resultCode == CANCELLED_WORKOUT) {
 			//Workout didn't end successfully.
+		}
+		else if(resultCode == PERFORM_WORKOUT) {
+
+			//We received a request to start a new workout.
+			// This is set up so the applications current workout is already set.
+			// So all we need to do is start the SelectExerciseActivity
+			Intent intent = new Intent(this, SelectExerciseActivity.class);
+			startActivityForResult(intent, 0);
 		}
 
 	}
