@@ -23,6 +23,8 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 	private boolean workoutViewExtended;
 	private int screenWidth;
 	
+	private float percentOfScreen;
+	
 	private FractionTranslateLinearLayout historyLayout;
 	private FractionTranslateLinearLayout workoutLayout;
 	private LinearLayout historyActivityLayout;
@@ -58,13 +60,15 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 	 * the two fragment containers on our screen.
 	 */
 	private void updateScreenWidth() {
+		
+		percentOfScreen = 0.9f;
 
 		//Grabs the width of the screen in pixels from our layout.
 		screenWidth = historyLayout.getScreenWidth();
 
 		//Make sure our two layouts are set to static widths according to the width of the screen.
 		LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)workoutLayout.getLayoutParams();
-		params.width = (int) (screenWidth*0.8f);
+		params.width = (int) (screenWidth*percentOfScreen);
 		workoutLayout.setLayoutParams(params);
 
 		params = (LinearLayout.LayoutParams)historyLayout.getLayoutParams();
@@ -84,7 +88,7 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 		}
 
 		//Create a new workout view fragment
-		WorkoutFragment newFrag = new WorkoutFragment();
+		WorkoutViewFragment newFrag = new WorkoutViewFragment();
 		newFrag.setWorkout(workout);
 
 		//Replace the current workout fragment with the new one.
@@ -107,7 +111,7 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 			workoutViewExtended = true;
 
 			//Animate the transition.
-			ObjectAnimator.ofFloat(this, "workoutHistoryLeftMargin", 0, 0.8f).setDuration(200).start();
+			ObjectAnimator.ofFloat(this, "workoutHistoryLeftMargin", 0, percentOfScreen).setDuration(200).start();
 		}
 	}
 	
@@ -123,7 +127,7 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 			workoutViewExtended = false;
 
 			//Animate the transition between states.
-			ObjectAnimator.ofFloat(this, "workoutHistoryLeftMargin", 0.8f, 0).setDuration(200).start();
+			ObjectAnimator.ofFloat(this, "workoutHistoryLeftMargin", percentOfScreen, 0).setDuration(200).start();
 		}
 	}
 

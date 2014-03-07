@@ -16,13 +16,13 @@ import com.mcindoe.workoutwhiz.models.Exercise;
 import com.mcindoe.workoutwhiz.views.ExerciseLinearLayout;
 import com.mcindoe.workoutwhiz.views.SelectExerciseActivity;
 
-public class ExerciseArrayAdapter extends ArrayAdapter<Exercise> {
+public class ExerciseSelectArrayAdapter extends ArrayAdapter<Exercise> {
 	
 	private Context mContext;
 	private List<Exercise> mExercises;
 	private View.OnClickListener mListener;
 
-	public ExerciseArrayAdapter(Context context, List<Exercise> exercises, View.OnClickListener listener) {
+	public ExerciseSelectArrayAdapter(Context context, List<Exercise> exercises, View.OnClickListener listener) {
 	
 		super(context, R.layout.list_item_exercise, exercises);
 		

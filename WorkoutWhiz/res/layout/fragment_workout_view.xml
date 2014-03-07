@@ -14,6 +14,7 @@
 
 	<!-- ListView of previous workouts -->
 	<ListView
+	    android:layout_marginLeft="3dp"
 	    android:id="@+id/workout_view_list_view"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"

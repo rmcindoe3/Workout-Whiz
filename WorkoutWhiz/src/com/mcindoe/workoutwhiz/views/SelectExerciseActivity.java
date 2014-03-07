@@ -21,7 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mcindoe.workoutwhiz.R;
-import com.mcindoe.workoutwhiz.controllers.ExerciseArrayAdapter;
+import com.mcindoe.workoutwhiz.controllers.ExerciseSelectArrayAdapter;
 import com.mcindoe.workoutwhiz.controllers.WorkoutDataSource;
 import com.mcindoe.workoutwhiz.models.Exercise;
 import com.mcindoe.workoutwhiz.models.Workout;
@@ -38,7 +38,7 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 	private TextView mWorkoutTitleTextView;
 
 	private ListView mExercisesListView;
-	private ExerciseArrayAdapter mExercisesArrayAdapter;
+	private ExerciseSelectArrayAdapter mExercisesArrayAdapter;
 	
 	private Workout mWorkout;
 
@@ -73,7 +73,7 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 		listOfExercises.addAll(mWorkout.getCompleteExercises());
 
 		//Sets up our list view 
-		mExercisesArrayAdapter = new ExerciseArrayAdapter(this, listOfExercises, new OnExerciseClickListener());
+		mExercisesArrayAdapter = new ExerciseSelectArrayAdapter(this, listOfExercises, new OnExerciseClickListener());
 		mExercisesListView.setAdapter(mExercisesArrayAdapter);
 	}
 	
