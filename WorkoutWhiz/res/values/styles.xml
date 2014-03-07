@@ -28,6 +28,7 @@
 
     <style name="AppTheme.View.TextView">
         <item name="android:ellipsize">end</item>
+        <item name="android:singleLine">true</item>
         <item name="android:gravity">center</item>
     </style>
 

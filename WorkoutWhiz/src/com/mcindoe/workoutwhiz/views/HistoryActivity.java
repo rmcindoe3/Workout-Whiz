@@ -1,36 +1,144 @@
 package com.mcindoe.workoutwhiz.views;
 
-import java.util.ArrayList;
-
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
 import android.view.Window;
-import android.widget.ListView;
+import android.widget.LinearLayout;
 
 import com.mcindoe.workoutwhiz.R;
 import com.mcindoe.workoutwhiz.controllers.WorkoutDataSource;
-import com.mcindoe.workoutwhiz.controllers.WorkoutHistoryArrayAdapter;
 import com.mcindoe.workoutwhiz.models.Workout;
 
-public class HistoryActivity extends Activity {
+public class HistoryActivity extends Activity implements WorkoutHistoryFragment.WorkoutHistoryListener {
 	
-	WorkoutHistoryArrayAdapter mWorkoutArrayAdapter;
-	ListView mWorkoutsListView;
+	private WorkoutHistoryFragment mWorkoutHistoryFragment;
+	private boolean workoutViewExtended;
+	private int screenWidth;
+	
+	private FractionTranslateLinearLayout historyLayout;
+	private FractionTranslateLinearLayout workoutLayout;
+	private LinearLayout historyActivityLayout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_history);
+
+		//Grabs our GUI elements.
+	    historyLayout = (FractionTranslateLinearLayout)findViewById(R.id.history_fragment_container);
+	    workoutLayout = (FractionTranslateLinearLayout)findViewById(R.id.workout_fragment_container);
+	    historyActivityLayout = (LinearLayout)findViewById(R.id.history_activity_layout);
 		
-		//Grabs our GUI elements
-		mWorkoutsListView = (ListView)findViewById(R.id.workout_history_list_view);
+	    //We're going to start without the workout view extended across the screen
+		workoutViewExtended = false;
+
+		//Lets create our workout history fragment
+		mWorkoutHistoryFragment = new WorkoutHistoryFragment();
 		
-		//Updates our list view.
-		updateWorkoutListView();
+		//And then add it to our history fragment container.
+		FragmentTransaction ft = getFragmentManager().beginTransaction();
+		ft.add(R.id.history_fragment_container, mWorkoutHistoryFragment, "workout_history_fragment");
+		ft.commit();
+	}
+	
+	/**
+	 * Called when our workout history fragment has a workout selected.
+	 * @param workout
+	 */
+	@Override
+	public void showWorkout(Workout workout) {
+
+		//Create a new workout view fragment
+		WorkoutFragment newFrag = new WorkoutFragment();
+		newFrag.setWorkout(workout);
+
+		//Replace the current workout fragment with the new one.
+		FragmentTransaction ft = getFragmentManager().beginTransaction();
+		ft.replace(R.id.workout_fragment_container, newFrag, "workout_fragment");
+		ft.commit();
+		
+		//If the workout view isn't already extended, extend it.
+		if(!workoutViewExtended) {
+			
+			//Grabs the width of the screen in pixels from our layout.
+			screenWidth = historyLayout.getScreenWidth();
+
+			//Extends the workout view fragment.
+			extendWorkoutFragment();
+		}
+	}
+	
+	/**
+	 * Extends the workout view fragment.
+	 */
+	public void extendWorkoutFragment() {
+		
+		//Set our state boolean to true
+		workoutViewExtended = true;
+
+		//Make sure our two layouts are set to static widths according to the width of the screen.
+	    LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)workoutLayout.getLayoutParams();
+	    params.width = (int) (screenWidth*0.8f);
+	    workoutLayout.setLayoutParams(params);
+
+	    params = (LinearLayout.LayoutParams)historyLayout.getLayoutParams();
+	    params.width = screenWidth;
+	    historyLayout.setLayoutParams(params);
+
+	    //Animate the transition.
+		ObjectAnimator.ofFloat(this, "workoutHistoryLeftMargin", 0, 0.8f).setDuration(200).start();
+	}
+	
+	/**
+	 * Hides the workout view fragment from the screen.
+	 */
+	public void hideWorkoutFragment() {
+		
+		//sets our state properly.
+		workoutViewExtended = false;
+
+		//Animate the transition between states.
+		ObjectAnimator.ofFloat(this, "workoutHistoryLeftMargin", 0.8f, 0).setDuration(200).start();
+	}
+
+	/**
+	 * Called by an object animator to animate the movement of our workout 
+	 * history fragment. 
+	 * @param value - percentage of the screen to move the left margin of the layout.
+	 */
+	@SuppressWarnings("unused")
+	private void setWorkoutHistoryLeftMargin(float value) {
+		
+		//Grab our layouts params and then move them to the left according to the given value.
+	    LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)historyLayout.getLayoutParams();
+	    params.leftMargin = (int) (0 - value*screenWidth);
+	    historyLayout.setLayoutParams(params);
+	    
+	    historyActivityLayout.requestLayout();
+	}
+	
+	/**
+	 * Overrides the default back pressed function to implement
+	 * hiding of the workout view if it's extended.
+	 */
+	@Override
+	public void onBackPressed() {
+
+		//If the workout view is extended, then hide it
+		if(workoutViewExtended) {
+			hideWorkoutFragment();
+		}
+		//If the workout view is already hidden, just do a normal backPressed
+		else {
+			super.onBackPressed();
+		}
 	}
 	
 	/**
@@ -39,7 +147,7 @@ public class HistoryActivity extends Activity {
 	 */
 	public void onClearWorkoutsButtonClicked(View view) {
 		
-		final HistoryActivity srcActivity = this;
+		final HistoryActivity srcActivity = (HistoryActivity)this;
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("Delete workout history?");
@@ -52,7 +160,7 @@ public class HistoryActivity extends Activity {
 				wds.open();
 				wds.clearDatabase();
 				wds.close();
-				updateWorkoutListView();
+				mWorkoutHistoryFragment.updateWorkoutListView();
 			}
 		});
 		builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
@@ -73,47 +181,5 @@ public class HistoryActivity extends Activity {
 	public void onExportWorkoutsButtonClicked(View view) {
 		
 		//TODO: implement exporting of workouts here.
-	}
-
-	/**
-	 * updates our workout history list view with the most recent info from the database.
-	 */
-	public void updateWorkoutListView() {
-		
-		//Create our list of workouts
-		ArrayList<Workout> workouts;
-		
-		WorkoutDataSource wds = new WorkoutDataSource(this);
-		wds.open();
-		
-		//Grabs the 30 most recent workouts to be shown
-		workouts = wds.getMostRecentWorkouts(30);
-
-		wds.close();
-
-		//Sets up our list view 
-		mWorkoutArrayAdapter = new WorkoutHistoryArrayAdapter(this, workouts, new OnWorkoutHistoryClickListener());
-		mWorkoutsListView.setAdapter(mWorkoutArrayAdapter);
-	}
-
-	/**
-	 * Custom click listener for our list views.
-	 */
-	private class OnWorkoutHistoryClickListener implements View.OnClickListener {
-
-		@Override
-		public void onClick(View v) {
-			
-			//If the view that called this is our list item
-			if(v.getId() == R.id.list_item_workout_history) {
-				
-				//TODO: Show a workout fragment here.
-			}
-			//If the view that called this is our options button...
-			else if(v.getId() == R.id.list_item_workout_options_button) {
-
-				//TODO: show the options for this list item.
-			}
-		}
 	}
 }

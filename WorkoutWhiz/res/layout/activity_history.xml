@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/history_activity_layout"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,69 +7,14 @@
     style="@style/AppTheme.Layout"
     tools:context=".HistoryActivity" >
 
-    <LinearLayout
-	    android:layout_width="match_parent"
-	    android:layout_height="match_parent"
-	    android:orientation="vertical" >
+    <com.mcindoe.workoutwhiz.views.FractionTranslateLinearLayout
+        android:id="@+id/history_fragment_container"
+    	android:layout_width="match_parent"
+    	android:layout_height="match_parent" />
 
-	    <!-- Title of the Workout -->
-	    <TextView
-	        android:id="@+id/workout_history_title_text_view"
-	        style="@style/AppTheme.View.TextView.Title"
-	        android:text="@string/workout_history_title_text_view" />
-	
-	    <!-- This layout contains the entire screen, besides the title -->
-	    <LinearLayout
-	        android:layout_width="match_parent"
-	        android:layout_height="match_parent"
-	        android:orientation="vertical" >
-	       
-	        <!-- ListView of previous workouts -->
-	        <ListView
-	            android:id="@+id/workout_history_list_view"
-	            android:layout_width="fill_parent"
-	            android:layout_height="0dp"
-	            android:layout_weight="21"
-	            android:scrollbars="none" />
-	        
-	        <!-- Contains the bottom part of the screen that contains buttons -->
-	        <LinearLayout 
-	            android:layout_height="0dp"
-	            android:layout_weight="4"
-	            android:background="@drawable/activity_bottom_bar"
-	            android:orientation="horizontal"
-	            android:gravity="center"
-	            android:padding="10dp"
-	            android:layout_width="match_parent">
-	
-	            <Button
-	                android:id="@+id/clear_workouts_button"
-	                style="@style/AppTheme.View.TextView.Button.Navigation"
-	                android:layout_width="0dp"
-	                android:layout_weight="1"
-	                android:onClick="onClearWorkoutsButtonClicked"
-	                android:layout_height="fill_parent"
-	                android:text="@string/clear_workouts_button" />
-	
-	            <Button
-	                android:id="@+id/export_workouts_button"
-	                style="@style/AppTheme.View.TextView.Button.Navigation"
-	                android:layout_width="0dp"
-	                android:onClick="onExportWorkoutsButtonClicked"
-	                android:layout_weight="1"
-	                android:layout_height="fill_parent"
-	                android:text="@string/export_workouts_button" />
-	            
-	        </LinearLayout>
-	        
-		</LinearLayout>
-
-	</LinearLayout>
-	
-    <LinearLayout
+    <com.mcindoe.workoutwhiz.views.FractionTranslateLinearLayout
         android:id="@+id/workout_fragment_container"
-        android:orientation="vertical"
-        android:layout_height="fill_parent"
-        android:layout_width="wrap_content" />
+    	android:layout_width="wrap_content"
+    	android:layout_height="match_parent" />
 
 </LinearLayout>

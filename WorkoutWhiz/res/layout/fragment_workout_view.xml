@@ -1,7 +1,9 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.mcindoe.workoutwhiz.views.FractionTranslateLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/workout_view_fraction_translate_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     style="@style/AppTheme.Layout"
+    android:background="@drawable/workout_fragment_bg"
     android:orientation="vertical" >
 
     <!-- Title of the Workout -->
@@ -18,4 +20,4 @@
 	    android:scrollbars="none" />
     
 
-</LinearLayout>
+</com.mcindoe.workoutwhiz.views.FractionTranslateLinearLayout>
