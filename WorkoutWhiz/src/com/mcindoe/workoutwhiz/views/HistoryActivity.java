@@ -6,18 +6,16 @@ import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.Animation.AnimationListener;
 import android.widget.LinearLayout;
 
 import com.mcindoe.workoutwhiz.R;
 import com.mcindoe.workoutwhiz.controllers.WorkoutDataSource;
 import com.mcindoe.workoutwhiz.models.Workout;
 
-public class HistoryActivity extends Activity implements WorkoutHistoryFragment.WorkoutHistoryListener {
+public class HistoryActivity extends Activity implements WorkoutHistoryFragment.WorkoutHistoryListener, WorkoutViewFragment.WorkoutViewButtonListener {
 	
 	private WorkoutHistoryFragment mWorkoutHistoryFragment;
 	private boolean workoutViewExtended;
@@ -212,5 +210,23 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 	public void onExportWorkoutsButtonClicked(View view) {
 		
 		//TODO: implement exporting of workouts here.
+	}
+
+	@Override
+	public void eraseWorkout(Workout workout) {
+		//TODO: erase the given workout from our list.
+		Log.d("Debug", "Erase");
+	}
+
+	@Override
+	public void favoriteWorkout(Workout workout) {
+		//TODO: favorite the given workout
+		Log.d("Debug", "Favorite");
+	}
+
+	@Override
+	public void performWorkout(Workout workout) {
+		//TODO: perform the given workout
+		Log.d("Debug", "Perform");
 	}
 }
