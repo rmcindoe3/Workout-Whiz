@@ -54,6 +54,9 @@
     <string name="workout_history_title_text_view">Workout History</string>
     <string name="export_workouts_button">Export</string>
     <string name="clear_workouts_button">Clear</string>
+    <string name="erase_workout_button">Erase</string>
+    <string name="favorite_workout_button">Favorite</string>
+    <string name="perform_workout_button">Perform</string>
 
 
 </resources>

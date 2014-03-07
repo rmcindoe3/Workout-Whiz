@@ -12,13 +12,54 @@
         style="@style/AppTheme.View.TextView.Title"
         android:text="@string/default_workout_name" />
 
-	<!-- ListView of previous workouts -->
-	<ListView
-	    android:layout_marginLeft="3dp"
-	    android:id="@+id/workout_view_list_view"
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-	    android:scrollbars="none" />
-    
+    <LinearLayout
+        android:layout_marginLeft="3dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
 
+		<!-- ListView of previous workouts -->
+		<ListView
+		    android:id="@+id/workout_view_list_view"
+		    android:layout_width="fill_parent"
+		    android:layout_height="0dp"
+		    android:layout_weight="21"
+		    android:scrollbars="none" />
+	
+		<!-- Contains the bottom part of the screen that contains buttons -->
+		<LinearLayout 
+		    android:layout_height="0dp"
+		    android:layout_weight="4"
+		    android:background="@drawable/activity_bottom_bar"
+		    android:orientation="horizontal"
+		    android:gravity="center"
+		    android:padding="10dp"
+		    android:layout_width="match_parent">
+		
+		    <Button
+		        android:id="@+id/erase_workout_button"
+		        style="@style/AppTheme.View.TextView.Button.Navigation"
+		        android:layout_width="0dp"
+		        android:layout_weight="1"
+		        android:layout_height="fill_parent"
+		        android:text="@string/erase_workout_button" />
+		
+		    <Button
+		        android:id="@+id/favorite_workout_button"
+		        style="@style/AppTheme.View.TextView.Button.Navigation"
+		        android:layout_width="0dp"
+		        android:layout_weight="1"
+		        android:layout_height="fill_parent"
+		        android:text="@string/favorite_workout_button" />
+		
+		    <Button
+		        android:id="@+id/perform_workout_button"
+		        style="@style/AppTheme.View.TextView.Button.Navigation"
+		        android:layout_width="0dp"
+		        android:layout_weight="1"
+		        android:layout_height="fill_parent"
+		        android:text="@string/perform_workout_button" />
+		    
+		</LinearLayout>
+	</LinearLayout>
 </com.mcindoe.workoutwhiz.views.FractionTranslateLinearLayout>
