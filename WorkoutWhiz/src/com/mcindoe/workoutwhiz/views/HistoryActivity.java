@@ -6,8 +6,10 @@ import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.DragEvent;
 import android.view.View;
-import android.view.View.OnFocusChangeListener;
+import android.view.View.OnDragListener;
 import android.view.Window;
 import android.widget.LinearLayout;
 
@@ -30,6 +32,9 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_history);
+		
+		//Set initial screen width to -1 so we know to change it later.
+		screenWidth = -1;
 
 		//Grabs our GUI elements.
 	    historyLayout = (FractionTranslateLinearLayout)findViewById(R.id.history_fragment_container);
@@ -49,11 +54,34 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 	}
 	
 	/**
+	 * Updates the screen width to the correct value and then appropriately sizes
+	 * the two fragment containers on our screen.
+	 */
+	private void updateScreenWidth() {
+
+		//Grabs the width of the screen in pixels from our layout.
+		screenWidth = historyLayout.getScreenWidth();
+
+		//Make sure our two layouts are set to static widths according to the width of the screen.
+		LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)workoutLayout.getLayoutParams();
+		params.width = (int) (screenWidth*0.8f);
+		workoutLayout.setLayoutParams(params);
+
+		params = (LinearLayout.LayoutParams)historyLayout.getLayoutParams();
+		params.width = screenWidth;
+		historyLayout.setLayoutParams(params);
+	}
+
+	/**
 	 * Called when our workout history fragment has a workout selected.
 	 * @param workout
 	 */
 	@Override
 	public void showWorkout(Workout workout) {
+		
+		if(screenWidth == -1) {
+			updateScreenWidth();
+		}
 
 		//Create a new workout view fragment
 		WorkoutFragment newFrag = new WorkoutFragment();
@@ -64,15 +92,8 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 		ft.replace(R.id.workout_fragment_container, newFrag, "workout_fragment");
 		ft.commit();
 		
-		//If the workout view isn't already extended, extend it.
-		if(!workoutViewExtended) {
-			
-			//Grabs the width of the screen in pixels from our layout.
-			screenWidth = historyLayout.getScreenWidth();
-
-			//Extends the workout view fragment.
-			extendWorkoutFragment();
-		}
+		//Extend the workout fragment if necessary.
+		extendWorkoutFragment();
 	}
 	
 	/**
@@ -80,20 +101,14 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 	 */
 	public void extendWorkoutFragment() {
 		
-		//Set our state boolean to true
-		workoutViewExtended = true;
+		if(!workoutViewExtended) {
 
-		//Make sure our two layouts are set to static widths according to the width of the screen.
-	    LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)workoutLayout.getLayoutParams();
-	    params.width = (int) (screenWidth*0.8f);
-	    workoutLayout.setLayoutParams(params);
+			//Set our state boolean to true
+			workoutViewExtended = true;
 
-	    params = (LinearLayout.LayoutParams)historyLayout.getLayoutParams();
-	    params.width = screenWidth;
-	    historyLayout.setLayoutParams(params);
-
-	    //Animate the transition.
-		ObjectAnimator.ofFloat(this, "workoutHistoryLeftMargin", 0, 0.8f).setDuration(200).start();
+			//Animate the transition.
+			ObjectAnimator.ofFloat(this, "workoutHistoryLeftMargin", 0, 0.8f).setDuration(200).start();
+		}
 	}
 	
 	/**
@@ -101,11 +116,15 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 	 */
 	public void hideWorkoutFragment() {
 		
-		//sets our state properly.
-		workoutViewExtended = false;
+		//If the workout view is extended
+		if(workoutViewExtended) {
 
-		//Animate the transition between states.
-		ObjectAnimator.ofFloat(this, "workoutHistoryLeftMargin", 0.8f, 0).setDuration(200).start();
+			//sets our state properly.
+			workoutViewExtended = false;
+
+			//Animate the transition between states.
+			ObjectAnimator.ofFloat(this, "workoutHistoryLeftMargin", 0.8f, 0).setDuration(200).start();
+		}
 	}
 
 	/**
