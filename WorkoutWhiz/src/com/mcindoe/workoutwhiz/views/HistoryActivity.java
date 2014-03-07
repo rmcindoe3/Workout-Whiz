@@ -176,7 +176,7 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 	 */
 	public void onClearWorkoutsButtonClicked(View view) {
 		
-		final HistoryActivity srcActivity = (HistoryActivity)this;
+		final HistoryActivity srcActivity = this;
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("Delete workout history?");
@@ -214,8 +214,43 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 
 	@Override
 	public void eraseWorkout(Workout workout) {
-		//TODO: erase the given workout from our list.
-		Log.d("Debug", "Erase");
+		
+		final HistoryActivity srcActivity = this;
+		final Workout wo = workout;
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Delete " + workout.getName() + "?");
+		builder.setMessage("You'll lose this workout's data!");
+		builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+				
+				//Delete the given workout from the database.
+				WorkoutDataSource wds = new WorkoutDataSource(srcActivity);
+				wds.open();
+				int ret = wds.deleteWorkout(wo.getId());
+				wds.close();
+
+				if(ret == 1) {
+					hideWorkoutFragment();
+					mWorkoutHistoryFragment.updateWorkoutListView();
+				}
+				else {
+					//Should never get here, but that means we tried
+					// to delete something that wasn't in the database.
+					Log.e("Database", "Attempted to delete a workout that was not in database.");
+				}
+			}
+		});
+		builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+				//The dialog will be dismissed and nothing happens.
+			}
+		});
+		AlertDialog dialog = builder.create();
+		
+		dialog.show();
 	}
 
 	@Override

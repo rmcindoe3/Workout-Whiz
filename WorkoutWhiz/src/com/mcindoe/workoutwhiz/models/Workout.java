@@ -6,9 +6,10 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Workout {
-	
+
 	private String name;
 	private String date;
+	private long id;
 	private ArrayList<Exercise> incompleteExercises;
 	private ArrayList<Exercise> completeExercises;
 
@@ -94,6 +95,45 @@ public class Workout {
 		//Now add it to our complete exercises list.
 		completeExercises.add(exer);
 	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if(other == null) {
+			return false;
+		}
+		else if(!(other instanceof Workout)) {
+			return false;
+		}
+		Workout wo = (Workout)other;
+		if(!wo.getName().equals(this.getName())) {
+			return false;
+		}
+		if(!wo.getDate().equals(this.getDate())) {
+			return false;
+		}
+		if(this.completeExercises.size() == wo.completeExercises.size()) {
+			for(int i = 0; i < this.completeExercises.size(); i++) {
+				if(!this.completeExercises.get(i).equals(wo.completeExercises.get(i))) {
+					return false;
+				}
+			}
+		}
+		else {
+			return false;
+		}
+		if(this.incompleteExercises.size() == wo.incompleteExercises.size()) {
+			for(int i = 0; i < this.incompleteExercises.size(); i++) {
+				if(!this.incompleteExercises.get(i).equals(wo.incompleteExercises.get(i))) {
+					return false;
+				}
+			}
+		}
+		else {
+			return false;
+		}
+		
+		return true;
+	}
 
 	public ArrayList<Exercise> getIncompleteExercises() {
 		return incompleteExercises;
@@ -125,6 +165,14 @@ public class Workout {
 
 	public void setDate(String date) {
 		this.date = date;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 }

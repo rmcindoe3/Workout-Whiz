@@ -105,6 +105,7 @@ public class WorkoutDataSource {
 			//Initialize our workout variable with the name and date
 			workout = new Workout(workoutCursor.getString(workoutCursor.getColumnIndex(WorkoutDBSQLiteHelper.WORKOUT_NAME)));
 			workout.setDate(workoutCursor.getString(workoutCursor.getColumnIndex(WorkoutDBSQLiteHelper.WORKOUT_DATE)));
+			workout.setId(workoutCursor.getLong(workoutCursor.getColumnIndex(WorkoutDBSQLiteHelper.WORKOUT_ID)));
 			
 			//Create a list of exercises that we'll be adding to
 			ArrayList<Exercise> prevExercises = new ArrayList<Exercise>();
@@ -145,6 +146,15 @@ public class WorkoutDataSource {
 		}
 		
 		return ret;
+	}
+	
+	/**
+	 * Deletes the Workout from the database that matches the given ID
+	 * @param id - the ID of the workout we want to delete.
+	 * @return - how many rows were deleted from the database.
+	 */
+	public int deleteWorkout(long id) {
+		return database.delete(WorkoutDBSQLiteHelper.TABLE_WORKOUT, "_id=?", new String[] {String.valueOf(id)});
 	}
 	
 	/**
