@@ -6,11 +6,11 @@ import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.DragEvent;
 import android.view.View;
-import android.view.View.OnDragListener;
 import android.view.Window;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.widget.LinearLayout;
 
 import com.mcindoe.workoutwhiz.R;
@@ -106,12 +106,16 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 	public void extendWorkoutFragment() {
 		
 		if(!workoutViewExtended) {
+			
+			//The duration we want this animation to last.
+			int animDuration = 300;
 
 			//Set our state boolean to true
 			workoutViewExtended = true;
 
 			//Animate the transition.
-			ObjectAnimator.ofFloat(this, "workoutHistoryLeftMargin", 0, percentOfScreen).setDuration(200).start();
+			ObjectAnimator.ofFloat(this, "workoutHistoryLeftMargin", 0, percentOfScreen).setDuration(animDuration).start();
+			ObjectAnimator.ofFloat(historyLayout, "alpha", 1, 0.2f).setDuration(animDuration).start();
 		}
 	}
 	
@@ -123,11 +127,15 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 		//If the workout view is extended
 		if(workoutViewExtended) {
 
+			//The duration we want this animation to last.
+			int animDuration = 300;
+
 			//sets our state properly.
 			workoutViewExtended = false;
 
 			//Animate the transition between states.
-			ObjectAnimator.ofFloat(this, "workoutHistoryLeftMargin", percentOfScreen, 0).setDuration(200).start();
+			ObjectAnimator.ofFloat(this, "workoutHistoryLeftMargin", percentOfScreen, 0).setDuration(animDuration).start();
+			ObjectAnimator.ofFloat(historyLayout, "alpha", 0.2f, 1).setDuration(animDuration).start();
 		}
 	}
 
