@@ -119,6 +119,11 @@ public class WorkoutDataSource {
 		return ret;
 	}
 	
+	/**
+	 * Gets the exercises from our database that are associated with the given workout id
+	 * @param workoutId - the id of the workout we want the exercises for
+	 * @return - List of exercises associated with given workout id.
+	 */
 	public ArrayList<Exercise> getExercises(long workoutId) {
 
 		//Create a list of exercises that we'll be adding to
@@ -146,6 +151,11 @@ public class WorkoutDataSource {
 		return prevExercises;
 	}
 	
+	/**
+	 * Gets the rep count information for the given exercise id
+	 * @param exerciseId - the id for the exercise that we want rep information for
+	 * @return - List of reps associated with the given exercise id
+	 */
 	public ArrayList<Integer> getReps(long exerciseId) {
 
 		ArrayList<Integer> lastReps = new ArrayList<Integer>();
