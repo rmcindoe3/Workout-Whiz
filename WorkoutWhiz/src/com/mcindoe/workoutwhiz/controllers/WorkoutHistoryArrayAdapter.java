@@ -3,12 +3,12 @@ package com.mcindoe.workoutwhiz.controllers;
 import java.util.List;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mcindoe.workoutwhiz.R;
@@ -50,6 +50,12 @@ public class WorkoutHistoryArrayAdapter extends ArrayAdapter<Workout> {
 		//Fills in the date of the workout.
 		TextView workoutDateTextView = (TextView)workoutRow.findViewById(R.id.workout_date_text_view);
 		workoutDateTextView.setText(Workout.formatDate(workout.getDate()));
+
+		//If this workout is a favorite, draw the star on our favorite star image view.
+		if(workout.getFavorite() != 0) {
+			ImageView favoriteStarView = (ImageView)workoutRow.findViewById(R.id.favorite_star_image_view);
+			favoriteStarView.setImageResource(R.drawable.favorite_star);
+		}
 
 		//Adds a click listener to our options button.
 		ImageButton optionsButton = (ImageButton)workoutRow.findViewById(R.id.list_item_workout_options_button);
