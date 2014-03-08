@@ -139,6 +139,20 @@ public class WorkoutDataSource {
 	}
 	
 	/**
+	 * Updates the given workout in the database to be a favorite.
+	 * @param workout - the workout to be turned into a favorite
+	 * @return - the database update command result
+	 */
+	public int updateWorkoutAsFavorite(Workout workout) {
+		
+		//Pack our values for the workout table
+		ContentValues values = new ContentValues();
+		values.put(WorkoutDBSQLiteHelper.WORKOUT_FAVORITE, workout.getFavorite());
+
+		return database.update(WorkoutDBSQLiteHelper.TABLE_WORKOUT, values, "_id=?", new String[] {String.valueOf(workout.getId())});
+	}
+	
+	/**
 	 * Gets the most recent workouts, up to the given amount.
 	 * @param numWorkouts - the number of workouts you want to grab
 	 * @return - a list containing the "numWorkouts"th most recent workouts stored in the db.

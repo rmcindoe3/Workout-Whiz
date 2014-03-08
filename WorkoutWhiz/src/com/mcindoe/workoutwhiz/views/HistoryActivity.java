@@ -5,11 +5,13 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.mcindoe.workoutwhiz.R;
 import com.mcindoe.workoutwhiz.controllers.WorkoutDataSource;
@@ -256,8 +258,35 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 
 	@Override
 	public void favoriteWorkout(Workout workout) {
-		//TODO: favorite the given workout
-		Log.d("Debug", "Favorite");
+		
+		SharedPreferences favSettings = getPreferences(Activity.MODE_PRIVATE);
+		
+		int numFavorites = favSettings.getInt("NUM_FAVORITES", 0);
+		int newFavoriteNum = favSettings.getInt("NEXT_FAVORITE_NUM", 1);
+		
+		//If the number of favorites we currently have is less than the max...
+		if(numFavorites < 5) {
+			
+			//Sets the selected workouts favorite number
+			workout.setFavorite(newFavoriteNum);
+			
+			//Updates the workout as a favorite in our database.
+			WorkoutDataSource wds = new WorkoutDataSource(this);
+			wds.open();
+			wds.updateWorkoutAsFavorite(workout);
+			wds.close();
+			
+			//Save that we added a new favorite to our preferences file.
+			favSettings.edit().putInt("NUM_FAVORITES", numFavorites + 1);
+			favSettings.edit().putInt("NEXT_FAVORITE_NUM", newFavoriteNum + 1);
+			
+			//Updates the list view to latest changes.
+			mWorkoutHistoryFragment.updateWorkoutListView();
+		}
+		//Else let the user know they are currently at the maximum number of favorites
+		else {
+			Toast.makeText(getApplicationContext(), "Already at maximum number of favorites.", Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	@Override
