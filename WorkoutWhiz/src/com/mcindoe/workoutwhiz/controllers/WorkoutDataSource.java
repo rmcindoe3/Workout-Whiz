@@ -109,45 +109,56 @@ public class WorkoutDataSource {
 			workout.setFavorite(workoutCursor.getInt(workoutCursor.getColumnIndex(WorkoutDBSQLiteHelper.WORKOUT_FAVORITE)));
 			workout.setId(workoutCursor.getLong(workoutCursor.getColumnIndex(WorkoutDBSQLiteHelper.WORKOUT_ID)));
 			
-			//Create a list of exercises that we'll be adding to
-			ArrayList<Exercise> prevExercises = new ArrayList<Exercise>();
-			
 			//Grab the workout id for this workout.
 			long workoutId = workoutCursor.getLong(workoutCursor.getColumnIndex(WorkoutDBSQLiteHelper.WORKOUT_ID));
 			
-			//Query for exercises associated with that workout id.
-			Cursor exerciseCursor = database.rawQuery("SELECT * FROM exercise WHERE workout_id = ? ORDER BY _id ASC", new String[] {""+workoutId});
-			
-			//For every exercise associated with this workout...
-			while(exerciseCursor.moveToNext()) {
-				
-				//Grab the exercise id
-				long exerciseId = exerciseCursor.getLong(exerciseCursor.getColumnIndex(WorkoutDBSQLiteHelper.EXERCISE_ID));
-				
-				//Grab the exercise name and intensity and create our exercise object as well as the previous reps list
-				String exerciseName = exerciseCursor.getString(exerciseCursor.getColumnIndex(WorkoutDBSQLiteHelper.EXERCISE_NAME));
-				int exerciseWeight = exerciseCursor.getInt(exerciseCursor.getColumnIndex(WorkoutDBSQLiteHelper.EXERCISE_INTENSITY));
-				Exercise exer = new Exercise(exerciseName, exerciseWeight);
-				ArrayList<Integer> lastReps = new ArrayList<Integer>();
-				
-				//Query for reps associated with that exercise id.
-				Cursor repCursor = database.rawQuery("SELECT * FROM rep WHERE exercise_id = ? ORDER BY _id ASC", new String[] {""+exerciseId});
-				
-				//For every rep associated with this exercise
-				while(repCursor.moveToNext()) {
-					lastReps.add(repCursor.getInt(repCursor.getColumnIndex(WorkoutDBSQLiteHelper.REP_COUNT)));
-				}
-				
-				//Set the last reps for our exercise and add it to the exercise list.
-				exer.setLastReps(lastReps);
-				prevExercises.add(exer);
-			}
-			
-			workout.setIncompleteExercises(prevExercises);
+			workout.setIncompleteExercises(getExercises(workoutId));
 			ret.add(workout);
 		}
 		
 		return ret;
+	}
+	
+	public ArrayList<Exercise> getExercises(long workoutId) {
+
+		//Create a list of exercises that we'll be adding to
+		ArrayList<Exercise> prevExercises = new ArrayList<Exercise>();
+
+		//Query for exercises associated with that workout id.
+		Cursor exerciseCursor = database.rawQuery("SELECT * FROM exercise WHERE workout_id = ? ORDER BY _id ASC", new String[] {""+workoutId});
+
+		//For every exercise associated with this workout...
+		while(exerciseCursor.moveToNext()) {
+
+			//Grab the exercise id
+			long exerciseId = exerciseCursor.getLong(exerciseCursor.getColumnIndex(WorkoutDBSQLiteHelper.EXERCISE_ID));
+
+			//Grab the exercise name and intensity and create our exercise object as well as the previous reps list
+			String exerciseName = exerciseCursor.getString(exerciseCursor.getColumnIndex(WorkoutDBSQLiteHelper.EXERCISE_NAME));
+			int exerciseWeight = exerciseCursor.getInt(exerciseCursor.getColumnIndex(WorkoutDBSQLiteHelper.EXERCISE_INTENSITY));
+			Exercise exer = new Exercise(exerciseName, exerciseWeight);
+
+			//Set the last reps for our exercise and add it to the exercise list.
+			exer.setLastReps(getReps(exerciseId));
+			prevExercises.add(exer);
+		}
+		
+		return prevExercises;
+	}
+	
+	public ArrayList<Integer> getReps(long exerciseId) {
+
+		ArrayList<Integer> lastReps = new ArrayList<Integer>();
+
+		//Query for reps associated with that exercise id.
+		Cursor repCursor = database.rawQuery("SELECT * FROM rep WHERE exercise_id = ? ORDER BY _id ASC", new String[] {""+exerciseId});
+
+		//For every rep associated with this exercise
+		while(repCursor.moveToNext()) {
+			lastReps.add(repCursor.getInt(repCursor.getColumnIndex(WorkoutDBSQLiteHelper.REP_COUNT)));
+		}
+		
+		return lastReps;
 	}
 	
 	/**
