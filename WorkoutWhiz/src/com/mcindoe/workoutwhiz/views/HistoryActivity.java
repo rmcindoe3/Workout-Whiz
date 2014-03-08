@@ -167,6 +167,7 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 		//If the workout view is already hidden, just do a normal backPressed
 		else {
 			super.onBackPressed();
+			overridePendingTransition(R.animator.enter_previous_activity, R.animator.exit_next_activity);
 		}
 	}
 	
@@ -270,5 +271,6 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 		}
 		setResult(MainActivity.PERFORM_WORKOUT);
 		finish();
+		overridePendingTransition(R.animator.enter_previous_activity, R.animator.exit_next_activity);
 	}
 }

@@ -126,6 +126,7 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 			setResult(MainActivity.SUCCESSFUL_WORKOUT);
 			Toast.makeText(getApplicationContext(), "Workout saved!", Toast.LENGTH_LONG).show();
 			finish();
+			overridePendingTransition(R.animator.enter_previous_activity, R.animator.exit_next_activity);
 		}
 		//If they haven't completed at least 3 exercises, don't let them finish the workout.
 		else {
@@ -145,6 +146,7 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 		//Now start the exercise activity for result
 		Intent intent = new Intent(this, ExerciseActivity.class);
 		startActivityForResult(intent, 0);
+		overridePendingTransition(R.animator.enter_next_activity,R.animator.exit_current_activity);
 	}
 	
 	/**
@@ -310,6 +312,7 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 				//Set the result for this activity to indicate we cancelled the exercise and finish it.
 		    	setResult(MainActivity.CANCELLED_WORKOUT);
 		    	finish();
+		    	overridePendingTransition(R.animator.enter_previous_activity, R.animator.exit_next_activity);
 			}
 		});
 		builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {

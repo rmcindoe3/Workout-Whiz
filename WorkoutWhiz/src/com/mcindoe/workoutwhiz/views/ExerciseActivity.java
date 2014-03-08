@@ -145,6 +145,7 @@ public class ExerciseActivity extends Activity {
 		    	
 		    	setResult(SelectExerciseActivity.SUCCESSFUL_EXERCISE);
 		    	finish();
+		    	overridePendingTransition(R.animator.enter_previous_activity, R.animator.exit_next_activity);
 		    }
 		});
 	}
@@ -264,6 +265,7 @@ public class ExerciseActivity extends Activity {
 				//Set the result for this activity to indicate we cancelled the exercise and finish it.
 		    	setResult(SelectExerciseActivity.CANCELLED_EXERCISE);
 		    	finish();
+		    	overridePendingTransition(R.animator.enter_previous_activity, R.animator.exit_next_activity);
 			}
 		});
 		builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {

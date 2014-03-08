@@ -53,6 +53,7 @@ public class MainActivity extends Activity implements WorkoutSelectDialogFragmen
 		
 		Intent intent = new Intent(this, SelectExerciseActivity.class);
 		startActivityForResult(intent, 0);
+		overridePendingTransition(R.animator.enter_next_activity,R.animator.exit_current_activity);
 	}
 
 	/**
@@ -75,6 +76,7 @@ public class MainActivity extends Activity implements WorkoutSelectDialogFragmen
 			// So all we need to do is start the SelectExerciseActivity
 			Intent intent = new Intent(this, SelectExerciseActivity.class);
 			startActivityForResult(intent, 0);
+			overridePendingTransition(R.animator.enter_next_activity,R.animator.exit_current_activity);
 		}
 
 	}
@@ -101,6 +103,7 @@ public class MainActivity extends Activity implements WorkoutSelectDialogFragmen
 		//Open history activity.
 		Intent intent = new Intent(this, HistoryActivity.class);
 		startActivityForResult(intent, 0);
+		overridePendingTransition(R.animator.enter_next_activity,R.animator.exit_current_activity);
 	}
 
 	/**
