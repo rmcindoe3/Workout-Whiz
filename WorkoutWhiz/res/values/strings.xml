@@ -57,6 +57,10 @@
     <string name="erase_workout_button">Erase</string>
     <string name="favorite_workout_button">Favorite</string>
     <string name="perform_workout_button">Perform</string>
+    <string name="workout_options_view_button">View</string>
+    <string name="workout_options_perform_button">Perform</string>
+    <string name="workout_options_favorite_button">Favorite</string>
+    <string name="workout_options_erase_button">Erase</string>
 
 
 </resources>
