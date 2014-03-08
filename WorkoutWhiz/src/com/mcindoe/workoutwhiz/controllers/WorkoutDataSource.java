@@ -9,6 +9,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.mcindoe.workoutwhiz.models.Exercise;
 import com.mcindoe.workoutwhiz.models.Workout;
@@ -79,6 +80,59 @@ public class WorkoutDataSource {
 					return null;
 				}
 			}
+		}
+		
+		return workout;
+	}
+	
+	public ArrayList<Workout> getFavoriteWorkouts() {
+		
+		//Initialize our return array.
+		ArrayList<Workout> ret = new ArrayList<Workout>();
+		
+		//Initialize our workout to null, will return null if there is no workout in the database already
+		Workout workout = null;
+		
+		Cursor favoriteCursor = database.rawQuery("SELECT DISTINCT favorite FROM workout ORDER BY favorite DESC", new String[] {});
+		
+		while(favoriteCursor.moveToNext()) {
+			
+			int favoriteNum = favoriteCursor.getInt(favoriteCursor.getColumnIndex(WorkoutDBSQLiteHelper.WORKOUT_FAVORITE));
+			
+			//If the next object in this cursor result is also a favorite...
+			if(favoriteNum != 0) {
+				ret.add(getMostRecentFavoriteWorkout(favoriteNum));
+			}
+		}
+		
+		return ret;
+	}
+	
+	/**
+	 * Gets the most recent workout that has the given favorite number
+	 * @param favoriteNum - the favorite number for which you want to find the most recent workout of
+	 * @return - the most recent workout with the given favorite number
+	 */
+	public Workout getMostRecentFavoriteWorkout(int favoriteNum) {
+		
+		//Initialize our workout object to null
+		Workout workout = null;
+		
+		//Perform the appropriate query
+		Cursor workoutCursor = database.rawQuery("SELECT * FROM workout WHERE favorite=? ORDER BY _id DESC", new String[] {String.valueOf(favoriteNum)});
+		
+		if(workoutCursor.moveToNext()) {
+			
+			//Initialize our workout variable with the name and date
+			workout = new Workout(workoutCursor.getString(workoutCursor.getColumnIndex(WorkoutDBSQLiteHelper.WORKOUT_NAME)));
+			workout.setDate(workoutCursor.getString(workoutCursor.getColumnIndex(WorkoutDBSQLiteHelper.WORKOUT_DATE)));
+			workout.setFavorite(workoutCursor.getInt(workoutCursor.getColumnIndex(WorkoutDBSQLiteHelper.WORKOUT_FAVORITE)));
+			workout.setId(workoutCursor.getLong(workoutCursor.getColumnIndex(WorkoutDBSQLiteHelper.WORKOUT_ID)));
+			
+			//Grab the workout id for this workout.
+			long workoutId = workoutCursor.getLong(workoutCursor.getColumnIndex(WorkoutDBSQLiteHelper.WORKOUT_ID));
+			
+			workout.setIncompleteExercises(getExercises(workoutId));
 		}
 		
 		return workout;
