@@ -10,6 +10,7 @@ public class Workout {
 	private String name;
 	private String date;
 	private long id;
+	private int favorite;
 	private ArrayList<Exercise> incompleteExercises;
 	private ArrayList<Exercise> completeExercises;
 
@@ -17,6 +18,7 @@ public class Workout {
 		this.setName(name);
 		setCompleteExercises(new ArrayList<Exercise>());
 		setIncompleteExercises(new ArrayList<Exercise>());
+		setFavorite(0);
 	}
 
 	/**
@@ -173,6 +175,14 @@ public class Workout {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public int getFavorite() {
+		return favorite;
+	}
+
+	public void setFavorite(int favorite) {
+		this.favorite = favorite;
 	}
 
 }

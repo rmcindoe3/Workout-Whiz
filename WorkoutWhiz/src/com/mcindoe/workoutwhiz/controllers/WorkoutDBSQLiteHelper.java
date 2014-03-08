@@ -13,6 +13,7 @@ public class WorkoutDBSQLiteHelper extends SQLiteOpenHelper {
 	public static final String WORKOUT_ID = "_id";
 	public static final String WORKOUT_NAME = "workout_name";
 	public static final String WORKOUT_DATE = "date";
+	public static final String WORKOUT_FAVORITE = "favorite";
 	
 	public static final String TABLE_EXERCISE = "exercise";
 	public static final String EXERCISE_ID = "_id";
@@ -29,6 +30,7 @@ public class WorkoutDBSQLiteHelper extends SQLiteOpenHelper {
 			+ TABLE_WORKOUT + "("
 			+ WORKOUT_ID + " integer primary key autoincrement, "
 			+ WORKOUT_NAME + " text not null, "
+			+ WORKOUT_FAVORITE + " integer not null, "
 			+ WORKOUT_DATE + " text not null);";
 
 	public static final String EXERCISE_TABLE_CREATE = "create table "

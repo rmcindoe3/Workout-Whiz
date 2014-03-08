@@ -36,6 +36,7 @@ public class WorkoutDataSource {
 		//Pack our values for the workout table
 		ContentValues values = new ContentValues();
 		values.put(WorkoutDBSQLiteHelper.WORKOUT_NAME, workout.getName());
+		values.put(WorkoutDBSQLiteHelper.WORKOUT_FAVORITE, workout.getFavorite());
 		values.put(WorkoutDBSQLiteHelper.WORKOUT_DATE, getCurrentDate());
 		
 		//Attempt to insert the values into the database
@@ -105,6 +106,7 @@ public class WorkoutDataSource {
 			//Initialize our workout variable with the name and date
 			workout = new Workout(workoutCursor.getString(workoutCursor.getColumnIndex(WorkoutDBSQLiteHelper.WORKOUT_NAME)));
 			workout.setDate(workoutCursor.getString(workoutCursor.getColumnIndex(WorkoutDBSQLiteHelper.WORKOUT_DATE)));
+			workout.setFavorite(workoutCursor.getInt(workoutCursor.getColumnIndex(WorkoutDBSQLiteHelper.WORKOUT_FAVORITE)));
 			workout.setId(workoutCursor.getLong(workoutCursor.getColumnIndex(WorkoutDBSQLiteHelper.WORKOUT_ID)));
 			
 			//Create a list of exercises that we'll be adding to
