@@ -6,11 +6,36 @@
     android:background="@drawable/workout_fragment_bg"
     android:orientation="vertical" >
 
-    <!-- Title of the Workout -->
-    <TextView
-        android:id="@+id/workout_view_title_text_view"
-        style="@style/AppTheme.View.TextView.Title"
-        android:text="@string/default_workout_name" />
+    <LinearLayout
+        android:layout_width="match_parent"
+		android:layout_height="@dimen/activity_title_bar_height"
+        android:background="@drawable/activity_top_bar"
+		android:gravity="center_vertical|left"
+        android:orientation="horizontal" >
+
+
+	    <!-- Title of the Workout -->
+	    <TextView
+			android:drawableLeft="@drawable/workout_whiz_activity_title_icon"
+			android:drawablePadding="10dp"
+			android:gravity="center_vertical|left"
+			android:paddingLeft="5dp"
+			android:textStyle="bold"
+			android:textColor="@color/white"
+			android:textSize="@dimen/activity_title_text_size"
+	        android:id="@+id/workout_view_title_text_view"
+	        android:layout_height="match_parent"
+	        android:layout_width="wrap_content"
+	        android:text="@string/default_workout_name" />
+
+	    <ImageView
+	        android:id="@+id/favorite_star_image_view"
+	        android:gravity="left|center_vertical"
+	        android:paddingLeft="15dp"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content" />
+        
+    </LinearLayout>
 
     <LinearLayout
         android:layout_marginLeft="3dp"

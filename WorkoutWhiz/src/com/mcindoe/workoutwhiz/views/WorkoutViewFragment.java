@@ -3,12 +3,12 @@ package com.mcindoe.workoutwhiz.views;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,6 +24,7 @@ public class WorkoutViewFragment extends Fragment {
 	private Button eraseWorkoutButton;
 	private Button favoriteWorkoutButton;
 	private Button performWorkoutButton;
+	private ImageView favoriteStarView;
 
 	private Workout mWorkout;
 
@@ -55,11 +56,21 @@ public class WorkoutViewFragment extends Fragment {
         Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View fragmentView = inflater.inflate(R.layout.fragment_workout_view, container, false);
+        
+        //Grab the image view for the favorite star.
+        favoriteStarView = (ImageView)fragmentView.findViewById(R.id.favorite_star_image_view);
 
         //Grab our buttons
         eraseWorkoutButton = (Button)fragmentView.findViewById(R.id.erase_workout_button);
         favoriteWorkoutButton = (Button)fragmentView.findViewById(R.id.favorite_workout_button);
         performWorkoutButton = (Button)fragmentView.findViewById(R.id.perform_workout_button);
+
+        //If our workout is a favorite, change the name of the favorite button
+        // and draw the favorite star in our image view.
+        if(mWorkout.getFavorite() != 0) {
+        	favoriteWorkoutButton.setText("Un-favorite");
+        	favoriteStarView.setImageResource(R.drawable.favorite_star);
+        }
 
         //Setup our erase button listener
         eraseWorkoutButton.setOnClickListener(new OnClickListener() {

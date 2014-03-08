@@ -215,6 +215,10 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 		//TODO: implement exporting of workouts here.
 	}
 
+	/**
+	 * Erases the given workout from our database after confirming
+	 * the deletion with the user.
+	 */
 	@Override
 	public void eraseWorkout(Workout workout) {
 		
@@ -243,6 +247,9 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 					// to delete something that wasn't in the database.
 					Log.e("Database", "Attempted to delete a workout that was not in database.");
 				}
+				
+				//Now hide the workout fragment
+				hideWorkoutFragment();
 			}
 		});
 		builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
@@ -256,30 +263,56 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 		dialog.show();
 	}
 
+	/**
+	 * Switches the given workout between a favorite and non favorite workout.
+	 */
 	@Override
 	public void favoriteWorkout(Workout workout) {
 		
-		SharedPreferences favSettings = getPreferences(Activity.MODE_PRIVATE);
-		
+		//If the workout is not a favorite, mark it as a favorite
+		if(workout.getFavorite() == 0) {
+			markAsFavorite(workout);
+		}
+		//If the workout is a favorite, remove it from favorites.
+		else {
+			markAsNotFavorite(workout);
+		}
+
+		//Now hide the workout fragment
+		hideWorkoutFragment();
+	}
+	
+	/**
+	 * Marks the given workout as a favorite.
+	 * @param workout - the workout to be marked.
+	 */
+	public void markAsFavorite(Workout workout) {
+
+		//Grab our shared pref file.
+		SharedPreferences favSettings = getSharedPreferences("FAVORITE_PREFERENCES", Activity.MODE_PRIVATE);
+
+		//Grab the number of favorites and the new favorite number from the settings
 		int numFavorites = favSettings.getInt("NUM_FAVORITES", 0);
 		int newFavoriteNum = favSettings.getInt("NEXT_FAVORITE_NUM", 1);
-		
+
 		//If the number of favorites we currently have is less than the max...
 		if(numFavorites < 5) {
-			
+
 			//Sets the selected workouts favorite number
 			workout.setFavorite(newFavoriteNum);
-			
+
 			//Updates the workout as a favorite in our database.
 			WorkoutDataSource wds = new WorkoutDataSource(this);
 			wds.open();
 			wds.updateWorkoutAsFavorite(workout);
 			wds.close();
-			
+
 			//Save that we added a new favorite to our preferences file.
-			favSettings.edit().putInt("NUM_FAVORITES", numFavorites + 1);
-			favSettings.edit().putInt("NEXT_FAVORITE_NUM", newFavoriteNum + 1);
-			
+			SharedPreferences.Editor favEditor = favSettings.edit();
+			favEditor.putInt("NUM_FAVORITES", numFavorites + 1);
+			favEditor.putInt("NEXT_FAVORITE_NUM", newFavoriteNum + 1);
+			favEditor.commit();
+
 			//Updates the list view to latest changes.
 			mWorkoutHistoryFragment.updateWorkoutListView();
 		}
@@ -288,16 +321,45 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 			Toast.makeText(getApplicationContext(), "Already at maximum number of favorites.", Toast.LENGTH_SHORT).show();
 		}
 	}
+	
+	/**
+	 * Marks the given workout as a non-favorite.
+	 * @param workout - the workout to be marked.
+	 */
+	public void markAsNotFavorite(Workout workout) {
+		
+		//Grab our shared pref file.
+		SharedPreferences favSettings = getSharedPreferences("FAVORITE_PREFERENCES", Activity.MODE_PRIVATE);
+		
+		//Grab the current number of favorites from settings.
+		int numFavorites = favSettings.getInt("NUM_FAVORITES", 0);
+		
+		//Decrement the number of favorites.
+		SharedPreferences.Editor favEditor = favSettings.edit();
+		favEditor.putInt("NUM_FAVORITES", numFavorites - 1);
+		favEditor.commit();
+		
+		//Updates the workout as a favorite in our database.
+		WorkoutDataSource wds = new WorkoutDataSource(this);
+		wds.open();
+		wds.updateWorkoutAsNotFavorite(workout);
+		wds.close();
 
+		//Updates the list view to latest changes.
+		mWorkoutHistoryFragment.updateWorkoutListView();
+	}
+
+	/**
+	 * Performs the given workout.
+	 */
 	@Override
 	public void performWorkout(Workout workout) {
 		
 		//Set the application's current workout to the selected workout.
 		((WorkoutWhizApplication)getApplication()).setCurrentWorkout(workout);
 		
-		if(workoutViewExtended) {
-			hideWorkoutFragment();
-		}
+		hideWorkoutFragment();
+
 		setResult(MainActivity.PERFORM_WORKOUT);
 		finish();
 	}

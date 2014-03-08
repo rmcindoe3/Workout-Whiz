@@ -151,6 +151,11 @@ public class WorkoutHistoryFragment extends Fragment {
 			}
 		});
 
+		//If the workout for this drop down is already a favorite, change the favorite button to
+		// become an 'Un-favorite' button.
+		if(srcLayout.getWorkout().getFavorite() != 0) {
+			favoriteButton.setText("Un-favorite");
+		}
 		favoriteButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
