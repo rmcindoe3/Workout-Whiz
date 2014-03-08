@@ -271,6 +271,5 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 		}
 		setResult(MainActivity.PERFORM_WORKOUT);
 		finish();
-		overridePendingTransition(R.animator.enter_previous_activity, R.animator.exit_next_activity);
 	}
 }
