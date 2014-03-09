@@ -26,9 +26,13 @@ import com.mcindoe.workoutwhiz.models.Workout;
 public class WorkoutSelectDialogFragment extends DialogFragment {
 	
 	private ListView mRecentWorkoutsListView;
+	private ListView mFavoriteWorkoutsListView;
+
 	private RadioButton mCreateNewWorkoutRadioButton;
 	private EditText mCreateNewWorkoutEditText;
+
 	private ArrayList<Workout> mRecentWorkouts;
+	private ArrayList<Workout> mFavoriteWorkouts;
 	
 	private static final String INVALID_WORKOUT_NAME = "0v329jjc9222nk3lj235h35";
 	
@@ -77,8 +81,10 @@ public class WorkoutSelectDialogFragment extends DialogFragment {
 		mCreateNewWorkoutEditText = (EditText)selectWorkoutDialogView.findViewById(R.id.create_new_workout_edit_text);
 		mCreateNewWorkoutRadioButton = (RadioButton)selectWorkoutDialogView.findViewById(R.id.create_new_workout_radio_button);
 		mRecentWorkoutsListView = (ListView)selectWorkoutDialogView.findViewById(R.id.recent_workouts_list_view);
+		mFavoriteWorkoutsListView = (ListView)selectWorkoutDialogView.findViewById(R.id.favorite_workouts_list_view);
 		
-		//Sets up the recent workouts list view
+		//Sets up the workouts list view
+		mFavoriteWorkoutsListView.setAdapter(new WorkoutSelectArrayAdapter(mContext, mFavoriteWorkouts, new OnRecentWorkoutClickListener()));
 		mRecentWorkoutsListView.setAdapter(new WorkoutSelectArrayAdapter(mContext, mRecentWorkouts, new OnRecentWorkoutClickListener()));
 
 		//Since we're overriding default radio button controllers, turn off clickable
@@ -136,6 +142,14 @@ public class WorkoutSelectDialogFragment extends DialogFragment {
 		//Create the dialog.
 		return builder.create();
 	}
+	
+	public ArrayList<Workout> getFavoriteWorkouts() {
+		return mFavoriteWorkouts;
+	}
+
+	public void setFavoriteWorkouts(ArrayList<Workout> mFavoriteWorkouts) {
+		this.mFavoriteWorkouts = mFavoriteWorkouts;
+	}
 
 	public ArrayList<Workout> getRecentWorkouts() {
 		return mRecentWorkouts;
@@ -179,11 +193,26 @@ public class WorkoutSelectDialogFragment extends DialogFragment {
 					break;
 				}
 			}
+			
+			//If we still haven't found the chosen workout, check favorites list.
+			if(ret == null) {
+				//Find which one it is and get it's workout to be returnd.
+				for(int i = 0; i < mFavoriteWorkoutsListView.getChildCount(); i++) {
+					WorkoutLinearLayout favoriteWorkoutsListItem = (WorkoutLinearLayout)mFavoriteWorkoutsListView.getChildAt(i);
+					RadioButton rb = (RadioButton)favoriteWorkoutsListItem.findViewById(R.id.workout_select_radio_button);
+
+					//If the radio button is checked, we have found the checked radio button
+					if(rb.isChecked()) {
+						ret = favoriteWorkoutsListItem.getWorkout();
+						break;
+					}
+				}
+			}
 		}
 		
 		return ret;
 	}
-	
+
 	/**
 	 * Custom on click listener for our dialog fragment views that simulates
 	 * a working RadioGroup for the different components of the screen.
@@ -197,6 +226,11 @@ public class WorkoutSelectDialogFragment extends DialogFragment {
 			for(int i = 0; i < mRecentWorkoutsListView.getChildCount(); i++) {
 				View recentWorkoutsListItem = mRecentWorkoutsListView.getChildAt(i);
 				RadioButton rb = (RadioButton)recentWorkoutsListItem.findViewById(R.id.workout_select_radio_button);
+				rb.setChecked(false);
+			}
+			for(int i = 0; i < mFavoriteWorkoutsListView.getChildCount(); i++) {
+				View favoriteWorkoutsListItem = mFavoriteWorkoutsListView.getChildAt(i);
+				RadioButton rb = (RadioButton)favoriteWorkoutsListItem.findViewById(R.id.workout_select_radio_button);
 				rb.setChecked(false);
 			}
 			

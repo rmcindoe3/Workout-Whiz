@@ -19,7 +19,8 @@ public class MainActivity extends Activity implements WorkoutSelectDialogFragmen
 	public static final int CANCELLED_WORKOUT = 0x843D;
 	public static final int PERFORM_WORKOUT = 0x28B1;
 	
-	private ArrayList<Workout> mWorkouts;
+	private ArrayList<Workout> mRecentWorkouts;
+	private ArrayList<Workout> mFavoriteWorkouts;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,8 @@ public class MainActivity extends Activity implements WorkoutSelectDialogFragmen
 
 		//Create our workout select dialog fragment and then show it.
 		WorkoutSelectDialogFragment workoutSelectDialog = new WorkoutSelectDialogFragment();
-		workoutSelectDialog.setRecentWorkouts(mWorkouts);
+		workoutSelectDialog.setRecentWorkouts(mRecentWorkouts);
+		workoutSelectDialog.setFavoriteWorkouts(mFavoriteWorkouts);
 		workoutSelectDialog.show(getFragmentManager(), "workout select dialog");
 	}
 
@@ -89,7 +91,8 @@ public class MainActivity extends Activity implements WorkoutSelectDialogFragmen
 		wds.open();
 		
 		//Grabs the 5 most recent workouts to be shown
-		mWorkouts = wds.getMostRecentWorkouts(5);
+		mRecentWorkouts = wds.getMostRecentWorkouts(5);
+		mFavoriteWorkouts = wds.getFavoriteWorkouts();
 
 		wds.close();
 	}
