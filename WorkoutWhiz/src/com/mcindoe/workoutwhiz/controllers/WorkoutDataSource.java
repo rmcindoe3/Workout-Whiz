@@ -139,6 +139,25 @@ public class WorkoutDataSource {
 	}
 	
 	/**
+	 * Returns the number of entries in this database that have the given
+	 * favorite number.
+	 * @param favoriteNum - the favorite number you want the count of
+	 * @return - the number of times this favorite is in the database.
+	 */
+	public int getFavoriteWorkoutCount(int favoriteNum) {
+		
+		int ret = 0;
+		
+		Cursor cursor = database.rawQuery("SELECT * FROM workout WHERE favorite=?", new String[] {String.valueOf(favoriteNum)});
+		
+		while(cursor.moveToNext()) {
+			ret++;
+		}
+		
+		return ret;
+	}
+	
+	/**
 	 * Updates the given workout in the database to be a favorite.
 	 * @param workout - the workout to be turned into a favorite
 	 * @return - the database update command result

@@ -29,6 +29,10 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 	private FractionTranslateLinearLayout workoutLayout;
 	private LinearLayout historyActivityLayout;
 
+	private final static String FAVORITE_SETTINGS = "FAVORITE_PREFERENCES";
+	private final static String NUM_FAVORITES = "NUM_FAVORITES";
+	private final static String NEXT_FAVORITE_NUM = "NEXT_FAVORITE_NUM";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -179,8 +183,6 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 	 */
 	public void onClearWorkoutsButtonClicked(View view) {
 		
-		final HistoryActivity srcActivity = this;
-
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle("Delete workout history?");
 		builder.setMessage("You'll lose all workout data!");
@@ -188,11 +190,7 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 			@Override
 			public void onClick(DialogInterface arg0, int arg1) {
 				//Clear the database if they click yes
-				WorkoutDataSource wds = new WorkoutDataSource(srcActivity);
-				wds.open();
-				wds.clearDatabase();
-				wds.close();
-				mWorkoutHistoryFragment.updateWorkoutListView();
+				clearDatabase();
 			}
 		});
 		builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
@@ -204,6 +202,28 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 		AlertDialog dialog = builder.create();
 		
 		dialog.show();
+	}
+	
+	/**
+	 * Clears all data from our workout database.
+	 */
+	public void clearDatabase() {
+
+		//Clear the database.
+		WorkoutDataSource wds = new WorkoutDataSource(this);
+		wds.open();
+		wds.clearDatabase();
+		wds.close();
+		
+		//Clear the favorites preference file.
+		SharedPreferences favSettings = getSharedPreferences(FAVORITE_SETTINGS, Activity.MODE_PRIVATE);
+		SharedPreferences.Editor favEditor = favSettings.edit();
+		favEditor.putInt(NUM_FAVORITES, 0);
+		favEditor.putInt(NEXT_FAVORITE_NUM, 1);
+		favEditor.commit();
+		
+		//Update the history list view.
+		mWorkoutHistoryFragment.updateWorkoutListView();
 	}
 	
 	/**
@@ -222,7 +242,6 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 	@Override
 	public void eraseWorkout(Workout workout) {
 		
-		final HistoryActivity srcActivity = this;
 		final Workout wo = workout;
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -231,25 +250,7 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 		builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface arg0, int arg1) {
-				
-				//Delete the given workout from the database.
-				WorkoutDataSource wds = new WorkoutDataSource(srcActivity);
-				wds.open();
-				int ret = wds.deleteWorkout(wo.getId());
-				wds.close();
-
-				if(ret == 1) {
-					hideWorkoutFragment();
-					mWorkoutHistoryFragment.updateWorkoutListView();
-				}
-				else {
-					//Should never get here, but that means we tried
-					// to delete something that wasn't in the database.
-					Log.e("Database", "Attempted to delete a workout that was not in database.");
-				}
-				
-				//Now hide the workout fragment
-				hideWorkoutFragment();
+				deleteWorkout(wo);
 			}
 		});
 		builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
@@ -261,6 +262,44 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 		AlertDialog dialog = builder.create();
 		
 		dialog.show();
+	}
+	
+	/**
+	 * Deletes the given workout from the database
+	 * @param wo - the workout to be deleted.
+	 */
+	public void deleteWorkout(Workout wo) {
+
+		//Delete the given workout from the database.
+		WorkoutDataSource wds = new WorkoutDataSource(this);
+		wds.open();
+		int ret = wds.deleteWorkout(wo.getId());
+		int favCount = wds.getFavoriteWorkoutCount(wo.getFavorite());
+		wds.close();
+
+		//If we successfully deleted ONE workout from the database.
+		if(ret == 1) {
+
+			//hides the workout view fragment
+			hideWorkoutFragment();
+
+			//update the favorites preference file if there are no more entries in this
+			// database with the same favorite number.
+			if(favCount == 0) {
+
+				SharedPreferences favSettings = getSharedPreferences(FAVORITE_SETTINGS, Activity.MODE_PRIVATE);
+				SharedPreferences.Editor favEditor = favSettings.edit();
+				favEditor.putInt(NUM_FAVORITES, favSettings.getInt(NUM_FAVORITES, 0) - 1);
+				favEditor.commit();
+			}
+
+			mWorkoutHistoryFragment.updateWorkoutListView();
+		}
+		else {
+			//Should never get here, but that means we tried
+			// to delete something that wasn't in the database.
+			Log.e("Database", "Attempted to delete a workout that was not in database.");
+		}
 	}
 
 	/**
@@ -289,11 +328,11 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 	public void markAsFavorite(Workout workout) {
 
 		//Grab our shared pref file.
-		SharedPreferences favSettings = getSharedPreferences("FAVORITE_PREFERENCES", Activity.MODE_PRIVATE);
+		SharedPreferences favSettings = getSharedPreferences(FAVORITE_SETTINGS, Activity.MODE_PRIVATE);
 
 		//Grab the number of favorites and the new favorite number from the settings
-		int numFavorites = favSettings.getInt("NUM_FAVORITES", 0);
-		int newFavoriteNum = favSettings.getInt("NEXT_FAVORITE_NUM", 1);
+		int numFavorites = favSettings.getInt(NUM_FAVORITES, 0);
+		int newFavoriteNum = favSettings.getInt(NEXT_FAVORITE_NUM, 1);
 
 		//If the number of favorites we currently have is less than the max...
 		if(numFavorites < 5) {
@@ -309,8 +348,8 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 
 			//Save that we added a new favorite to our preferences file.
 			SharedPreferences.Editor favEditor = favSettings.edit();
-			favEditor.putInt("NUM_FAVORITES", numFavorites + 1);
-			favEditor.putInt("NEXT_FAVORITE_NUM", newFavoriteNum + 1);
+			favEditor.putInt(NUM_FAVORITES, numFavorites + 1);
+			favEditor.putInt(NEXT_FAVORITE_NUM, newFavoriteNum + 1);
 			favEditor.commit();
 
 			//Updates the list view to latest changes.
@@ -329,14 +368,14 @@ public class HistoryActivity extends Activity implements WorkoutHistoryFragment.
 	public void markAsNotFavorite(Workout workout) {
 		
 		//Grab our shared pref file.
-		SharedPreferences favSettings = getSharedPreferences("FAVORITE_PREFERENCES", Activity.MODE_PRIVATE);
+		SharedPreferences favSettings = getSharedPreferences(FAVORITE_SETTINGS, Activity.MODE_PRIVATE);
 		
 		//Grab the current number of favorites from settings.
-		int numFavorites = favSettings.getInt("NUM_FAVORITES", 0);
+		int numFavorites = favSettings.getInt(NUM_FAVORITES, 0);
 		
 		//Decrement the number of favorites.
 		SharedPreferences.Editor favEditor = favSettings.edit();
-		favEditor.putInt("NUM_FAVORITES", numFavorites - 1);
+		favEditor.putInt(NUM_FAVORITES, numFavorites - 1);
 		favEditor.commit();
 		
 		//Updates the workout as a favorite in our database.
