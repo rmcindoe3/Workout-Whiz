@@ -106,6 +106,16 @@ public class MainActivity extends Activity implements WorkoutSelectDialogFragmen
 				}
 			}
 		}
+		
+		//If there are no favorite workouts, then add an indicator to our list.
+		if(mFavoriteWorkouts.size() == 0) {
+			mFavoriteWorkouts.add(new Workout(Workout.NO_WORKOUTS));
+		}
+
+		//If there are no recent workouts, then add an indicator to our list.
+		if(mRecentWorkouts.size() == 0) {
+			mRecentWorkouts.add(new Workout(Workout.NO_WORKOUTS));
+		}
 	}
 
 	/**

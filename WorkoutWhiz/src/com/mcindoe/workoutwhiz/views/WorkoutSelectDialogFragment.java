@@ -184,13 +184,20 @@ public class WorkoutSelectDialogFragment extends DialogFragment {
 			
 			//Find which one it is and get it's workout to be returnd.
 			for(int i = 0; i < mRecentWorkoutsListView.getChildCount(); i++) {
-				WorkoutLinearLayout recentWorkoutsListItem = (WorkoutLinearLayout)mRecentWorkoutsListView.getChildAt(i);
-				RadioButton rb = (RadioButton)recentWorkoutsListItem.findViewById(R.id.workout_select_radio_button);
-				
-				//If the radio button is checked, we have found the checked radio button
-				if(rb.isChecked()) {
-					ret = recentWorkoutsListItem.getWorkout();
-					break;
+
+				//Grab the ith child.
+				View recentWorkoutsListItem = mRecentWorkoutsListView.getChildAt(i);
+
+				//If this child isn't an empty list item...
+				if(recentWorkoutsListItem.getId() != R.id.empty_list_item) {
+
+					RadioButton rb = (RadioButton)recentWorkoutsListItem.findViewById(R.id.workout_select_radio_button);
+
+					//If the radio button is checked, we have found the checked radio button
+					if(rb.isChecked()) {
+						ret = ((WorkoutLinearLayout)recentWorkoutsListItem).getWorkout();
+						break;
+					}
 				}
 			}
 			
@@ -198,13 +205,20 @@ public class WorkoutSelectDialogFragment extends DialogFragment {
 			if(ret == null) {
 				//Find which one it is and get it's workout to be returnd.
 				for(int i = 0; i < mFavoriteWorkoutsListView.getChildCount(); i++) {
-					WorkoutLinearLayout favoriteWorkoutsListItem = (WorkoutLinearLayout)mFavoriteWorkoutsListView.getChildAt(i);
-					RadioButton rb = (RadioButton)favoriteWorkoutsListItem.findViewById(R.id.workout_select_radio_button);
 
-					//If the radio button is checked, we have found the checked radio button
-					if(rb.isChecked()) {
-						ret = favoriteWorkoutsListItem.getWorkout();
-						break;
+					//Grab the ith child
+					View favoriteWorkoutsListItem = mFavoriteWorkoutsListView.getChildAt(i);
+
+					//If this child isn't an empty list item...
+					if(favoriteWorkoutsListItem.getId() != R.id.empty_list_item) {
+
+						RadioButton rb = (RadioButton)favoriteWorkoutsListItem.findViewById(R.id.workout_select_radio_button);
+
+						//If the radio button is checked, we have found the checked radio button
+						if(rb.isChecked()) {
+							ret = ((WorkoutLinearLayout)favoriteWorkoutsListItem).getWorkout();
+							break;
+						}
 					}
 				}
 			}
@@ -224,14 +238,26 @@ public class WorkoutSelectDialogFragment extends DialogFragment {
 			//Set all the radio buttons to false.
 			mCreateNewWorkoutRadioButton.setChecked(false);
 			for(int i = 0; i < mRecentWorkoutsListView.getChildCount(); i++) {
+				
+				//Grab the ith child
 				View recentWorkoutsListItem = mRecentWorkoutsListView.getChildAt(i);
-				RadioButton rb = (RadioButton)recentWorkoutsListItem.findViewById(R.id.workout_select_radio_button);
-				rb.setChecked(false);
+				
+				//As long as this child isn't an empty list item set the radio button to false;
+				if(recentWorkoutsListItem.getId() != R.id.empty_list_item) {
+					RadioButton rb = (RadioButton)recentWorkoutsListItem.findViewById(R.id.workout_select_radio_button);
+					rb.setChecked(false);
+				}
 			}
 			for(int i = 0; i < mFavoriteWorkoutsListView.getChildCount(); i++) {
+				
+				//Grab the ith child
 				View favoriteWorkoutsListItem = mFavoriteWorkoutsListView.getChildAt(i);
-				RadioButton rb = (RadioButton)favoriteWorkoutsListItem.findViewById(R.id.workout_select_radio_button);
-				rb.setChecked(false);
+				
+				//As long as this child isn't an empty list item set the radio button to false;
+				if(favoriteWorkoutsListItem.getId() != R.id.empty_list_item) {
+					RadioButton rb = (RadioButton)favoriteWorkoutsListItem.findViewById(R.id.workout_select_radio_button);
+					rb.setChecked(false);
+				}
 			}
 			
 			//Now set the clicked radio button to true.
@@ -266,9 +292,15 @@ public class WorkoutSelectDialogFragment extends DialogFragment {
 					//Set all the radio buttons to false except the one for creating a new workout
 					mCreateNewWorkoutRadioButton.setChecked(true);
 					for(int i = 0; i < mRecentWorkoutsListView.getChildCount(); i++) {
+						
+						//Grab the ith child
 						View recentWorkoutsListItem = mRecentWorkoutsListView.getChildAt(i);
-						RadioButton rb = (RadioButton)recentWorkoutsListItem.findViewById(R.id.workout_select_radio_button);
-						rb.setChecked(false);
+						
+						//If this child isn't an empty list item
+						if(recentWorkoutsListItem.getId() != R.id.empty_list_item) {
+							RadioButton rb = (RadioButton)recentWorkoutsListItem.findViewById(R.id.workout_select_radio_button);
+							rb.setChecked(false);
+						}
 					}
 				}
 			}

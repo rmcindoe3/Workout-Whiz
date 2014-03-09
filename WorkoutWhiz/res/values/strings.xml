@@ -64,6 +64,7 @@
     <string name="recent_workouts_list_view">Recent Workouts:</string>
     <string name="favorite_workouts_list_view">Favorite Workouts:</string>
     <string name="create_workout_subtitle">Or create a new workout:</string>
+    <string name="empty_list_text">None&#8230;</string>
 
 
 </resources>
