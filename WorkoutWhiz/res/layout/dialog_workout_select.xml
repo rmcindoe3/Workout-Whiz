@@ -1,9 +1,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    style="@style/AppTheme.Layout"
     android:gravity="center"
     android:orientation="vertical" >
+    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.View.TextView.Subtitle"
+        android:text="@string/favorite_workouts_list_view" />
+        
 
+    <!-- ListView of favorite workouts -->
+    <ListView
+        android:id="@+id/favorite_workouts_list_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:scrollbars="none"
+        android:cacheColorHint="#00000000" />"
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.View.TextView.Subtitle"
+        android:text="@string/recent_workouts_list_view" />
 
     <!-- ListView of recent workouts -->
     <ListView
@@ -14,8 +36,15 @@
         android:scrollbars="none"
         android:cacheColorHint="#00000000" />"
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.View.TextView.Subtitle"
+        android:text="@string/create_workout_subtitle" />
+
     <LinearLayout
         android:id="@+id/create_new_workout_linear_layout"
+	    style="@style/AppTheme.View.ListView.ListItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -29,6 +58,7 @@
 
         <EditText
             android:id="@+id/create_new_workout_edit_text"
+            style="@style/AppTheme.View.TextView.EditText"
             android:inputType="text"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

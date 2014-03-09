@@ -61,6 +61,9 @@
     <string name="workout_options_perform_button">Perform</string>
     <string name="workout_options_favorite_button">Favorite</string>
     <string name="workout_options_erase_button">Erase</string>
+    <string name="recent_workouts_list_view">Recent Workouts:</string>
+    <string name="favorite_workouts_list_view">Favorite Workouts:</string>
+    <string name="create_workout_subtitle">Or create a new workout:</string>
 
 
 </resources>
