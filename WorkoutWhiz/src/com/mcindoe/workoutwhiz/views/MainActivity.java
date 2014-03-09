@@ -95,6 +95,17 @@ public class MainActivity extends Activity implements WorkoutSelectDialogFragmen
 		mFavoriteWorkouts = wds.getFavoriteWorkouts();
 
 		wds.close();
+		
+		//Removes any duplicates from the recent workouts list if they are also
+		// in our favorites list.
+		for(int i = 0; i < mFavoriteWorkouts.size(); i++) {
+			for(int j = 0; j < mRecentWorkouts.size(); j++) {
+				if(mFavoriteWorkouts.get(i).getId() == mRecentWorkouts.get(j).getId() || 
+					mFavoriteWorkouts.get(i).getFavorite() == mRecentWorkouts.get(j).getFavorite()) {
+					mRecentWorkouts.remove(j--);
+				}
+			}
+		}
 	}
 
 	/**
