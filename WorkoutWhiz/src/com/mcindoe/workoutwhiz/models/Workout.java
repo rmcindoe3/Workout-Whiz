@@ -14,7 +14,7 @@ public class Workout {
 	private ArrayList<Exercise> incompleteExercises;
 	private ArrayList<Exercise> completeExercises;
 	
-	public static String NO_WORKOUTS = "8fj201jcnx8j201hsn";
+	public static final String NO_WORKOUTS = "8fj201jcnx8j201hsn";
 
 	public Workout(String name) {
 		this.setName(name);

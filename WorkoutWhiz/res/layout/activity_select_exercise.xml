@@ -19,7 +19,8 @@
 
         <!-- ListView of exercises -->
         <ListView
-            android:id="@+id/incomplete_exercises_list_view"
+            android:id="@+id/exercises_list_view"
+            style="@style/AppTheme.View.ListView"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="14"

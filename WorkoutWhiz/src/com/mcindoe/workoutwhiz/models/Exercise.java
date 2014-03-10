@@ -10,6 +10,8 @@ public class Exercise {
 	private ArrayList<Integer> reps;
 	private ArrayList<Integer> lastReps;
 	
+	public static final String NO_EXERCISES = "20jf328ndskl21,sn0svnd83n";
+	
 	public Exercise(String name) {
 		this.setName(name);
 		this.setWeight(0);

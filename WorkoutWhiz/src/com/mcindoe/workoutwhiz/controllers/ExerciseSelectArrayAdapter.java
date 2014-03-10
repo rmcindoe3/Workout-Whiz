@@ -42,8 +42,11 @@ public class ExerciseSelectArrayAdapter extends ArrayAdapter<Exercise> {
 		//Initialize our return.
 		View exerciseRow;
 		
+		if(exer.getName().equals(Exercise.NO_EXERCISES)) {
+			exerciseRow = inflater.inflate(R.layout.list_item_empty, parent, false);
+		}
 		//If the exercise we're on is actually the incomplete exercise header title, then add the title
-		if(exer.equals(SelectExerciseActivity.INCOMPLETE_EXERCISE_TITLE)) {
+		else if(exer.equals(SelectExerciseActivity.INCOMPLETE_EXERCISE_TITLE)) {
 			
 			//Inflate our row ith the right object
 			exerciseRow = inflater.inflate(R.layout.list_item_exercise_header, parent, false);

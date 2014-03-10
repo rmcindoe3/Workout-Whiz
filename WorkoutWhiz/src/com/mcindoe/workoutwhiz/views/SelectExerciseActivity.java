@@ -51,7 +51,7 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 		//Grabs our GUI elements.
 		mAddExerciseEditText = (EditText)findViewById(R.id.add_exercise_edit_text);
 		mWorkoutTitleTextView = (TextView)findViewById(R.id.workout_title_text_view);
-		mExercisesListView = (ListView)findViewById(R.id.incomplete_exercises_list_view);
+		mExercisesListView = (ListView)findViewById(R.id.exercises_list_view);
 
 		//Sets up and displays our list view.
 		updateExerciseListView();
@@ -64,6 +64,16 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 		
 		//First we need to grab our workout.
 		mWorkout = ((WorkoutWhizApplication)getApplication()).getCurrentWorkout();
+		
+		//If there are no incomplete exercises, add an indicator that there are no exercises.
+		if(mWorkout.getIncompleteExercises().size() == 0) {
+			mWorkout.getIncompleteExercises().add(new Exercise(Exercise.NO_EXERCISES));
+		}
+
+		//If there are no complete exercises, add an indicator that there are no exercises.
+		if(mWorkout.getCompleteExercises().size() == 0) {
+			mWorkout.getCompleteExercises().add(new Exercise(Exercise.NO_EXERCISES));
+		}
 		
 		//Formats our list of exercises the way the array adapter will understand it.
 		ArrayList<Exercise> listOfExercises = new ArrayList<Exercise>();

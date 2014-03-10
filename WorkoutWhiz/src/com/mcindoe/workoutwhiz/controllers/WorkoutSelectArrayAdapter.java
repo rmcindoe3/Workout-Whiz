@@ -41,7 +41,7 @@ public class WorkoutSelectArrayAdapter extends ArrayAdapter<Workout> {
 
 			//Inflate the empty list view.
 			LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			workoutRow = inflater.inflate(R.layout.list_item_workout_empty, parent, false);
+			workoutRow = inflater.inflate(R.layout.list_item_empty, parent, false);
 		}
 		//Otherwise just treat it like a normal workout.
 		else {

@@ -137,6 +137,15 @@ public class ExerciseActivity extends Activity {
 		    	//Grab the current workout.
 		    	Workout workout = ((WorkoutWhizApplication)getApplication()).getCurrentWorkout();
 		    	
+		    	//If there is only one complete exercise for the current workout,
+		    	// check to see if it's the "None..." indicator.  If it is, then
+		    	// remove it from the list.
+		    	if(workout.getCompleteExercises().size() == 1) {
+		    		if(workout.getCompleteExercises().get(0).getName().equals(Exercise.NO_EXERCISES)) {
+		    			workout.getCompleteExercises().remove(0);
+		    		}
+		    	}
+		    	
 		    	//Complete our exercise.
 		    	workout.completeExercise(mExercise);
 		    	

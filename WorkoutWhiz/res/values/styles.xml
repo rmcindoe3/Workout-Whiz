@@ -15,11 +15,12 @@
     </style>
 
     <style name="AppTheme.View.ListView">
+        <item name="android:divider">@null</item>
+        <item name="android:dividerHeight">0dp</item>
     </style>
 
     <style name="AppTheme.View.ListView.ListItem">
 		<item name="android:background">@drawable/wide_list_item_exercise_selector</item>
-        <item name="android:divider">@drawable/list_view_exercise_divider</item>
         <item name="android:gravity">center_vertical</item>
     </style>
 
