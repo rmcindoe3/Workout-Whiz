@@ -76,7 +76,7 @@ public class ExerciseActivity extends Activity {
 		mNPController = new NumberPadController();
 		
 		//Grabs the title to this activity and sets it.
-		mExerciseTitleTextView.setText(mExercise.getName() + " (" + mExercise.getWeight() + " lbs.)");
+		mExerciseTitleTextView.setText(mExercise.getName() + " (" + mExercise.getNewWeight() + " lbs.)");
 		
 		//If we have a previously recorded rep for this exercise and set, then set the previous reps text box.
 		if(mExercise.getLastReps().size() > 0) {

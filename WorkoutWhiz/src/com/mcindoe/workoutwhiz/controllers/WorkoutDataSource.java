@@ -55,7 +55,7 @@ public class WorkoutDataSource {
 			values = new ContentValues();
 			values.put(WorkoutDBSQLiteHelper.EXERCISE_NAME, exer.getName());
 			values.put(WorkoutDBSQLiteHelper.EXERCISE_WORKOUT_ID, workoutId);
-			values.put(WorkoutDBSQLiteHelper.EXERCISE_INTENSITY, exer.getWeight());
+			values.put(WorkoutDBSQLiteHelper.EXERCISE_INTENSITY, exer.getNewWeight());
 			
 			//Attempt to insert the values into the database
 			exerciseId = database.insert(WorkoutDBSQLiteHelper.TABLE_EXERCISE, null, values);

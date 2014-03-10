@@ -70,7 +70,7 @@ public class ExerciseViewArrayAdapter extends ArrayAdapter<Exercise> {
 		String ret = "";
 		Exercise exer = mExercises.get(position);
 		
-		ret += exer.getWeight() + " lbs. - ";
+		ret += exer.getLastWeight() + " lbs. - ";
 
 		for(int i = 0; i < exer.getLastReps().size(); i++) {
 

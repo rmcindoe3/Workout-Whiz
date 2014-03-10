@@ -20,7 +20,6 @@ public class WeightDialogFragment extends DialogFragment {
 	private SeekBar mSeekBar;
 	private TextView mTextView;
 	private Exercise mExercise;
-	private int mExerciseOriginalWeight;
 	
 	/**
 	 * Interface that allows us to pass events back to our select exercise activity.
@@ -62,11 +61,8 @@ public class WeightDialogFragment extends DialogFragment {
 		mSeekBar = (SeekBar)weightDialogView.findViewById(R.id.weight_input_seek_bar);
 		mTextView = (TextView)weightDialogView.findViewById(R.id.weight_input_text_view);
 		
-		//Store the initial weight in case the user cancels this dialog.
-		mExerciseOriginalWeight = mExercise.getWeight();
-		
 		//Set them to the default weight for this exercise.
-		mTextView.setText(mExercise.getWeight() + " lbs.");
+		mTextView.setText(mExercise.getLastWeight() + " lbs.");
 		
 		//Set the max of the seekbar to 20
 		mSeekBar.setMax(20);
@@ -75,7 +71,11 @@ public class WeightDialogFragment extends DialogFragment {
 		mSeekBar.setProgress(10);
 
 		//Set up our seek bar listener.
-		mSeekBar.setOnSeekBarChangeListener(new WeightSeekBarChangeListener(mExercise.getWeight()));
+		mSeekBar.setOnSeekBarChangeListener(new WeightSeekBarChangeListener(mExercise.getLastWeight()));
+		
+		//Set the new weight for the exercise equal to the old weight, in case
+		// the user does not trigger the seek bar listener, which normally sets the new weight.
+		mExercise.setNewWeight(mExercise.getLastWeight());
 		
 		//Finishes creating our dialog builder.
 		builder.setView(weightDialogView);
@@ -95,9 +95,6 @@ public class WeightDialogFragment extends DialogFragment {
 		builder.setNegativeButton(R.string.cancel,
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
-						
-						//Revert the exercise back to it's original weight.
-						mExercise.setWeight(mExerciseOriginalWeight);
 					}
 				});
 
@@ -148,7 +145,7 @@ public class WeightDialogFragment extends DialogFragment {
 
 			//When the seek bar is moved, update the text view with it's new value
 			mTextView.setText(progress + weightOffset + " lbs.");
-			mExercise.setWeight(progress + weightOffset);
+			mExercise.setNewWeight(progress + weightOffset);
 		}
 
 		@Override

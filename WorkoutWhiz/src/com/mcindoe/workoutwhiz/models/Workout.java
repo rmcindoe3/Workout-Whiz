@@ -41,7 +41,7 @@ public class Workout {
 		}
 		
 		//Change the pattern to what we want and then return the new foramt.
-		sdf.applyPattern("yyyy-MM-dd");
+		sdf.applyPattern("MM-dd-yyyy");
 		return sdf.format(dateObj);
 	}
 	
@@ -102,38 +102,42 @@ public class Workout {
 	
 	@Override
 	public boolean equals(Object other) {
+
 		if(other == null) {
 			return false;
 		}
 		else if(!(other instanceof Workout)) {
 			return false;
 		}
+
 		Workout wo = (Workout)other;
+
 		if(!wo.getName().equals(this.getName())) {
 			return false;
 		}
+
 		if(!wo.getDate().equals(this.getDate())) {
 			return false;
 		}
-		if(this.completeExercises.size() == wo.completeExercises.size()) {
-			for(int i = 0; i < this.completeExercises.size(); i++) {
-				if(!this.completeExercises.get(i).equals(wo.completeExercises.get(i))) {
-					return false;
-				}
-			}
-		}
-		else {
+
+		if(this.completeExercises.size() != wo.completeExercises.size()) {
 			return false;
 		}
-		if(this.incompleteExercises.size() == wo.incompleteExercises.size()) {
-			for(int i = 0; i < this.incompleteExercises.size(); i++) {
-				if(!this.incompleteExercises.get(i).equals(wo.incompleteExercises.get(i))) {
-					return false;
-				}
+
+		for(int i = 0; i < this.completeExercises.size(); i++) {
+			if(!this.completeExercises.get(i).equals(wo.completeExercises.get(i))) {
+				return false;
 			}
 		}
-		else {
+
+		if(this.incompleteExercises.size() != wo.incompleteExercises.size()) {
 			return false;
+		}
+
+		for(int i = 0; i < this.incompleteExercises.size(); i++) {
+			if(!this.incompleteExercises.get(i).equals(wo.incompleteExercises.get(i))) {
+				return false;
+			}
 		}
 		
 		return true;

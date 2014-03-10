@@ -226,7 +226,7 @@ public class SelectExerciseActivity extends Activity implements WeightDialogFrag
 		//We create a new exercise and fill it with this exercises information because
 		// otherwise it will overwrite the previous exercises information in the case
 		// where we are repeating the same exercise in the same workout.
-		Exercise exer = new Exercise(layout.getExercise().getName(),layout.getExercise().getWeight());
+		Exercise exer = new Exercise(layout.getExercise().getName(),layout.getExercise().getLastWeight());
 		exer.setLastReps(layout.getExercise().getLastReps());
 		
 		return exer;
