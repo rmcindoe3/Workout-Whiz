@@ -36,7 +36,7 @@
 
             <Button
                 android:id="@+id/clear_workouts_button"
-                style="@style/AppTheme.View.TextView.Button.Navigation"
+                style="@style/AppTheme.View.TextView.Button.Navigation.Warning"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:onClick="onClearWorkoutsButtonClicked"

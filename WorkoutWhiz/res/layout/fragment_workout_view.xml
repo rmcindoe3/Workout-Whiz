@@ -63,7 +63,7 @@
 		
 		    <Button
 		        android:id="@+id/erase_workout_button"
-		        style="@style/AppTheme.View.TextView.Button.Navigation"
+		        style="@style/AppTheme.View.TextView.Button.Navigation.Warning"
 		        android:layout_width="0dp"
 		        android:layout_weight="1"
 		        android:layout_height="fill_parent"
