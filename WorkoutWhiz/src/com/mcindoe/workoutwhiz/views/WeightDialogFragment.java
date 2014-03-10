@@ -68,50 +68,14 @@ public class WeightDialogFragment extends DialogFragment {
 		//Set them to the default weight for this exercise.
 		mTextView.setText(mExercise.getWeight() + " lbs.");
 		
-		//If the weight isn't zero, then set seek bar max to twice the weight
-		if(mExercise.getWeight() != 0) {
-			mSeekBar.setMax(mExercise.getWeight()*2);
-		}
-		//If the weight is zero, then just set it to 20
-		else {
-			mSeekBar.setMax(20);
-		}
+		//Set the max of the seekbar to 20
+		mSeekBar.setMax(20);
 		
-		//Set the progress of the seekbar to the previously selected weight.
-		mSeekBar.setProgress(mExercise.getWeight());
+		//Set the progress of the seekbar to the middle.
+		mSeekBar.setProgress(10);
 
 		//Set up our seek bar listener.
-		mSeekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-			
-			private int maxChangedCounter = 0;
-
-			@Override
-			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-				
-				//If the seekbar is moved to maximum range and the maximum has not changed recently
-				// then increase the maximum by a factor of 1.5
-				if(progress == mSeekBar.getMax() && maxChangedCounter == 0) {
-					mSeekBar.setMax(mSeekBar.getMax()*3/2);
-					maxChangedCounter = 10;
-				}
-				else if(progress != mSeekBar.getMax() && maxChangedCounter != 0) {
-					maxChangedCounter--;
-				}
-				//When the seek bar is moved, update the text view with it's new value
-				mTextView.setText(progress + " lbs.");
-				mExercise.setWeight(progress);
-			}
-
-			@Override
-			public void onStartTrackingTouch(SeekBar seekBar) {
-				//We don't need this, but have to override it.
-			}
-
-			@Override
-			public void onStopTrackingTouch(SeekBar seekBar) {
-				//We don't need this, but have to override it.
-			}
-		});
+		mSeekBar.setOnSeekBarChangeListener(new WeightSeekBarChangeListener(mExercise.getWeight()));
 		
 		//Finishes creating our dialog builder.
 		builder.setView(weightDialogView);
@@ -139,6 +103,64 @@ public class WeightDialogFragment extends DialogFragment {
 
 		//Create the dialog.
 		return builder.create();
+	}
+	
+	/**
+	 * Custom seek bar change listener that turns this seekbar into a 
+	 * "sliding window" seekbar.
+	 */
+	private class WeightSeekBarChangeListener implements OnSeekBarChangeListener {
+		
+		private int weightOffset;
+		private int maxChangedCounter;
+		private int minChangedCounter;
+		
+		public WeightSeekBarChangeListener(int startingWeight) {
+			this.weightOffset = startingWeight - 10;
+			this.maxChangedCounter = 0;
+		}
+
+		@Override
+		public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+			//If the seekbar is moved to maximum range and the maximum has not changed recently
+			// then shift the weight offset by 10.
+			if(progress == mSeekBar.getMax() && maxChangedCounter == 0) {
+				weightOffset += 10;
+				maxChangedCounter = 5;
+			}
+			else if(progress != mSeekBar.getMax() && maxChangedCounter != 0) {
+				maxChangedCounter--;
+			}
+			
+			//If the seekbar is moved to minimum range and the minimum has not changed recently
+			// then shift the weight offset by 10.
+			if(progress == 0 && minChangedCounter == 0 && weightOffset > 10) {
+				weightOffset -= 10;
+				if(weightOffset < 10) {
+					weightOffset = 10;
+				}
+				minChangedCounter = 5;
+			}
+			else if(progress != 0 && minChangedCounter != 0) {
+				minChangedCounter--;
+			}
+
+			//When the seek bar is moved, update the text view with it's new value
+			mTextView.setText(progress + weightOffset + " lbs.");
+			mExercise.setWeight(progress + weightOffset);
+		}
+
+		@Override
+		public void onStartTrackingTouch(SeekBar seekBar) {
+			//Do nothing...
+		}
+
+		@Override
+		public void onStopTrackingTouch(SeekBar seekBar) {
+			//Do nothing...
+		}
+		
 	}
 
 	public Exercise getExercise() {
