@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal" >
-    
+
     <TextView
         android:layout_width="match_parent"
         android:gravity="left|center_vertical"
@@ -12,5 +12,5 @@
         android:textStyle="italic"
         android:text="@string/empty_list_text"
         android:textColor="#777777" />
-    
+
 </LinearLayout>

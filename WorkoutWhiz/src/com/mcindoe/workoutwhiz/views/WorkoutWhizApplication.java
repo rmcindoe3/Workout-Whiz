@@ -6,28 +6,28 @@ import com.mcindoe.workoutwhiz.models.Exercise;
 import com.mcindoe.workoutwhiz.models.Workout;
 
 public class WorkoutWhizApplication extends Application {
-	
-	private Workout currentWorkout;
-	private Exercise currentExercise;
 
-	@Override
-	public void onCreate() {
-		super.onCreate();
-	}
+    private Workout currentWorkout;
+    private Exercise currentExercise;
 
-	public Exercise getCurrentExercise() {
-		return currentExercise;
-	}
+    @Override
+    public void onCreate() {
+        super.onCreate();
+    }
 
-	public void setCurrentExercise(Exercise currentExercise) {
-		this.currentExercise = currentExercise;
-	}
+    public Exercise getCurrentExercise() {
+        return currentExercise;
+    }
 
-	public Workout getCurrentWorkout() {
-		return currentWorkout;
-	}
+    public void setCurrentExercise(Exercise currentExercise) {
+        this.currentExercise = currentExercise;
+    }
 
-	public void setCurrentWorkout(Workout currentWorkout) {
-		this.currentWorkout = currentWorkout;
-	}
+    public Workout getCurrentWorkout() {
+        return currentWorkout;
+    }
+
+    public void setCurrentWorkout(Workout currentWorkout) {
+        this.currentWorkout = currentWorkout;
+    }
 }

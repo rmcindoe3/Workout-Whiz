@@ -16,22 +16,22 @@ import com.mcindoe.workoutwhiz.R;
 import com.mcindoe.workoutwhiz.models.Exercise;
 
 public class WeightDialogFragment extends DialogFragment {
-	
-	private SeekBar mSeekBar;
-	private TextView mTextView;
-	private Exercise mExercise;
-	
-	/**
-	 * Interface that allows us to pass events back to our select exercise activity.
-	 */
-	public interface WeightDialogListener {
-		public void startExercise(Exercise exer);
-	}
-	
-	private WeightDialogListener sourceActivity;
-	
-	@Override
-	public void onAttach(Activity activity) {
+
+    private SeekBar mSeekBar;
+    private TextView mTextView;
+    private Exercise mExercise;
+
+    /**
+     * Interface that allows us to pass events back to our select exercise activity.
+     */
+    public interface WeightDialogListener {
+        public void startExercise(Exercise exer);
+    }
+
+    private WeightDialogListener sourceActivity;
+
+    @Override
+    public void onAttach(Activity activity) {
 
         super.onAttach(activity);
 
@@ -44,127 +44,127 @@ public class WeightDialogFragment extends DialogFragment {
             throw new ClassCastException(activity.toString()
                     + " must implement WeightDialogListener");
         }	
-	}
+    }
 
-	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-		//Use the Builder class for convenient dialog construction
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		
-		// Get the Layout Inflater.
-		LayoutInflater inflater = getActivity().getLayoutInflater();
-		
-		View weightDialogView = inflater.inflate(R.layout.dialog_weight, null);
-		
-		//Initialize our custom dialog elements.
-		mSeekBar = (SeekBar)weightDialogView.findViewById(R.id.weight_input_seek_bar);
-		mTextView = (TextView)weightDialogView.findViewById(R.id.weight_input_text_view);
-		
-		//Set them to the default weight for this exercise.
-		mTextView.setText(mExercise.getLastWeight() + " lbs.");
-		
-		//Set the max of the seekbar to 20
-		mSeekBar.setMax(20);
-		
-		//Set the progress of the seekbar to the middle.
-		mSeekBar.setProgress(10);
+        //Use the Builder class for convenient dialog construction
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-		//Set up our seek bar listener.
-		mSeekBar.setOnSeekBarChangeListener(new WeightSeekBarChangeListener(mExercise.getLastWeight()));
-		
-		//Set the new weight for the exercise equal to the old weight, in case
-		// the user does not trigger the seek bar listener, which normally sets the new weight.
-		mExercise.setNewWeight(mExercise.getLastWeight());
-		
-		//Finishes creating our dialog builder.
-		builder.setView(weightDialogView);
+        // Get the Layout Inflater.
+        LayoutInflater inflater = getActivity().getLayoutInflater();
 
-		builder.setTitle("Select weight for " + mExercise.getName());
+        View weightDialogView = inflater.inflate(R.layout.dialog_weight, null);
 
-		builder.setPositiveButton(R.string.ok,
-				new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
+        //Initialize our custom dialog elements.
+        mSeekBar = (SeekBar)weightDialogView.findViewById(R.id.weight_input_seek_bar);
+        mTextView = (TextView)weightDialogView.findViewById(R.id.weight_input_text_view);
 
-						//When the ok button is pressed, let our source activity know
-						//	that the weight has been selected.
-						sourceActivity.startExercise(mExercise);
-					}
-				});
+        //Set them to the default weight for this exercise.
+        mTextView.setText(mExercise.getLastWeight() + " lbs.");
 
-		builder.setNegativeButton(R.string.cancel,
-				new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-					}
-				});
+        //Set the max of the seekbar to 20
+        mSeekBar.setMax(20);
 
-		//Create the dialog.
-		return builder.create();
-	}
-	
-	/**
-	 * Custom seek bar change listener that turns this seekbar into a 
-	 * "sliding window" seekbar.
-	 */
-	private class WeightSeekBarChangeListener implements OnSeekBarChangeListener {
-		
-		private int weightOffset;
-		private int maxChangedCounter;
-		private int minChangedCounter;
-		
-		public WeightSeekBarChangeListener(int startingWeight) {
-			this.weightOffset = startingWeight - 10;
-			this.maxChangedCounter = 0;
-		}
+        //Set the progress of the seekbar to the middle.
+        mSeekBar.setProgress(10);
 
-		@Override
-		public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+        //Set up our seek bar listener.
+        mSeekBar.setOnSeekBarChangeListener(new WeightSeekBarChangeListener(mExercise.getLastWeight()));
 
-			//If the seekbar is moved to maximum range and the maximum has not changed recently
-			// then shift the weight offset by 10.
-			if(progress == mSeekBar.getMax() && maxChangedCounter == 0) {
-				weightOffset += 10;
-				maxChangedCounter = 5;
-			}
-			else if(progress != mSeekBar.getMax() && maxChangedCounter != 0) {
-				maxChangedCounter--;
-			}
-			
-			//If the seekbar is moved to minimum range and the minimum has not changed recently
-			// then shift the weight offset by 10.
-			if(progress == 0 && minChangedCounter == 0 && weightOffset > 10) {
-				weightOffset -= 10;
-				if(weightOffset < 10) {
-					weightOffset = 10;
-				}
-				minChangedCounter = 5;
-			}
-			else if(progress != 0 && minChangedCounter != 0) {
-				minChangedCounter--;
-			}
+        //Set the new weight for the exercise equal to the old weight, in case
+        // the user does not trigger the seek bar listener, which normally sets the new weight.
+        mExercise.setNewWeight(mExercise.getLastWeight());
 
-			//When the seek bar is moved, update the text view with it's new value
-			mTextView.setText(progress + weightOffset + " lbs.");
-			mExercise.setNewWeight(progress + weightOffset);
-		}
+        //Finishes creating our dialog builder.
+        builder.setView(weightDialogView);
 
-		@Override
-		public void onStartTrackingTouch(SeekBar seekBar) {
-			//Do nothing...
-		}
+        builder.setTitle("Select weight for " + mExercise.getName());
 
-		@Override
-		public void onStopTrackingTouch(SeekBar seekBar) {
-			//Do nothing...
-		}
-		
-	}
+        builder.setPositiveButton(R.string.ok,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
 
-	public Exercise getExercise() {
-		return mExercise;
-	}
+                        //When the ok button is pressed, let our source activity know
+                        //	that the weight has been selected.
+                        sourceActivity.startExercise(mExercise);
+                    }
+                });
 
-	public void setExercise(Exercise mExercise) {
-		this.mExercise = mExercise;
-	}
+        builder.setNegativeButton(R.string.cancel,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                });
+
+        //Create the dialog.
+        return builder.create();
+    }
+
+    /**
+     * Custom seek bar change listener that turns this seekbar into a 
+     * "sliding window" seekbar.
+     */
+    private class WeightSeekBarChangeListener implements OnSeekBarChangeListener {
+
+        private int weightOffset;
+        private int maxChangedCounter;
+        private int minChangedCounter;
+
+        public WeightSeekBarChangeListener(int startingWeight) {
+            this.weightOffset = startingWeight - 10;
+            this.maxChangedCounter = 0;
+        }
+
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+            //If the seekbar is moved to maximum range and the maximum has not changed recently
+            // then shift the weight offset by 10.
+            if(progress == mSeekBar.getMax() && maxChangedCounter == 0) {
+                weightOffset += 10;
+                maxChangedCounter = 5;
+            }
+            else if(progress != mSeekBar.getMax() && maxChangedCounter != 0) {
+                maxChangedCounter--;
+            }
+
+            //If the seekbar is moved to minimum range and the minimum has not changed recently
+            // then shift the weight offset by 10.
+            if(progress == 0 && minChangedCounter == 0 && weightOffset > 10) {
+                weightOffset -= 10;
+                if(weightOffset < 10) {
+                    weightOffset = 10;
+                }
+                minChangedCounter = 5;
+            }
+            else if(progress != 0 && minChangedCounter != 0) {
+                minChangedCounter--;
+            }
+
+            //When the seek bar is moved, update the text view with it's new value
+            mTextView.setText(progress + weightOffset + " lbs.");
+            mExercise.setNewWeight(progress + weightOffset);
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+            //Do nothing...
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+            //Do nothing...
+        }
+
+    }
+
+    public Exercise getExercise() {
+        return mExercise;
+    }
+
+    public void setExercise(Exercise mExercise) {
+        this.mExercise = mExercise;
+    }
 }

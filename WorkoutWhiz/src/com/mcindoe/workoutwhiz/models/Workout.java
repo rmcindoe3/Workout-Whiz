@@ -7,188 +7,188 @@ import java.util.Date;
 
 public class Workout {
 
-	private String name;
-	private String date;
-	private long id;
-	private int favorite;
-	private ArrayList<Exercise> incompleteExercises;
-	private ArrayList<Exercise> completeExercises;
-	
-	public static final String NO_WORKOUTS = "8fj201jcnx8j201hsn";
+    private String name;
+    private String date;
+    private long id;
+    private int favorite;
+    private ArrayList<Exercise> incompleteExercises;
+    private ArrayList<Exercise> completeExercises;
 
-	public Workout(String name) {
-		this.setName(name);
-		setCompleteExercises(new ArrayList<Exercise>());
-		setIncompleteExercises(new ArrayList<Exercise>());
-		setFavorite(0);
-	}
+    public static final String NO_WORKOUTS = "8fj201jcnx8j201hsn";
 
-	/**
-	 * Changes the given date into the format we want for our date text view
-	 * @param date - the original formatting of the date
-	 * @return - the corrected format of the date
-	 */
-	public static String formatDate(String date) {
-		
-		//Grab a date object out of the given string.
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		Date dateObj = new Date();
-		try {
-			dateObj = sdf.parse(date);
-		} catch (ParseException e) {
-			e.printStackTrace();
-			return "Date Format Error";
-		}
-		
-		//Change the pattern to what we want and then return the new foramt.
-		sdf.applyPattern("MM-dd-yyyy");
-		return sdf.format(dateObj);
-	}
-	
-	/**
-	 * Removes the given exercise from the incomplete exercises list.
-	 * @param exer - the exercise to remove.
-	 */
-	public void removeIncompleteExercise(Exercise exer) {
-		for(int i = 0; i < incompleteExercises.size(); i++) {
-			if(exer.completeEquals(incompleteExercises.get(i))) {
-				incompleteExercises.remove(i);
-				break;
-			}
-		}
-	}
-	
-	/**
-	 * Removes the given exercise from the complete exercises list.
-	 * @param exer - the exercise to remove.
-	 */
-	public void removeCompleteExercise(Exercise exer) {
-		for(int i = 0; i < completeExercises.size(); i++) {
-			if(exer.completeEquals(completeExercises.get(i))) {
-				completeExercises.remove(i);
-				break;
-			}
-		}
-	}
-	
-	/**
-	 * Moves the given exercise from the complete exercise list to
-	 * the incomplete exercise list
-	 * @param exer - the exercise to move.
-	 */
-	public void markAsIncomplete(Exercise exer) {
-		for(int i = 0; i < completeExercises.size(); i++) {
-			if(exer.completeEquals(completeExercises.get(i))) {
-				completeExercises.get(i).setReps(new ArrayList<Integer>());
-				incompleteExercises.add(completeExercises.get(i));
-				completeExercises.remove(i);
-				break;
-			}
-		}
-	}
-	
-	/**
-	 * Moves an exercise from the incomplete list to the complete list
-	 * @param exer - the exercise that has been completed.
-	 */
-	public void completeExercise(Exercise exer) {
-		//If our incomplete exercises list contains the exercise, remove it
-		if(incompleteExercises.contains(exer)) {
-			incompleteExercises.remove(exer);
-		}
-		//Now add it to our complete exercises list.
-		completeExercises.add(exer);
-	}
-	
-	@Override
-	public boolean equals(Object other) {
+    public Workout(String name) {
+        this.setName(name);
+        setCompleteExercises(new ArrayList<Exercise>());
+        setIncompleteExercises(new ArrayList<Exercise>());
+        setFavorite(0);
+    }
 
-		if(other == null) {
-			return false;
-		}
-		else if(!(other instanceof Workout)) {
-			return false;
-		}
+    /**
+     * Changes the given date into the format we want for our date text view
+     * @param date - the original formatting of the date
+     * @return - the corrected format of the date
+     */
+    public static String formatDate(String date) {
 
-		Workout wo = (Workout)other;
+        //Grab a date object out of the given string.
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date dateObj = new Date();
+        try {
+            dateObj = sdf.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "Date Format Error";
+        }
 
-		if(!wo.getName().equals(this.getName())) {
-			return false;
-		}
+        //Change the pattern to what we want and then return the new foramt.
+        sdf.applyPattern("MM-dd-yyyy");
+        return sdf.format(dateObj);
+    }
 
-		if(!wo.getDate().equals(this.getDate())) {
-			return false;
-		}
+    /**
+     * Removes the given exercise from the incomplete exercises list.
+     * @param exer - the exercise to remove.
+     */
+    public void removeIncompleteExercise(Exercise exer) {
+        for(int i = 0; i < incompleteExercises.size(); i++) {
+            if(exer.completeEquals(incompleteExercises.get(i))) {
+                incompleteExercises.remove(i);
+                break;
+            }
+        }
+    }
 
-		if(this.completeExercises.size() != wo.completeExercises.size()) {
-			return false;
-		}
+    /**
+     * Removes the given exercise from the complete exercises list.
+     * @param exer - the exercise to remove.
+     */
+    public void removeCompleteExercise(Exercise exer) {
+        for(int i = 0; i < completeExercises.size(); i++) {
+            if(exer.completeEquals(completeExercises.get(i))) {
+                completeExercises.remove(i);
+                break;
+            }
+        }
+    }
 
-		for(int i = 0; i < this.completeExercises.size(); i++) {
-			if(!this.completeExercises.get(i).equals(wo.completeExercises.get(i))) {
-				return false;
-			}
-		}
+    /**
+     * Moves the given exercise from the complete exercise list to
+     * the incomplete exercise list
+     * @param exer - the exercise to move.
+     */
+    public void markAsIncomplete(Exercise exer) {
+        for(int i = 0; i < completeExercises.size(); i++) {
+            if(exer.completeEquals(completeExercises.get(i))) {
+                completeExercises.get(i).setReps(new ArrayList<Integer>());
+                incompleteExercises.add(completeExercises.get(i));
+                completeExercises.remove(i);
+                break;
+            }
+        }
+    }
 
-		if(this.incompleteExercises.size() != wo.incompleteExercises.size()) {
-			return false;
-		}
+    /**
+     * Moves an exercise from the incomplete list to the complete list
+     * @param exer - the exercise that has been completed.
+     */
+    public void completeExercise(Exercise exer) {
+        //If our incomplete exercises list contains the exercise, remove it
+        if(incompleteExercises.contains(exer)) {
+            incompleteExercises.remove(exer);
+        }
+        //Now add it to our complete exercises list.
+        completeExercises.add(exer);
+    }
 
-		for(int i = 0; i < this.incompleteExercises.size(); i++) {
-			if(!this.incompleteExercises.get(i).equals(wo.incompleteExercises.get(i))) {
-				return false;
-			}
-		}
-		
-		return true;
-	}
+    @Override
+    public boolean equals(Object other) {
 
-	public ArrayList<Exercise> getIncompleteExercises() {
-		return incompleteExercises;
-	}
+        if(other == null) {
+            return false;
+        }
+        else if(!(other instanceof Workout)) {
+            return false;
+        }
 
-	public void setIncompleteExercises(ArrayList<Exercise> incompleteExercise) {
-		this.incompleteExercises = incompleteExercise;
-	}
+        Workout wo = (Workout)other;
 
-	public ArrayList<Exercise> getCompleteExercises() {
-		return completeExercises;
-	}
+        if(!wo.getName().equals(this.getName())) {
+            return false;
+        }
 
-	public void setCompleteExercises(ArrayList<Exercise> completeExercises) {
-		this.completeExercises = completeExercises;
-	}
+        if(!wo.getDate().equals(this.getDate())) {
+            return false;
+        }
 
-	public String getName() {
-		return name;
-	}
+        if(this.completeExercises.size() != wo.completeExercises.size()) {
+            return false;
+        }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+        for(int i = 0; i < this.completeExercises.size(); i++) {
+            if(!this.completeExercises.get(i).equals(wo.completeExercises.get(i))) {
+                return false;
+            }
+        }
 
-	public String getDate() {
-		return date;
-	}
+        if(this.incompleteExercises.size() != wo.incompleteExercises.size()) {
+            return false;
+        }
 
-	public void setDate(String date) {
-		this.date = date;
-	}
+        for(int i = 0; i < this.incompleteExercises.size(); i++) {
+            if(!this.incompleteExercises.get(i).equals(wo.incompleteExercises.get(i))) {
+                return false;
+            }
+        }
 
-	public long getId() {
-		return id;
-	}
+        return true;
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public ArrayList<Exercise> getIncompleteExercises() {
+        return incompleteExercises;
+    }
 
-	public int getFavorite() {
-		return favorite;
-	}
+    public void setIncompleteExercises(ArrayList<Exercise> incompleteExercise) {
+        this.incompleteExercises = incompleteExercise;
+    }
 
-	public void setFavorite(int favorite) {
-		this.favorite = favorite;
-	}
+    public ArrayList<Exercise> getCompleteExercises() {
+        return completeExercises;
+    }
+
+    public void setCompleteExercises(ArrayList<Exercise> completeExercises) {
+        this.completeExercises = completeExercises;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public int getFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(int favorite) {
+        this.favorite = favorite;
+    }
 
 }

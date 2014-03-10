@@ -17,130 +17,130 @@ import com.mcindoe.workoutwhiz.views.ExerciseLinearLayout;
 import com.mcindoe.workoutwhiz.views.SelectExerciseActivity;
 
 public class ExerciseSelectArrayAdapter extends ArrayAdapter<Exercise> {
-	
-	private Context mContext;
-	private List<Exercise> mExercises;
-	private View.OnClickListener mListener;
 
-	public ExerciseSelectArrayAdapter(Context context, List<Exercise> exercises, View.OnClickListener listener) {
-	
-		super(context, R.layout.list_item_exercise, exercises);
-		
-		this.mContext = context;
-		this.mExercises = exercises;
-		this.mListener = listener;
-	}
-	
-	public View getView(int position, View convertView, ViewGroup parent) {
-		
-		//Grab which exercise we're currently on.
-		Exercise exer = mExercises.get(position);
-		
-		//Grab our layout inflater
-		LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		
-		//Initialize our return.
-		View exerciseRow;
-		
-		if(exer.getName().equals(Exercise.NO_EXERCISES)) {
-			exerciseRow = inflater.inflate(R.layout.list_item_empty, parent, false);
-		}
-		//If the exercise we're on is actually the incomplete exercise header title, then add the title
-		else if(exer.equals(SelectExerciseActivity.INCOMPLETE_EXERCISE_TITLE)) {
-			
-			//Inflate our row ith the right object
-			exerciseRow = inflater.inflate(R.layout.list_item_exercise_header, parent, false);
-			
-			//Grab the title text view and set it to the correct title.
-			TextView tv = (TextView)exerciseRow.findViewById(R.id.list_item_exercise_header_subtitle);
-			tv.setText("Incomplete Exercises:");
-		}
-		//If the exercise we're on is actually the complete exercise header title, then add the title
-		else if(exer.equals(SelectExerciseActivity.COMPLETE_EXERCISE_TITLE)) {
-			
-			//Inflate our row with the right object
-			exerciseRow = inflater.inflate(R.layout.list_item_exercise_header, parent, false);
-			
-			//Grab the title text view and set it to the correct title.
-			TextView tv = (TextView)exerciseRow.findViewById(R.id.list_item_exercise_header_subtitle);
-			tv.setText("Complete Exercises:");
-		}
-		//Otherwise, we know we have a real exercise to be filled in
-		else {
-			
-			//If the exercise has completed reps, this is a completed exercise.
-			boolean completed = exer.isCompleted();
-			
-			//Inflate the proper layout
-			exerciseRow = inflater.inflate(R.layout.list_item_exercise, parent, false);
-			
-			//Sets our exercise for this list item.
-			ExerciseLinearLayout layout = (ExerciseLinearLayout)exerciseRow.findViewById(R.id.list_item_exercise);
-			layout.setExercise(exer);
+    private Context mContext;
+    private List<Exercise> mExercises;
+    private View.OnClickListener mListener;
 
-			//Fills in the name of the exercise.
-			TextView exerciseNameTextView = (TextView)exerciseRow.findViewById(R.id.exercise_name_text_view);
-			exerciseNameTextView.setText(exer.getName());
+    public ExerciseSelectArrayAdapter(Context context, List<Exercise> exercises, View.OnClickListener listener) {
 
-			//Fills in the intensity of the exercise.
-			TextView exerciseIntensityTextView = (TextView)exerciseRow.findViewById(R.id.exercise_intensity_text_view);
-			exerciseIntensityTextView.setText(getExerciseIntensityString(position, completed));
-			
-			//Adds a click listener to our options button.
-			ImageButton optionsButton = (ImageButton)exerciseRow.findViewById(R.id.list_item_exercise_options_button);
-			optionsButton.setOnClickListener(mListener);
+        super(context, R.layout.list_item_exercise, exercises);
 
-			//If this is a completed exercise, color the text green.
-			if(completed) {
-				exerciseNameTextView.setTextColor(Color.rgb(0, 150, 0));
-				exerciseIntensityTextView.setTextColor(Color.rgb(0, 150, 0));
-			}
-		}
-		
-		//Sets the on click listener for this exercise.
-		exerciseRow.setOnClickListener(mListener);
+        this.mContext = context;
+        this.mExercises = exercises;
+        this.mListener = listener;
+    }
 
-		return exerciseRow;
-	}
-	
-	/**
-	 * Creates an appropriate string for the exercise intensity text view
-	 * @param position - the position of the exercise in the list.
-	 * @return the exercise intensity string
-	 */
-	public String getExerciseIntensityString(int position, boolean comp) {
-		
-		String ret = "";
-		Exercise exer = mExercises.get(position);
-		
-		if(!comp) {
+    public View getView(int position, View convertView, ViewGroup parent) {
 
-			ret += exer.getLastWeight() + " lbs. - ";
+        //Grab which exercise we're currently on.
+        Exercise exer = mExercises.get(position);
 
-			for(int i = 0; i < exer.getLastReps().size(); i++) {
-				
-				ret += exer.getLastReps().get(i) + "";
-	
-				if(i != (exer.getLastReps().size()-1)) {
-					ret += ", ";
-				}
-			}
-		}
-		else {
+        //Grab our layout inflater
+        LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-			ret += exer.getNewWeight() + " lbs. - ";
+        //Initialize our return.
+        View exerciseRow;
 
-			for(int i = 0; i < exer.getReps().size(); i++) {
-				
-				ret += exer.getReps().get(i) + "";
-	
-				if(i != (exer.getReps().size()-1)) {
-					ret += ", ";
-				}
-			}
-		}
-		
-		return ret;
-	}
-	
+        if(exer.getName().equals(Exercise.NO_EXERCISES)) {
+            exerciseRow = inflater.inflate(R.layout.list_item_empty, parent, false);
+        }
+        //If the exercise we're on is actually the incomplete exercise header title, then add the title
+        else if(exer.equals(SelectExerciseActivity.INCOMPLETE_EXERCISE_TITLE)) {
+
+            //Inflate our row ith the right object
+            exerciseRow = inflater.inflate(R.layout.list_item_exercise_header, parent, false);
+
+            //Grab the title text view and set it to the correct title.
+            TextView tv = (TextView)exerciseRow.findViewById(R.id.list_item_exercise_header_subtitle);
+            tv.setText("Incomplete Exercises:");
+        }
+        //If the exercise we're on is actually the complete exercise header title, then add the title
+        else if(exer.equals(SelectExerciseActivity.COMPLETE_EXERCISE_TITLE)) {
+
+            //Inflate our row with the right object
+            exerciseRow = inflater.inflate(R.layout.list_item_exercise_header, parent, false);
+
+            //Grab the title text view and set it to the correct title.
+            TextView tv = (TextView)exerciseRow.findViewById(R.id.list_item_exercise_header_subtitle);
+            tv.setText("Complete Exercises:");
+        }
+        //Otherwise, we know we have a real exercise to be filled in
+        else {
+
+            //If the exercise has completed reps, this is a completed exercise.
+            boolean completed = exer.isCompleted();
+
+            //Inflate the proper layout
+            exerciseRow = inflater.inflate(R.layout.list_item_exercise, parent, false);
+
+            //Sets our exercise for this list item.
+            ExerciseLinearLayout layout = (ExerciseLinearLayout)exerciseRow.findViewById(R.id.list_item_exercise);
+            layout.setExercise(exer);
+
+            //Fills in the name of the exercise.
+            TextView exerciseNameTextView = (TextView)exerciseRow.findViewById(R.id.exercise_name_text_view);
+            exerciseNameTextView.setText(exer.getName());
+
+            //Fills in the intensity of the exercise.
+            TextView exerciseIntensityTextView = (TextView)exerciseRow.findViewById(R.id.exercise_intensity_text_view);
+            exerciseIntensityTextView.setText(getExerciseIntensityString(position, completed));
+
+            //Adds a click listener to our options button.
+            ImageButton optionsButton = (ImageButton)exerciseRow.findViewById(R.id.list_item_exercise_options_button);
+            optionsButton.setOnClickListener(mListener);
+
+            //If this is a completed exercise, color the text green.
+            if(completed) {
+                exerciseNameTextView.setTextColor(Color.rgb(0, 150, 0));
+                exerciseIntensityTextView.setTextColor(Color.rgb(0, 150, 0));
+            }
+        }
+
+        //Sets the on click listener for this exercise.
+        exerciseRow.setOnClickListener(mListener);
+
+        return exerciseRow;
+    }
+
+    /**
+     * Creates an appropriate string for the exercise intensity text view
+     * @param position - the position of the exercise in the list.
+     * @return the exercise intensity string
+     */
+    public String getExerciseIntensityString(int position, boolean comp) {
+
+        String ret = "";
+        Exercise exer = mExercises.get(position);
+
+        if(!comp) {
+
+            ret += exer.getLastWeight() + " lbs. - ";
+
+            for(int i = 0; i < exer.getLastReps().size(); i++) {
+
+                ret += exer.getLastReps().get(i) + "";
+
+                if(i != (exer.getLastReps().size()-1)) {
+                    ret += ", ";
+                }
+            }
+        }
+        else {
+
+            ret += exer.getNewWeight() + " lbs. - ";
+
+            for(int i = 0; i < exer.getReps().size(); i++) {
+
+                ret += exer.getReps().get(i) + "";
+
+                if(i != (exer.getReps().size()-1)) {
+                    ret += ", ";
+                }
+            }
+        }
+
+        return ret;
+    }
+
 }

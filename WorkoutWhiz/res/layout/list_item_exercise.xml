@@ -13,25 +13,25 @@
         android:gravity="left|center_vertical"
         android:orientation="vertical" >
 
-	    <TextView 
-	        android:id="@+id/exercise_name_text_view"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:gravity="left|bottom"
-	        android:text="@string/default_exercise_name"
-	        android:textSize="@dimen/list_item_exercise_name_text_size" />
-	
-	    <TextView 
-	        android:id="@+id/exercise_intensity_text_view"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:gravity="left|top"
-	        android:textColor="#777777"
-	        android:text="@string/default_exercise_intensity"
-	        android:textSize="@dimen/list_item_exercise_intensity_text_size" />
-        
+        <TextView 
+            android:id="@+id/exercise_name_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left|bottom"
+            android:text="@string/default_exercise_name"
+            android:textSize="@dimen/list_item_exercise_name_text_size" />
+
+        <TextView 
+            android:id="@+id/exercise_intensity_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left|top"
+            android:textColor="#777777"
+            android:text="@string/default_exercise_intensity"
+            android:textSize="@dimen/list_item_exercise_intensity_text_size" />
+
     </LinearLayout>
-    
+
     <ImageButton
         android:id="@+id/list_item_exercise_options_button"
         android:gravity="right|center_vertical"

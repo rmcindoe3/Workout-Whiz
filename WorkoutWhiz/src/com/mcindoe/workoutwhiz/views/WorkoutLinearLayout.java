@@ -7,27 +7,27 @@ import android.widget.LinearLayout;
 import com.mcindoe.workoutwhiz.models.Workout;
 
 public class WorkoutLinearLayout extends LinearLayout {
-	
-	private Workout mWorkout;
 
-	public WorkoutLinearLayout(Context context) {
-		super(context);
-	}
+    private Workout mWorkout;
 
-	public WorkoutLinearLayout(Context context, AttributeSet attrs) {
-		super(context, attrs);
-	}
+    public WorkoutLinearLayout(Context context) {
+        super(context);
+    }
 
-	public WorkoutLinearLayout(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
-	}
+    public WorkoutLinearLayout(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
 
-	public Workout getWorkout() {
-		return mWorkout;
-	}
+    public WorkoutLinearLayout(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+    }
 
-	public void setWorkout(Workout mWorkout) {
-		this.mWorkout = mWorkout;
-	}
+    public Workout getWorkout() {
+        return mWorkout;
+    }
+
+    public void setWorkout(Workout mWorkout) {
+        this.mWorkout = mWorkout;
+    }
 
 }

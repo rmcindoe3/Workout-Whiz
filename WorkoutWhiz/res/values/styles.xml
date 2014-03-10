@@ -2,11 +2,11 @@
 
     <style name="AppBaseTheme" parent="android:Theme.NoTitleBar">
     </style>
-    
+
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
     </style>
-    
+
     <style name="AppTheme.Layout">
         <item name="android:background">@color/bg_color</item>
     </style>
@@ -20,7 +20,7 @@
     </style>
 
     <style name="AppTheme.View.ListView.ListItem">
-		<item name="android:background">@drawable/wide_list_item_exercise_selector</item>
+        <item name="android:background">@drawable/wide_list_item_exercise_selector</item>
         <item name="android:gravity">center_vertical</item>
     </style>
 
@@ -34,7 +34,7 @@
     </style>
 
     <style name="AppTheme.View.TextView.ExerciseOptions">
-		<item name="android:background">@drawable/popup_exercise_options_bg</item>
+        <item name="android:background">@drawable/popup_exercise_options_bg</item>
         <item name="android:layout_height">@dimen/exercise_options_height</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:gravity">center_vertical|right</item>
@@ -58,7 +58,7 @@
         <item name="android:background">@drawable/rep_text_view</item>
         <item name="android:textSize">@dimen/rep_count_text_size</item>
     </style>
-    
+
     <style name="AppTheme.View.TextView.Title">
         <item name="android:gravity">center_vertical|left</item>
         <item name="android:layout_width">match_parent</item>

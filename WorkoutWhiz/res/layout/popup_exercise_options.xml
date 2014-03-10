@@ -3,32 +3,32 @@
     android:layout_height="wrap_content"
     android:paddingRight="30dp"
     android:orientation="vertical" >
-    
+
     <LinearLayout
         android:orientation="vertical"
         android:background="@drawable/floating_layout_bg"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content" >
-    
-	    <Button
-	        android:id="@+id/exercise_options_perform_button"
-	        android:text="@string/exercise_options_perform"
-	        android:textSize="20sp"
-	        style="@style/AppTheme.View.TextView.ExerciseOptions" />
-	
-	    <Button
-	        android:id="@+id/exercise_options_mark_as_incomplete_button"
-	        android:text="@string/exercise_options_mark_as_incomplete"
-	        android:textSize="20sp"
-	        style="@style/AppTheme.View.TextView.ExerciseOptions" />
-	
-	    <Button
-	        android:id="@+id/exercise_options_remove_button"
-	        android:text="@string/exercise_options_remove"
-	        android:textSize="20sp"
-	        style="@style/AppTheme.View.TextView.ExerciseOptions" />
-        
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/exercise_options_perform_button"
+            android:text="@string/exercise_options_perform"
+            android:textSize="20sp"
+            style="@style/AppTheme.View.TextView.ExerciseOptions" />
+
+        <Button
+            android:id="@+id/exercise_options_mark_as_incomplete_button"
+            android:text="@string/exercise_options_mark_as_incomplete"
+            android:textSize="20sp"
+            style="@style/AppTheme.View.TextView.ExerciseOptions" />
+
+        <Button
+            android:id="@+id/exercise_options_remove_button"
+            android:text="@string/exercise_options_remove"
+            android:textSize="20sp"
+            style="@style/AppTheme.View.TextView.ExerciseOptions" />
+
     </LinearLayout>
-    
+
 
 </LinearLayout>

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-   
+
     <!-- Title of the Workout -->
     <TextView
         android:id="@+id/workout_history_title_text_view"
@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" >
-       
+
         <!-- ListView of previous workouts -->
         <ListView
             android:id="@+id/workout_history_list_view"
@@ -23,7 +23,7 @@
             android:layout_height="0dp"
             android:layout_weight="21"
             android:scrollbars="none" />
-        
+
         <!-- Contains the bottom part of the screen that contains buttons -->
         <LinearLayout 
             android:layout_height="0dp"
@@ -47,13 +47,14 @@
                 android:id="@+id/export_workouts_button"
                 style="@style/AppTheme.View.TextView.Button.Navigation"
                 android:layout_width="0dp"
+                android:enabled="false"
                 android:onClick="onExportWorkoutsButtonClicked"
                 android:layout_weight="1"
                 android:layout_height="fill_parent"
                 android:text="@string/export_workouts_button" />
-            
+
         </LinearLayout>
-        
-	</LinearLayout>
+
+    </LinearLayout>
 
 </com.mcindoe.workoutwhiz.views.FractionTranslateLinearLayout>

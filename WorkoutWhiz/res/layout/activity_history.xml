@@ -9,12 +9,12 @@
 
     <com.mcindoe.workoutwhiz.views.FractionTranslateLinearLayout
         android:id="@+id/history_fragment_container"
-    	android:layout_width="match_parent"
-    	android:layout_height="match_parent" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <com.mcindoe.workoutwhiz.views.FractionTranslateLinearLayout
         android:id="@+id/workout_fragment_container"
-    	android:layout_width="wrap_content"
-    	android:layout_height="match_parent" />
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

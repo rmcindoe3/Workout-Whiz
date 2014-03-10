@@ -4,13 +4,13 @@
     style="@style/AppTheme.Layout"
     android:gravity="center"
     android:orientation="vertical" >
-    
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/AppTheme.View.TextView.Subtitle"
         android:text="@string/favorite_workouts_list_view" />
-        
+
 
     <!-- ListView of favorite workouts -->
     <ListView
@@ -44,7 +44,7 @@
 
     <LinearLayout
         android:id="@+id/create_new_workout_linear_layout"
-	    style="@style/AppTheme.View.ListView.ListItem"
+        style="@style/AppTheme.View.ListView.ListItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"

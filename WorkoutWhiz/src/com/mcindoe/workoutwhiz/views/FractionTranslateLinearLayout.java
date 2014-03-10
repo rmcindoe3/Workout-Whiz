@@ -7,18 +7,18 @@ import android.widget.LinearLayout;
 public class FractionTranslateLinearLayout extends LinearLayout {
 
     public FractionTranslateLinearLayout(Context context) {
-		super(context);
-	}
-	
-	public FractionTranslateLinearLayout(Context context, AttributeSet attrs) {
-		super(context, attrs);
-	}
+        super(context);
+    }
 
-	public FractionTranslateLinearLayout(Context context, AttributeSet attrs, int defStyles) {
-		super(context, attrs, defStyles);
-	}
+    public FractionTranslateLinearLayout(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
 
-	private int screenWidth;
+    public FractionTranslateLinearLayout(Context context, AttributeSet attrs, int defStyles) {
+        super(context, attrs, defStyles);
+    }
+
+    private int screenWidth;
     private float fractionX;
 
     @Override
@@ -29,9 +29,9 @@ public class FractionTranslateLinearLayout extends LinearLayout {
 
         super.onSizeChanged(w, h, oldW, oldH);
     }
-    
+
     public int getScreenWidth() {
-    	return screenWidth;
+        return screenWidth;
     }
 
     public float getFractionX(){
