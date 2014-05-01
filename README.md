@@ -6,6 +6,7 @@ A streamlined application for keeping track of exercise sets over time.  The cor
 [Screenshots of Application with Walkthrough](http://imgur.com/a/iGVkn)
 
 How to set up Android project:
+
 1. Clone the repo to your machine.
 2. Using your IDE of choice, import the DASHStreamer folder as an existing Android project.
 3. Clean/Build the project.
